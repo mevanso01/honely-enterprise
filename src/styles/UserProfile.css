@@ -1,0 +1,51 @@
+.userprofile-wrapper {
+display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  margin: 20px auto 0px;
+    width: 100%;
+    padding: 20px;
+}
+.userprofile-wrapper {
+    padding: 0px 20px;
+    margin-bottom: 10px;
+}
+.userprofile-form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+}
+.userprofile-form-group label {
+    font-weight: 500;
+    font-family: 'Fira Sans', sans-serif;
+    margin-bottom: 0.5rem !important;
+}
+.userprofile-form-group input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.userprofile-readonly {
+    background-color: #f0ecec !important;
+}
+.userprofile-update-btn {
+    margin-top: 15px;
+    width: 30px;
+}
+.userprofile-success-message {
+    color: green;
+}
+.userprofile-error-message {
+    color: red;
+}

@@ -1,0 +1,19 @@
+.futurevalueconfig-wrapper {
+    text-align: left;
+    margin: 0px auto 0px;
+    width: 100%;
+    padding: 20px;
+}
+.futurevalueconfig-wrapper h3{
+    font-size: 20px;
+    font-weight: 600;
+}
+.futurevalueconfig-options {
+    margin-top: 35px;
+}
+.futurevalueconfig-success-message {
+    color: green;
+}
+.futurevalueconfig-error-message {
+    color: red;
+}

@@ -1,0 +1,96 @@
+.cma-section {
+    background-color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.cma-header {
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.cma-continue-btn {
+    /* margin-right: 7% */
+}
+.cma-continue-btn button {
+    background-color: white;
+    color: black;
+    border-radius: 7px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+}
+.cma-header h1{
+    font-family: 'Roboto', sans-serif;
+    font-size: 45px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+.cma-header p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    /* width: 40%; */
+}
+.cma-selected-properties {
+    margin-bottom: 60px;;
+}
+.cma-selected-properties table{
+    table-layout: auto;
+    width: 100%;
+}
+.cma-selected-properties table tr {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 15px;
+    font-weight: 400;
+}
+.cma-selected-properties table tr:nth-child(odd) {
+    background-color: #EFEFEF;
+}
+.cma-selected-properties table tr:first-child {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    background-color: white !important;
+}
+.cma-selected-properties table tr th{
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    padding: 8px;
+}
+.cma-selected-properties table tr td{
+    padding: 8px;
+    text-align: center;
+}
+.cma-selected-properties table tr th:first-child{
+    text-align: left;
+}
+.cma-selected-properties table tr td:first-child{
+    text-align: left;
+}
+.cma-property-search-block {
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #EFEFEF;
+    margin-bottom: 60px;
+}
+.cma-property-search-sub-block {
+    margin: 0 auto;
+    min-width: 550px;
+}
+.cma-property-search-sub-block h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+.cma-comparable-properties-block h1{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,79 @@
+.leadgenintro-container {
+    border: 1px solid white;
+    background-color: white;
+    /* border-radius: 10px; */
+    margin: 0px auto;
+    /* max-height: 1200px; */
+    width: 100%;
+    max-width: 1200px;
+    padding-top: 100px;
+    /* padding: 60px 20px 0px 100px; */
+}
+.leadgenintro-upper {
+    margin-bottom: 60px;
+}
+.leadgenintro-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.leadgenintro-steps div{
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+}
+.leadgenintro-steps h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 20px;;
+}
+.leadgenintro-steps p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+}
+.leadgenintro-prompt {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.leadgenintro-prompt h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.leadgenintro-prompt p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+}
+.leadgenintro-lower {
+    background-color: #FEFDF7;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.leadgenintro-lower-text {
+    max-width: 400px;
+}
+.leadgenintro-lower-text h1 {
+    font-family: 'Popipns', sans-serif;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.leadgenintro-lower-text p {
+    font-family: 'Popipns', sans-serif;
+    font-size: 20px; 
+}
+.leadgenintro-lower-code-snippet {
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
+    padding: 10px 2% 10px 2%;
+    font-family: 'Space Mono', sans-serif;
+}

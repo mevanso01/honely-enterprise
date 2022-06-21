@@ -13,12 +13,14 @@ import AccountManagement from './components/AccountManagement';
 import UserProfile from "./components/UserProfile";
 import Subscription from "./components/Subscription";
 import Header from "./components/Header";
+import Login from "./components/Login";
 import axios from 'axios';
 import { TrinitySpinner } from 'loading-animations-react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useLocation,
   Link
 } from "react-router-dom";
 import ChangePassword from './components/ChangePassword';
@@ -248,8 +250,29 @@ function App() {
       </div>
     );
   } else if (data.authFlag === false) {
+    const location = window.location.pathname;
+    if (location === '/login') {
+      return (
+        <Router>
+        <Routes>
+          <Route path="/login" element={<Login authFlag={data.authFlag} />} />
+        </Routes>
+        </Router>
+      )
+    } else {
+      return (
+        <AuthPage updateAuthState={updateAuthState}/>
+      )
+    }
     return (
+      // <div>
+      // <Router>
+      // <Routes>
+      //   <Route path="/login" element={<Login authFlag={data.authFlag} />} />
+      // </Routes>
+      // </Router>
       <AuthPage updateAuthState={updateAuthState}/>
+      // {/* </div> */}
     );
   } else {
     return (

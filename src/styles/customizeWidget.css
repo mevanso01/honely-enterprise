@@ -59,19 +59,30 @@
 .add-input-fields-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
 }
-.add-input-fields-container span {
+.add-input-fields-container .mdi-view-headline {
   font-size: 24px;
-  margin-right: 4px;
-}
-.add-input-fields-container .additional-input-delete {
-  position: absolute;
-  right: -28px;
-  font-size: 20px;
   cursor: pointer;
+  margin-right: 8px;
 }
-.add-input-fields-container .additional-input-delete:hover {
+.additional-input-delete-btn {
+  position: absolute;
+  right: -24px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  min-width: initial;
+  color: #181818;
+}
+.additional-input-delete-btn:hover {
+  background-color: transparent;
   color: #FF735E;
 }
 .add-input-fields-wrapper input {

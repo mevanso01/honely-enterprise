@@ -1,0 +1,16 @@
+{
+  "theme": "dark",
+  "font": "Poppins",
+  "colors": {
+    "highLightColor": "#FF9900",
+    "logoColor": "#000000",
+    "backgroundColor": "#000000",
+    "inputBgColor": "#292929",
+    "textColor": "#FFFFFF",
+    "inactiveColor": "#8C8C8C",
+    "increaseColor": "#51B4C9",
+    "decreaseColor": "#C557C7",
+    "error": "#FF735E",
+    "lightGray": "#eee"
+  }
+}

@@ -14,6 +14,7 @@ import UserProfile from "./components/UserProfile";
 import Subscription from "./components/Subscription";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import CustomizeWidget from "./components/CustomizeWidget"
 import axios from 'axios';
 import { TrinitySpinner } from 'loading-animations-react';
 import {
@@ -243,6 +244,7 @@ function App() {
             <Route path="payment-history" element={<PaymentHistory jwt={data.jwt} doSignOut={doSignOut}/>} />
             <Route path="future-value-config" element={<FutureValueConfig userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
           </Route>
+          <Route path="/customize-widget" element={<CustomizeWidget />} />
         </Routes>
         </div>
       </div>

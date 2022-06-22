@@ -33,10 +33,17 @@ import {
         if (location === '/' || location === '/dashboard') {
             headerItems[0].classList.add('active')
             headerItems[1].classList.remove('active')
+            headerItems[2].classList.remove('active')
         }
         if (location.startsWith('/account-management')) {
             headerItems[0].classList.remove('active')
+            headerItems[2].classList.remove('active')
             headerItems[1].classList.add('active')
+        }
+        if (location.startsWith('/customize-widget')) {
+          headerItems[0].classList.remove('active')
+          headerItems[1].classList.remove('active')
+          headerItems[2].classList.add('active')
         }
     }
     useEffect(() => {
@@ -52,6 +59,9 @@ import {
             </li>
             <li className="header-item" onClick={() => {selectHeaderSection(1)}}>
               <Link to="/account-management">Account Management</Link>
+            </li>
+            <li className="header-item" onClick={() => {selectHeaderSection(2)}}>
+              <Link to="/customize-widget">Customize Widget</Link>
             </li>
           </ul>
         </nav>

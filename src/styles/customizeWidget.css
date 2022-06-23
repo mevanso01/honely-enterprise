@@ -8,7 +8,7 @@
 .widget-side-bar {
   background-color: #F6F6F6;
   width: 350px;
-  padding: 25px 30px;
+  padding: 25px 30px 100px 30px;
 }
 .widget-block-section {
   margin: 30px 0;
@@ -70,7 +70,8 @@
 .additional-input-delete-btn {
   position: absolute;
   right: -24px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
   outline: none;
   border: none;
@@ -114,6 +115,9 @@
 .add-item-containter span:hover {
   color: #24CB43;
 }
+.poll-field-item-container {
+  margin-bottom: 35px;
+}
 .poll-inputs-container {
   margin-top: 2px;
   display: flex;
@@ -127,14 +131,22 @@
   display: flex;
   align-items: center;
 }
-.poll-question-input-wrapper span {
-  cursor: pointer;
+.poll-input-delete-btn {
   position: absolute;
-  right: -23px;
-  font-size: 20px;
+  right: -24px;
+  font-size: 16px;
   cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  min-width: initial;
+  color: #181818;
 }
-.poll-question-input-wrapper span:hover {
+.poll-input-delete-btn:hover {
+  background-color: transparent;
   color: #FF735E;
 }
 .requirement-checkbox {

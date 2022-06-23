@@ -244,7 +244,7 @@ function App() {
             <Route path="payment-history" element={<PaymentHistory jwt={data.jwt} doSignOut={doSignOut}/>} />
             <Route path="future-value-config" element={<FutureValueConfig userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
           </Route>
-          <Route path="/customize-widget" element={<CustomizeWidget />} />
+          <Route path="/customize-widget" element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} />
         </Routes>
         </div>
       </div>

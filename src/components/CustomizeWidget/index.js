@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import '../../styles/customizeWidget.css'
 import ColorPickerItem from './ColorPickerItem'
 import AccordionItem from './AccordionItem'
@@ -8,13 +9,7 @@ import AdditionalInputFields from './AdditionalInputFields'
 import PollQuestion from './PollQuestion'
 
 const CustomizeWidget = (props) => {
-  const [widgetConfig, setWidgetConfig] = useState({
-    ...lightThemeColors,
-    text: 'Get a free home value forecast',
-    title: 'Find the Futurve Values of Any Property',
-    additionalInputs: [],
-    additionalPolls: []
-  })
+  const [widgetConfig, setWidgetConfig] = useState(lightThemeColors)
   const fonts = ['Poppins', 'Times New Roman', 'Arial']
  
   const handleUpdateWidgetConfig = (updatedChange) => {
@@ -27,6 +22,27 @@ const CustomizeWidget = (props) => {
     })
   }
 
+  useEffect(() => {
+    const config = {
+      headers: {
+        'Authorization': 'Bearer ' + props.jwt
+      }
+    }
+    axios.get('https://developers.honely.com/widget/settings', config)
+    .then(response => {
+      console.log(response.data.data)
+    })
+    .catch(error => {
+      if (error.message === 'Request failed with status code 401') {
+        props.doSignOut()
+      } else {
+        console.log(error)
+      }
+    })
+  }, [])
+
+  console.log(widgetConfig)
+
   return (
     <div className='widget-container'>
       <div className='widget-side-bar'>
@@ -37,20 +53,20 @@ const CustomizeWidget = (props) => {
             header={<p>Presets</p>}
           >
             <div className='widget-radio-item' onClick={() => handleUpdateWidgetConfig(lightThemeColors)}>
-              {widgetConfig?.theme === 'light' ? (
+              {widgetConfig?.mode === 'LIGHT' ? (
                 <span className='mdi mdi-radiobox-marked' />
               ) : (
                 <span className='mdi mdi-radiobox-blank' />
               )}
-              <label>Light theme</label>
+              <label>Light mode</label>
             </div>
             <div className='widget-radio-item' onClick={() => handleUpdateWidgetConfig(darkThemeColors)}>
-              {widgetConfig?.theme === 'dark' ? (
+              {widgetConfig?.mode === 'DARK' ? (
                 <span className='mdi mdi-radiobox-marked' />
               ) : (
                 <span className='mdi mdi-radiobox-blank' />
               )}
-              <label>Dark theme</label>
+              <label>Dark mode</label>
             </div>
           </AccordionItem>
           <AccordionItem
@@ -62,7 +78,7 @@ const CustomizeWidget = (props) => {
                 className='widget-radio-item'
                 onClick={() => handleUpdateWidgetConfig({ font: font })}
               >
-                {widgetConfig?.font === font ? (
+                {widgetConfig?.fonts === font ? (
                   <span className='mdi mdi-radiobox-marked' />
                 ) : (
                   <span className='mdi mdi-radiobox-blank' />
@@ -73,16 +89,16 @@ const CustomizeWidget = (props) => {
           </AccordionItem>
           <div className='widget-block-divider' />
           <ColorPickerItem
-            key={widgetConfig.theme + 'highligt'}
+            key={widgetConfig.mode + 'highligt'}
             label='Highlight Color'
-            defaultColor={widgetConfig?.colors?.highLightColor}
-            handleUpdateColor={color => handleUpdateColor({ highLightColor: color })}
+            defaultColor={widgetConfig?.colors?.highlight_color}
+            handleUpdateColor={color => handleUpdateColor({ highlight_color: color })}
           />
           <div className='widget-block-divider' />
           <ColorPickerItem
             label='Logo Color'
-            defaultColor={widgetConfig?.colors?.logoColor}
-            handleUpdateColor={color => handleUpdateColor({ logoColor: color })}
+            defaultColor={widgetConfig?.colors?.logo_color}
+            handleUpdateColor={color => handleUpdateColor({ logo_color: color })}
           />
           <div className='widget-block-divider' />
         </section>
@@ -90,8 +106,8 @@ const CustomizeWidget = (props) => {
           <h3>Text <span>(optional)</span></h3>
           <input
             className='widget-input'
-            defaultValue={widgetConfig.text}
-            onChange={e => handleUpdateWidgetConfig({ text: e.target.value })}
+            defaultValue={widgetConfig.logo_text}
+            onChange={e => handleUpdateWidgetConfig({ logo_text: e.target.value })}
           />
         </section>
         <section className='widget-block-section'>
@@ -99,8 +115,8 @@ const CustomizeWidget = (props) => {
           <h3>Title</h3>
           <input
             className='widget-input'
-            defaultValue={widgetConfig.title}
-            onChange={e => handleUpdateWidgetConfig({ title: e.target.value })}
+            defaultValue={widgetConfig.title_text}
+            onChange={e => handleUpdateWidgetConfig({ title_text: e.target.value })}
           />
         </section>
         <section className='widget-block-section'>
@@ -109,28 +125,28 @@ const CustomizeWidget = (props) => {
             header={<h3 style={{ marginBottom: '0px' }}>Modify colors</h3>}
           >
             <ColorPickerItem
-              key={widgetConfig.theme + 'text'}
+              key={widgetConfig.mode + 'text'}
               label='Text Color'
-              defaultColor={widgetConfig?.colors?.textColor}
-              handleUpdateColor={color => handleUpdateColor({ textColor: color })}
+              defaultColor={widgetConfig?.colors?.text_color}
+              handleUpdateColor={color => handleUpdateColor({ text_color: color })}
             />
             <ColorPickerItem
-              key={widgetConfig.theme + 'background'}
+              key={widgetConfig.mode + 'background'}
               label='Background Color'
-              defaultColor={widgetConfig?.colors?.backgroundColor}
-              handleUpdateColor={color => handleUpdateColor({ backgroundColor: color })}
+              defaultColor={widgetConfig?.colors?.background_color}
+              handleUpdateColor={color => handleUpdateColor({ background_color: color })}
             />
             <ColorPickerItem
-              key={widgetConfig.theme + 'inputBG'}
+              key={widgetConfig.mode + 'inputBG'}
               label='Input Fields BG'
-              defaultColor={widgetConfig?.colors?.inputBgColor}
-              handleUpdateColor={color => handleUpdateColor({ inputBgColor: color })}
+              defaultColor={widgetConfig?.colors?.input_fields_bg}
+              handleUpdateColor={color => handleUpdateColor({ input_fields_bg: color })}
             />
             <ColorPickerItem
-              key={widgetConfig.theme + 'inactive'}
+              key={widgetConfig.mode + 'inactive'}
               label='Inactive Color'
-              defaultColor={widgetConfig?.colors?.inactiveColor}
-              handleUpdateColor={color => handleUpdateColor({ inactiveColor: color })}
+              defaultColor={widgetConfig?.colors?.inactive_color}
+              handleUpdateColor={color => handleUpdateColor({ inactive_color: color })}
             />
           </AccordionItem>
         </section>
@@ -148,17 +164,17 @@ const CustomizeWidget = (props) => {
         <section className='widget-block-section'>
           <h2>RESULTS PAGE</h2>
           <ColorPickerItem
-            key={widgetConfig.theme + 'inc'}
+            key={widgetConfig.mode + 'inc'}
             label='Increase Color'
-            defaultColor={widgetConfig?.colors?.increaseColor}
-            handleUpdateColor={color => handleUpdateColor({ increaseColor: color })}
+            defaultColor={widgetConfig?.colors?.increase_color}
+            handleUpdateColor={color => handleUpdateColor({ increase_color: color })}
           />
           <div className='widget-block-divider' />
           <ColorPickerItem
-            key={widgetConfig.theme + 'dec'}
+            key={widgetConfig.mode + 'dec'}
             label='Decrease Color'
-            defaultColor={widgetConfig?.colors?.decreaseColor}
-            handleUpdateColor={color => handleUpdateColor({ decreaseColor: color })}
+            defaultColor={widgetConfig?.colors?.decrease_color}
+            handleUpdateColor={color => handleUpdateColor({ decrease_color: color })}
           />
         </section>
       </div>

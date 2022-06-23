@@ -1,16 +1,36 @@
 {
-  "theme": "light",
-  "font": "Poppins",
+  "mode": "LIGHT",
+  "logo_text": "Get a free home value forecast!",
+  "title_text": "Find the Futurve Values of Any Property",
+  "fonts": "Poppins",
   "colors": {
-    "highLightColor": "#24CB43",
-    "logoColor": "#FFFFFF",
-    "backgroundColor": "#FFFFFF",
-    "inputBgColor": "#FFFFFF",
-    "textColor": "#000000",
-    "inactiveColor": "#CFCED3",
-    "increaseColor": "#51B4C9",
-    "decreaseColor": "#C557C7",
-    "error": "#FF735E",
-    "lightGray": "#eee"
-  }
+    "highlight_color": "#61C757",
+    "logo_color": "#CCCCCC",
+    "text_color": "#000000",
+    "background_color": "#FFFFFF",
+    "input_fields_bg": "#FFFFFF",
+    "inactive_color": "#CFCED3",
+    "increase_color": "#51B4C9",
+    "decrease_color": "#C557C7"
+  },
+  "input_fields": [
+    {
+      "field_key": "phone_number",
+      "order": 1,
+      "type": "textbox",
+      "required": false,
+      "label": "Phone number",
+      "placeholder": "e.g +1 555 555 5555"
+    }
+  ],
+  "polls_fields": [
+    {
+      "field_key": "purpose",
+      "order": 1,
+      "type": "button",
+      "required": true,
+      "label": "Select Your Purpose",
+      "options": ["Buying", "Selling"]
+    }
+  ]
 }

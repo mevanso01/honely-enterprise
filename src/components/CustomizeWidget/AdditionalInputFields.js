@@ -10,38 +10,38 @@ const AdditionalInputFields = (props) => {
   const [addInputState, setAddInputState] = useState({ label: '', placeholder: '' })
 
   const handleAddInputField = () => {
-    const ids = widgetConfig.additionalInputs.reduce((ids, item) => [...ids, item.id], [])
-    const maxId = ids.length ? Math.max(...ids) : 0
+    const orders = widgetConfig.input_fields.reduce((orders, item) => [...orders, item.order], [])
+    const maxOrder = orders.length ? Math.max(...orders) : 0
     setWidgetConfig({
       ...widgetConfig,
-      additionalInputs: [
-        ...widgetConfig.additionalInputs,
-        { ...addInputState, id: maxId + 1 }
+      input_fields: [
+        ...widgetConfig.input_fields,
+        { ...addInputState, order: maxOrder + 1 }
       ]
     })
     setAddInputState({ label: '', placeholder: '' })
   }
 
-  const handleDeleteInput = (id) => {
+  const handleDeleteInput = (order) => {
     setWidgetConfig({
       ...widgetConfig,
-      additionalInputs: widgetConfig.additionalInputs.filter(item => item.id !== id )
+      input_fields: widgetConfig.input_fields.filter(item => item.order !== order )
     })
   }
 
   let timeout = null
-  const handleInputChange = (id, updatedValue) => {
+  const handleInputChange = (order, updatedValue) => {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
-      const updatedInputs = widgetConfig.additionalInputs.map(item => {
-        if (item.id === id) {
+      const updatedInputs = widgetConfig.input_fields.map(item => {
+        if (item.order === order) {
           return { ...item, ...updatedValue }
         }
         return item
       })
       setWidgetConfig({
         ...widgetConfig,
-        additionalInputs: updatedInputs
+        input_fields: updatedInputs
       })
     }, 750)
   }
@@ -63,18 +63,18 @@ const AdditionalInputFields = (props) => {
               className='widget-input'
               placeholder='Title'
               defaultValue={value.label}
-              onChange={e => handleInputChange(value.id, { label: e.target.value })}
+              onChange={e => handleInputChange(value.order, { label: e.target.value })}
             />
             <input
               className='widget-input'
               placeholder='placeholder'
               defaultValue={value.placeholder}
-              onChange={e => handleInputChange(value.id, { placeholder: e.target.value })}
+              onChange={e => handleInputChange(value.order, { placeholder: e.target.value })}
             />
           </div>
           <button
             className='additional-input-delete-btn'
-            onClick={() => handleDeleteInput(value.id)}
+            onClick={() => handleDeleteInput(value.order)}
           >
             X
           </button>
@@ -91,7 +91,7 @@ const AdditionalInputFields = (props) => {
       <div>
         {items.map((item, index) => (
           <SortableItem
-            key={item.id}
+            key={item.order}
             index={index}
             value={item}
             handleDeleteInput={handleDeleteInput}
@@ -103,14 +103,14 @@ const AdditionalInputFields = (props) => {
   });
 
   const onSortEnd = ({oldIndex, newIndex}) => {
-    const copyListItems = [...widgetConfig.additionalInputs];
+    const copyListItems = [...widgetConfig.input_fields];
     const dragItemContent = copyListItems[oldIndex];
     copyListItems.splice(oldIndex, 1);
     copyListItems.splice(newIndex, 0, dragItemContent);
 
     setWidgetConfig({
       ...widgetConfig,
-      additionalInputs: copyListItems
+      input_fields: copyListItems
     })
   };
 
@@ -118,7 +118,7 @@ const AdditionalInputFields = (props) => {
     <section className='widget-block-section'>
       <h3>Add Input Fields</h3>
       <SortableList
-        items={widgetConfig.additionalInputs}
+        items={widgetConfig.input_fields}
         onSortEnd={onSortEnd}
         handleDeleteInput={handleDeleteInput}
         handleInputChange={handleInputChange}

@@ -1,8 +1,33 @@
 .widget-container {
   margin: 0px auto;
-  width: 100%;
   padding: 20px 20px 0px;
+}
+.widget-header-container {
+  background-color: #4A4A4A;
+  padding: 2px;
+  height: 62px;
+}
+.widget-header-container.empty {
+  background-color: transparent;
+}
+.widget-header-btn {
+  cursor: pointer;
+  background: transparent;
+  color: #FFFFFF;
+  border-radius: 10px;
+  margin: 0 2px;
+  border: none;
+  font-weight: 600;
+  font-size: 24px;
+  width: 140px;
+}
+.widget-header-btn:hover {
+  background: #000000;
+}
+
+.widget-content-wrapper {
   display: flex;
+  width: 100%;
 }
 .widget-loading-container {
   position: fixed;
@@ -173,11 +198,6 @@
 }
 .requirement-checkbox span.active {
   color: #24CB43;
-}
-.widget-save-btn {
-  cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
 }
 
 .color-picker-container {

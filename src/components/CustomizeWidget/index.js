@@ -128,164 +128,175 @@ const CustomizeWidget = (props) => {
       )}
       {Object.keys(widgetSettings.settings).length > 0 && !widgetSettings.error && (
         <>
-          <div className='widget-side-bar'>
-            <section className='widget-block-section'>
-              <h2>WIDGET ICON</h2>
-              <h3>Style</h3>
-              <AccordionItem
-                header={<p>Presets</p>}
-              >
-                <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings['default-light'])}>
-                  {widgetConfig?.mode === 'LIGHT' ? (
-                    <span className='mdi mdi-radiobox-marked' />
-                  ) : (
-                    <span className='mdi mdi-radiobox-blank' />
-                  )}
-                  <label>Light mode</label>
-                </div>
-                <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings['default-dark'])}>
-                  {widgetConfig?.mode === 'DARK' ? (
-                    <span className='mdi mdi-radiobox-marked' />
-                  ) : (
-                    <span className='mdi mdi-radiobox-blank' />
-                  )}
-                  <label>Dark mode</label>
-                </div>
-                {(widgetSettings.settings.current.mode === 'CUSTOM' || widgetConfig.mode === 'CUSTOM') && (
-                  <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings.current)}>
-                    {widgetConfig?.mode === 'CUSTOM' ? (
-                      <span className='mdi mdi-radiobox-marked' />
-                    ) : (
-                      <span className='mdi mdi-radiobox-blank' />
-                    )}
-                    <label>Custom mode</label>
-                  </div>
-                )}
-              </AccordionItem>
-              <AccordionItem
-                header={<p>Choose Font</p>}
-              >
-                {fonts.map((font, i) => (
-                  <div
-                    key={i}
-                    className='widget-radio-item'
-                    onClick={() => handleUpdateWidgetConfig({ font: font })}
-                  >
-                    {widgetConfig?.fonts === font ? (
-                      <span className='mdi mdi-radiobox-marked' />
-                    ) : (
-                      <span className='mdi mdi-radiobox-blank' />
-                    )}
-                    <label>{font}</label>
-                  </div>
-                ))}
-              </AccordionItem>
-              <div className='widget-block-divider' />
-              <ColorPickerItem
-                key={widgetConfig.mode + 'highligt'}
-                label='Highlight Color'
-                defaultColor={widgetConfig?.colors?.highlight_color}
-                handleUpdateColor={color => handleUpdateColor({ highlight_color: color })}
-              />
-              <div className='widget-block-divider' />
-              <ColorPickerItem
-                label='Logo Color'
-                defaultColor={widgetConfig?.colors?.logo_color}
-                handleUpdateColor={color => handleUpdateColor({ logo_color: color })}
-              />
-              <div className='widget-block-divider' />
-            </section>
-            <section className='widget-block-section'>
-              <h3>Text <span>(optional)</span></h3>
-              <input
-                className='widget-input'
-                defaultValue={widgetConfig['logo-text']}
-                onChange={e => handleUpdateWidgetConfig({ 'logo-text': e.target.value })}
-              />
-            </section>
-            <section className='widget-block-section'>
-              <h2>INPUT FORM</h2>
-              <h3>Title</h3>
-              <input
-                className='widget-input'
-                defaultValue={widgetConfig['title-text']}
-                onChange={e => handleUpdateWidgetConfig({ 'title-text': e.target.value })}
-              />
-            </section>
-            <section className='widget-block-section'>
-              <AccordionItem
-                isForceOpen={true}
-                header={<h3 style={{ marginBottom: '0px' }}>Modify colors</h3>}
-              >
-                <ColorPickerItem
-                  key={widgetConfig.mode + 'text'}
-                  label='Text Color'
-                  defaultColor={widgetConfig?.colors?.text_color}
-                  handleUpdateColor={color => handleUpdateColor({ text_color: color })}
-                />
-                <ColorPickerItem
-                  key={widgetConfig.mode + 'background'}
-                  label='Background Color'
-                  defaultColor={widgetConfig?.colors?.background_color}
-                  handleUpdateColor={color => handleUpdateColor({ background_color: color })}
-                />
-                <ColorPickerItem
-                  key={widgetConfig.mode + 'inputBG'}
-                  label='Input Fields BG'
-                  defaultColor={widgetConfig?.colors?.input_fields_bg}
-                  handleUpdateColor={color => handleUpdateColor({ input_fields_bg: color })}
-                />
-                <ColorPickerItem
-                  key={widgetConfig.mode + 'inactive'}
-                  label='Inactive Color'
-                  defaultColor={widgetConfig?.colors?.inactive_color}
-                  handleUpdateColor={color => handleUpdateColor({ inactive_color: color })}
-                />
-              </AccordionItem>
-            </section>
-  
-            <AdditionalInputFields
-              widgetConfig={widgetConfig}
-              setWidgetConfig={setWidgetConfig}
-            />
-          
-            <PollQuestion
-              widgetConfig={widgetConfig}
-              setWidgetConfig={setWidgetConfig}
-            />
-  
-            <section className='widget-block-section'>
-              <h2>RESULTS PAGE</h2>
-              <ColorPickerItem
-                key={widgetConfig.mode + 'inc'}
-                label='Increase Color'
-                defaultColor={widgetConfig?.colors?.increase_color}
-                handleUpdateColor={color => handleUpdateColor({ increase_color: color })}
-              />
-              <div className='widget-block-divider' />
-              <ColorPickerItem
-                key={widgetConfig.mode + 'dec'}
-                label='Decrease Color'
-                defaultColor={widgetConfig?.colors?.decrease_color}
-                handleUpdateColor={color => handleUpdateColor({ decrease_color: color })}
-              />
-            </section>
-
-            <section className='widget-block-section'>
+          {(widgetConfig?.extended || widgetConfig?.mode !== widgetSettings.settings?.current?.mode) ? (
+            <div className='widget-header-container'>
               <button
-                className='widget-save-btn'
+                className='widget-header-btn'
                 onClick={() => handleUpdateWidget()}
               >
                 Save
               </button>
-            </section>
-          </div>
-      
-          <div className='widget-preview-container'>
-            <section className='widget-preview-item'>
-              <p>Widget Icon Preview</p>
-              <WidgetIconPreview widgetConfig={widgetConfig} />
-            </section>
+              <button
+                className='widget-header-btn'
+                onClick={() => setWidgetConfig(widgetSettings.settings.current)}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <div className='widget-header-container empty' />
+          )}
+          <div className='widget-content-wrapper'>
+            <div className='widget-side-bar'>
+              <section className='widget-block-section'>
+                <h2>WIDGET ICON</h2>
+                <h3>Style</h3>
+                <AccordionItem
+                  header={<p>Presets</p>}
+                >
+                  <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings['default-light'])}>
+                    {widgetConfig?.mode === 'LIGHT' ? (
+                      <span className='mdi mdi-radiobox-marked' />
+                    ) : (
+                      <span className='mdi mdi-radiobox-blank' />
+                    )}
+                    <label>Light mode</label>
+                  </div>
+                  <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings['default-dark'])}>
+                    {widgetConfig?.mode === 'DARK' ? (
+                      <span className='mdi mdi-radiobox-marked' />
+                    ) : (
+                      <span className='mdi mdi-radiobox-blank' />
+                    )}
+                    <label>Dark mode</label>
+                  </div>
+                  {(widgetSettings.settings.current.mode === 'CUSTOM' || widgetConfig.mode === 'CUSTOM') && (
+                    <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings.current)}>
+                      {widgetConfig?.mode === 'CUSTOM' ? (
+                        <span className='mdi mdi-radiobox-marked' />
+                      ) : (
+                        <span className='mdi mdi-radiobox-blank' />
+                      )}
+                      <label>Custom mode</label>
+                    </div>
+                  )}
+                </AccordionItem>
+                <AccordionItem
+                  header={<p>Choose Font</p>}
+                >
+                  {fonts.map((font, i) => (
+                    <div
+                      key={i}
+                      className='widget-radio-item'
+                      onClick={() => handleUpdateWidgetConfig({ font: font })}
+                    >
+                      {widgetConfig?.fonts === font ? (
+                        <span className='mdi mdi-radiobox-marked' />
+                      ) : (
+                        <span className='mdi mdi-radiobox-blank' />
+                      )}
+                      <label>{font}</label>
+                    </div>
+                  ))}
+                </AccordionItem>
+                <div className='widget-block-divider' />
+                <ColorPickerItem
+                  key={widgetConfig.mode + 'highligt'}
+                  label='Highlight Color'
+                  defaultColor={widgetConfig?.colors?.highlight_color}
+                  handleUpdateColor={color => handleUpdateColor({ highlight_color: color })}
+                />
+                <div className='widget-block-divider' />
+                <ColorPickerItem
+                  label='Logo Color'
+                  defaultColor={widgetConfig?.colors?.logo_color}
+                  handleUpdateColor={color => handleUpdateColor({ logo_color: color })}
+                />
+                <div className='widget-block-divider' />
+              </section>
+              <section className='widget-block-section'>
+                <h3>Text <span>(optional)</span></h3>
+                <input
+                  className='widget-input'
+                  defaultValue={widgetConfig['logo-text']}
+                  onChange={e => handleUpdateWidgetConfig({ 'logo-text': e.target.value })}
+                />
+              </section>
+              <section className='widget-block-section'>
+                <h2>INPUT FORM</h2>
+                <h3>Title</h3>
+                <input
+                  className='widget-input'
+                  defaultValue={widgetConfig['title-text']}
+                  onChange={e => handleUpdateWidgetConfig({ 'title-text': e.target.value })}
+                />
+              </section>
+              <section className='widget-block-section'>
+                <AccordionItem
+                  isForceOpen={true}
+                  header={<h3 style={{ marginBottom: '0px' }}>Modify colors</h3>}
+                >
+                  <ColorPickerItem
+                    key={widgetConfig.mode + 'text'}
+                    label='Text Color'
+                    defaultColor={widgetConfig?.colors?.text_color}
+                    handleUpdateColor={color => handleUpdateColor({ text_color: color })}
+                  />
+                  <ColorPickerItem
+                    key={widgetConfig.mode + 'background'}
+                    label='Background Color'
+                    defaultColor={widgetConfig?.colors?.background_color}
+                    handleUpdateColor={color => handleUpdateColor({ background_color: color })}
+                  />
+                  <ColorPickerItem
+                    key={widgetConfig.mode + 'inputBG'}
+                    label='Input Fields BG'
+                    defaultColor={widgetConfig?.colors?.input_fields_bg}
+                    handleUpdateColor={color => handleUpdateColor({ input_fields_bg: color })}
+                  />
+                  <ColorPickerItem
+                    key={widgetConfig.mode + 'inactive'}
+                    label='Inactive Color'
+                    defaultColor={widgetConfig?.colors?.inactive_color}
+                    handleUpdateColor={color => handleUpdateColor({ inactive_color: color })}
+                  />
+                </AccordionItem>
+              </section>
+    
+              <AdditionalInputFields
+                widgetConfig={widgetConfig}
+                setWidgetConfig={setWidgetConfig}
+              />
+            
+              <PollQuestion
+                widgetConfig={widgetConfig}
+                setWidgetConfig={setWidgetConfig}
+              />
+    
+              <section className='widget-block-section'>
+                <h2>RESULTS PAGE</h2>
+                <ColorPickerItem
+                  key={widgetConfig.mode + 'inc'}
+                  label='Increase Color'
+                  defaultColor={widgetConfig?.colors?.increase_color}
+                  handleUpdateColor={color => handleUpdateColor({ increase_color: color })}
+                />
+                <div className='widget-block-divider' />
+                <ColorPickerItem
+                  key={widgetConfig.mode + 'dec'}
+                  label='Decrease Color'
+                  defaultColor={widgetConfig?.colors?.decrease_color}
+                  handleUpdateColor={color => handleUpdateColor({ decrease_color: color })}
+                />
+              </section>
+            </div>
+        
+            <div className='widget-preview-container'>
+              <section className='widget-preview-item'>
+                <p>Widget Icon Preview</p>
+                <WidgetIconPreview widgetConfig={widgetConfig} />
+              </section>
+            </div>
           </div>
         </>
       )}

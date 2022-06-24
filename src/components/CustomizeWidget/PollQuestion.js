@@ -38,19 +38,23 @@ const PollQuestion = (props) => {
     })
   }
 
+  let updateItemTimeout = null
   const handleUpdateItem = (order, updatedValue) => {
-    const updatedPolls = widgetConfig['polls-fields'].map(item => {
-      if (item.order === order) {
-        return { ...item, ...updatedValue }
-      }
-      return item
-    })
-    setWidgetConfig({
-      ...widgetConfig,
-      mode: 'CUSTOM',
-      extended: widgetConfig?.extended ?? widgetConfig.mode,
-      'polls-fields': updatedPolls
-    })
+    clearTimeout(updateItemTimeout)
+    updateItemTimeout = setTimeout(() => {
+      const updatedPolls = widgetConfig['polls-fields'].map(item => {
+        if (item.order === order) {
+          return { ...item, ...updatedValue }
+        }
+        return item
+      })
+      setWidgetConfig({
+        ...widgetConfig,
+        mode: 'CUSTOM',
+        extended: widgetConfig?.extended ?? widgetConfig.mode,
+        'polls-fields': updatedPolls
+      })
+    }, 750)
   }
 
   const handleAddPollOption = (order, e) => {

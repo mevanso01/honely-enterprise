@@ -6,6 +6,7 @@ import ColorPickerItem from './ColorPickerItem'
 import AccordionItem from './AccordionItem'
 import AdditionalInputFields from './AdditionalInputFields'
 import PollQuestion from './PollQuestion'
+import WidgetIconPreview from './WidgetIconPreview'
 
 const CustomizeWidget = (props) => {
   const [widgetSettings, setWidgetSettings] = useState({ loading: true, loadingText: 'Loading...', settings: {}, error: null })
@@ -115,8 +116,6 @@ const CustomizeWidget = (props) => {
       }
     })
   }, [])
-
-  console.log(widgetConfig)
 
   return (
     <div className='widget-container'>
@@ -284,7 +283,8 @@ const CustomizeWidget = (props) => {
       
           <div className='widget-preview-container'>
             <section className='widget-preview-item'>
-              <h1>Widget Preview</h1>
+              <p>Widget Preview</p>
+              <WidgetIconPreview widgetConfig={widgetConfig} />
             </section>
           </div>
         </>

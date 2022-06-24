@@ -283,7 +283,7 @@ const CustomizeWidget = (props) => {
       
           <div className='widget-preview-container'>
             <section className='widget-preview-item'>
-              <p>Widget Preview</p>
+              <p>Widget Icon Preview</p>
               <WidgetIconPreview widgetConfig={widgetConfig} />
             </section>
           </div>

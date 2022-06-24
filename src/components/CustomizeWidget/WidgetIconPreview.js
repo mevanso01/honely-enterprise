@@ -6,7 +6,12 @@ const WidgetIconPreview = (props) => {
     widgetConfig
   } = props
   return (
-    <div className='widget-icon-preview-container'>
+    <div
+      className='widget-icon-preview-container'
+      style={{
+        backgroundColor: widgetConfig.colors.background_color
+      }}
+    >
       <span
         className='widget-logo-text'
         style={{

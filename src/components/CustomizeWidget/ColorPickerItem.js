@@ -22,7 +22,6 @@ const ColorPickerItem = (props) => {
   }
 
   useEffect(() => {
-    if (!open) return
     document.addEventListener('mouseup', closeColorPicker)
     return () => {
       document.removeEventListener('mouseup', closeColorPicker)
@@ -32,7 +31,7 @@ const ColorPickerItem = (props) => {
   return (
     <div className='color-picker-container'>
       <label>{label}</label>
-      <span style={{ backgroundColor: color.hex }} onClick={() => setOpen(!open)} />
+      <span style={{ backgroundColor: color.hex }} onClick={() => setOpen(true)} />
       {open && (
         <div className='color-picker-wrapper'>
           <ColorPicker

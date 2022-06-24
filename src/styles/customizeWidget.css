@@ -4,6 +4,18 @@
   padding: 20px 20px 0px;
   display: flex;
 }
+.widget-loading-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  background: rgb(0 0 0 / 10%);
+  z-index: 100;
+}
+.widet-error-text {
+  text-align: center;
+  margin: 50px 0;
+}
 
 .widget-side-bar {
   background-color: #F6F6F6;
@@ -161,6 +173,11 @@
 }
 .requirement-checkbox span.active {
   color: #24CB43;
+}
+.widget-save-btn {
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .color-picker-container {

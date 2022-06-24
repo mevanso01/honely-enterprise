@@ -7,16 +7,23 @@ const AdditionalInputFields = (props) => {
     setWidgetConfig
   } = props
 
-  const [addInputState, setAddInputState] = useState({ label: '', placeholder: '' })
+  const [addInputState, setAddInputState] = useState({ label: '', placeholder: '', type: 'textbox', required: false })
 
   const handleAddInputField = () => {
-    const orders = widgetConfig.input_fields.reduce((orders, item) => [...orders, item.order], [])
+    const orders = widgetConfig['input-fields'].reduce((orders, item) => [...orders, item.order], [])
     const maxOrder = orders.length ? Math.max(...orders) : 0
+    const newOrder = maxOrder + 1
     setWidgetConfig({
       ...widgetConfig,
-      input_fields: [
-        ...widgetConfig.input_fields,
-        { ...addInputState, order: maxOrder + 1 }
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'input-fields': [
+        ...widgetConfig['input-fields'],
+        {
+          ...addInputState,
+          field_key: 'input_' + newOrder,
+          order: newOrder
+        }
       ]
     })
     setAddInputState({ label: '', placeholder: '' })
@@ -25,7 +32,9 @@ const AdditionalInputFields = (props) => {
   const handleDeleteInput = (order) => {
     setWidgetConfig({
       ...widgetConfig,
-      input_fields: widgetConfig.input_fields.filter(item => item.order !== order )
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'input-fields': widgetConfig['input-fields'].filter(item => item.order !== order )
     })
   }
 
@@ -33,7 +42,7 @@ const AdditionalInputFields = (props) => {
   const handleInputChange = (order, updatedValue) => {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
-      const updatedInputs = widgetConfig.input_fields.map(item => {
+      const updatedInputs = widgetConfig['input-fields'].map(item => {
         if (item.order === order) {
           return { ...item, ...updatedValue }
         }
@@ -41,7 +50,9 @@ const AdditionalInputFields = (props) => {
       })
       setWidgetConfig({
         ...widgetConfig,
-        input_fields: updatedInputs
+        mode: 'CUSTOM',
+        extended: widgetConfig?.extended ?? widgetConfig.mode,
+        'input-fields': updatedInputs
       })
     }, 750)
   }
@@ -103,14 +114,16 @@ const AdditionalInputFields = (props) => {
   });
 
   const onSortEnd = ({oldIndex, newIndex}) => {
-    const copyListItems = [...widgetConfig.input_fields];
+    const copyListItems = [...widgetConfig['input-fields']];
     const dragItemContent = copyListItems[oldIndex];
     copyListItems.splice(oldIndex, 1);
     copyListItems.splice(newIndex, 0, dragItemContent);
 
     setWidgetConfig({
       ...widgetConfig,
-      input_fields: copyListItems
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'input-fields': copyListItems
     })
   };
 
@@ -118,7 +131,7 @@ const AdditionalInputFields = (props) => {
     <section className='widget-block-section'>
       <h3>Add Input Fields</h3>
       <SortableList
-        items={widgetConfig.input_fields}
+        items={widgetConfig['input-fields']}
         onSortEnd={onSortEnd}
         handleDeleteInput={handleDeleteInput}
         handleInputChange={handleInputChange}

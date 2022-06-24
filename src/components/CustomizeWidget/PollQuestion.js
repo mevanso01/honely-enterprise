@@ -7,18 +7,19 @@ const PollQuestion = (props) => {
     setWidgetConfig
   } = props
 
-  const [addPollLabel, setAddPollLabel] = useState('')
-
   const handleAddPoll = () => {
-    const orders = widgetConfig.polls_fields.reduce((orders, item) => [...orders, item.order], [])
+    const orders = widgetConfig['polls-fields'].reduce((orders, item) => [...orders, item.order], [])
     const maxOrder = orders.length ? Math.max(...orders) : 0
+    const newOrder = maxOrder + 1
     setWidgetConfig({
       ...widgetConfig,
-      polls_fields: [
-        ...widgetConfig.polls_fields,
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'polls-fields': [
+        ...widgetConfig['polls-fields'],
         {
-          field_key: '',
-          order: maxOrder + 1,
+          field_key: 'polls_' + newOrder,
+          order: newOrder,
           type: 'button',
           required: false,
           label: '',
@@ -26,18 +27,19 @@ const PollQuestion = (props) => {
         }
       ]
     })
-    setAddPollLabel('')
   }
 
   const handleDeletePoll = (order) => {
     setWidgetConfig({
       ...widgetConfig,
-      polls_fields: widgetConfig.polls_fields.filter(item => item.order !== order)
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'polls-fields': widgetConfig['polls-fields'].filter(item => item.order !== order)
     })
   }
 
   const handleUpdateItem = (order, updatedValue) => {
-    const updatedPolls = widgetConfig.polls_fields.map(item => {
+    const updatedPolls = widgetConfig['polls-fields'].map(item => {
       if (item.order === order) {
         return { ...item, ...updatedValue }
       }
@@ -45,13 +47,15 @@ const PollQuestion = (props) => {
     })
     setWidgetConfig({
       ...widgetConfig,
-      polls_fields: updatedPolls
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'polls-fields': updatedPolls
     })
   }
 
   const handleAddPollOption = (order, e) => {
     if (e.keyCode === 13 && e.target.value) {
-      const updatedPolls = widgetConfig.polls_fields.map(item => {
+      const updatedPolls = widgetConfig['polls-fields'].map(item => {
         if (item.order === order) {
           return { ...item, options: [...item.options, e.target.value] }
         }
@@ -59,7 +63,9 @@ const PollQuestion = (props) => {
       })
       setWidgetConfig({
         ...widgetConfig,
-        polls_fields: updatedPolls
+        mode: 'CUSTOM',
+        extended: widgetConfig?.extended ?? widgetConfig.mode,
+        'polls-fields': updatedPolls
       })
       e.target.value = ''
     }
@@ -69,7 +75,7 @@ const PollQuestion = (props) => {
   const handleUpdateOption = (order, index, value) => {
     clearTimeout(updateOptionTimeout)
     updateOptionTimeout = setTimeout(() => {
-    const updatedPolls = widgetConfig.polls_fields.map(item => {
+    const updatedPolls = widgetConfig['polls-fields'].map(item => {
         if (item.order === order) {
           const updatedOptions = [...item.options]
           updatedOptions[index] = value
@@ -79,13 +85,15 @@ const PollQuestion = (props) => {
       })
       setWidgetConfig({
         ...widgetConfig,
-        polls_fields: updatedPolls
+        mode: 'CUSTOM',
+        extended: widgetConfig?.extended ?? widgetConfig.mode,
+        'polls-fields': updatedPolls
       })
     }, 750)
   }
 
   const handleDeleteOption = (order, index) => {
-    const updatedPolls = widgetConfig.polls_fields.map(item => {
+    const updatedPolls = widgetConfig['polls-fields'].map(item => {
       if (item.order === order) {
         let updatedOptions = [...item.options]
         updatedOptions.splice(index, 1)
@@ -95,7 +103,9 @@ const PollQuestion = (props) => {
     })
     setWidgetConfig({
       ...widgetConfig,
-      polls_fields: updatedPolls
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'polls-fields': updatedPolls
     })
   }
 
@@ -176,14 +186,16 @@ const PollQuestion = (props) => {
   });
 
   const onSortEnd = ({oldIndex, newIndex}) => {
-    const copyListItems = [...widgetConfig.polls_fields];
+    const copyListItems = [...widgetConfig['polls-fields']];
     const dragItemContent = copyListItems[oldIndex];
     copyListItems.splice(oldIndex, 1);
     copyListItems.splice(newIndex, 0, dragItemContent);
 
     setWidgetConfig({
       ...widgetConfig,
-      polls_fields: copyListItems
+      mode: 'CUSTOM',
+      extended: widgetConfig?.extended ?? widgetConfig.mode,
+      'polls-fields': copyListItems
     })
   };
 
@@ -191,7 +203,7 @@ const PollQuestion = (props) => {
     <section className='widget-block-section'>
       <h3>Poll Question</h3>
       <SortableList
-        items={widgetConfig.polls_fields}
+        items={widgetConfig['polls-fields']}
         onSortEnd={onSortEnd}
         handleUpdateItem={handleUpdateItem}
         handleDeletePoll={handleDeletePoll}

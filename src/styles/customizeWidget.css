@@ -260,7 +260,6 @@
   overflow: initial;
 }
 
-
 .widget-preview-container {
   flex: 1;
   padding: 50px 30px;
@@ -283,6 +282,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 150px;
 }
 .widget-logo-text {
   font-weight: 700;
@@ -297,4 +297,194 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.input-form-preview-container {
+  min-width: 500px;
+  box-shadow: 4px 4px 19px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  padding: 40px 30px;
+  margin-bottom: 70px;
+}
+
+.input-form-preview-container .title-text {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0px 0px 20px;
+}
+.widget-form-controller {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+}
+.widget-form-controller label {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.widget-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.widget-input-wrapper svg {
+  position: absolute;
+  left: 14px;
+}
+.widget-input-wrapper input {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 12px 15px 12px 36px;
+  outline: none;
+  width: 100%;
+}
+.poll-field-container label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 8px 0px 4px;
+}
+.poll-field-container > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 5px 5px -5px;
+  width: calc(100% + 10px);
+}
+.poll-field-container > div > button {
+  width: calc(50% - 10px);
+  height: 44px;
+  margin: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 10px 30px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease-in 0s;
+  background: rgb(255, 255, 255);
+}
+.widget-bottom-btn-container {
+  flex: 1 1 0%;
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+.widget-bottom-btn-container button {
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 10px 30px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease-in 0s;
+  width: 100%;
+}
+
+.result-page-preview-container {
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 16px;
+  padding: 40px 30px;
+  min-width: 500px;
+}
+.result-header-item {
+  border-bottom-width: 1px;
+  border-style: solid;
+  padding: 15px 0px;
+}
+.result-header-item p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0px;
+}
+.result-header-item h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.result-main-item {
+  margin-top: 20px;
+}
+.result-main-item > p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0px;
+}
+.result-main-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.result-main-item > div > h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0px;
+  width: 50%;
+}
+.result-main-item > div > div {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin: 0px 30px;
+  cursor: pointer;
+}
+.result-main-item > div > span {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  flex: 1 1 0%;
+}
+.widget-powered-by-container {
+  border-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 5px;
+  margin-top: 30px;
+  text-align: right;
+}
+.widget-powered-by-container a {
+  font-size: 12px;
+  color: rgb(207, 206, 211);
+  text-decoration: none;
+}
+.contact-broker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0px;
+}
+.contact-broker-container a {
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0px 10px;
+}
+.contact-broker-container a svg {
+  margin-right: 10px;
+}
+.contact-broker-container a span {
+  font-size: 14px;
 }

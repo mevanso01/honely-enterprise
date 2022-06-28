@@ -7,6 +7,8 @@ import AccordionItem from './AccordionItem'
 import AdditionalInputFields from './AdditionalInputFields'
 import PollQuestion from './PollQuestion'
 import WidgetIconPreview from './WidgetIconPreview'
+import InputFormPreview from './InputFormPreview'
+import { ResultPagePreview } from './ResultPagePreview'
 
 const CustomizeWidget = (props) => {
   const [widgetSettings, setWidgetSettings] = useState({ loading: true, loadingText: 'Loading...', settings: {}, error: null })
@@ -295,6 +297,14 @@ const CustomizeWidget = (props) => {
               <section className='widget-preview-item'>
                 <p>Widget Icon Preview</p>
                 <WidgetIconPreview widgetConfig={widgetConfig} />
+              </section>
+              <section className='widget-preview-item'>
+                <p>Input Form Preview</p>
+                <InputFormPreview widgetConfig={widgetConfig} />
+              </section>
+              <section className='widget-preview-item'>
+                <p>Results Page Preview</p>
+                <ResultPagePreview widgetConfig={widgetConfig} />
               </section>
             </div>
           </div>

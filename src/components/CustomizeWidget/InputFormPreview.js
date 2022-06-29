@@ -1,4 +1,5 @@
 import React from 'react'
+import { ArrowDownIcon } from './Icons'
 import { LocationIcon, UserIcon, MessageIcon, PhoneIcon } from './Icons'
 
 const InputFormPreview = (props) => {
@@ -12,6 +13,9 @@ const InputFormPreview = (props) => {
         backgroundColor: widgetConfig.colors.background_color
       }}
     >
+      <div className='input-form-preview-close-icon-container'>
+        <ArrowDownIcon color={widgetConfig.colors.text_color} />
+      </div>
       {widgetConfig['title-text'] === 'Find the Futurve Values of Any Property' ? (
       <p
         className='title-text'

@@ -1,4 +1,6 @@
 import React from 'react'
+import { CloseIcon } from './Icons'
+import { lighten } from 'polished'
 import { ArrowDownIcon, ArrowUpIcon, ContactIcon } from './Icons'
 
 export const ResultPagePreview = (props) => {
@@ -12,6 +14,15 @@ export const ResultPagePreview = (props) => {
         backgroundColor: widgetConfig.colors.background_color
       }}
     >
+      <div className='result-close-icon-container'>
+        <span
+          style={{
+            borderColor: widgetConfig.colors.text_color
+          }}
+        >
+          <CloseIcon color={widgetConfig.colors.text_color} />
+        </span>
+      </div>
       <div className='result-header-item' style={{ borderColor: widgetConfig.colors.inactive_color }}>
         <p style={{ color: widgetConfig.colors.inactive_color }}>Showing result for:</p>
         <h3 style={{ color: widgetConfig.colors.text_color }}>1234 Street st. City, ST 00011</h3>
@@ -24,7 +35,13 @@ export const ResultPagePreview = (props) => {
         <p style={{ color: widgetConfig.colors.inactive_color }}>1 Year Forecast</p>
         <div>
           <h3 style={{ color: widgetConfig.colors.text_color }}>$500,000</h3>
-          <div><ArrowUpIcon color={widgetConfig.colors.increase_color} /></div>
+          <div
+            style={{
+              background: lighten(0.3, widgetConfig.colors.increase_color)
+            }}
+          >
+            <ArrowUpIcon color={widgetConfig.colors.increase_color} />
+          </div>
           <span style={{ color: widgetConfig.colors.increase_color }}>10%</span>
         </div>
       </div>
@@ -32,7 +49,13 @@ export const ResultPagePreview = (props) => {
         <p style={{ color: widgetConfig.colors.inactive_color }}>2 Year Forecast</p>
         <div>
           <h3 style={{ color: widgetConfig.colors.text_color }}>$600,000</h3>
-          <div><ArrowUpIcon color={widgetConfig.colors.increase_color} /></div>
+          <div
+            style={{
+              background: lighten(0.3, widgetConfig.colors.increase_color)
+            }}
+          >
+            <ArrowUpIcon color={widgetConfig.colors.increase_color} />
+          </div>
           <span style={{ color: widgetConfig.colors.increase_color }}>20%</span>
         </div>
       </div>
@@ -40,7 +63,13 @@ export const ResultPagePreview = (props) => {
         <p style={{ color: widgetConfig.colors.inactive_color }}>3 Year Forecast</p>
         <div>
           <h3 style={{ color: widgetConfig.colors.text_color }}>$400,000</h3>
-          <div><ArrowDownIcon color={widgetConfig.colors.decrease_color} /></div>
+          <div
+            style={{
+              background: lighten(0.3, widgetConfig.colors.decrease_color)
+            }}
+          >
+            <ArrowDownIcon color={widgetConfig.colors.decrease_color} />
+          </div>
           <span style={{ color: widgetConfig.colors.decrease_color }}>5%</span>
         </div>
       </div>

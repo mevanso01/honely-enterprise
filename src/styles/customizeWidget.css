@@ -318,6 +318,11 @@
   padding: 40px 30px;
   margin-bottom: 70px;
 }
+.input-form-preview-close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
 
 .input-form-preview-container .title-text {
   font-size: 16px;
@@ -412,6 +417,20 @@
   border-radius: 16px;
   padding: 40px 30px;
   min-width: 500px;
+}
+.result-close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.result-close-icon-container span {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .result-header-item {
   border-bottom-width: 1px;

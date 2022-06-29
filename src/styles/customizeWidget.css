@@ -199,6 +199,18 @@
 .requirement-checkbox span.active {
   color: #24CB43;
 }
+.poll-checkbox-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  min-width: initial;
+}
+.poll-checkbox-btn:hover {
+  background-color: transparent;
+  color: initial;
+}
 
 .color-picker-container {
   display: flex;

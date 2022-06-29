@@ -1,0 +1,85 @@
+.subscription-wrapper {
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
+    text-align: left;
+    margin: 0px auto 0px;
+    width: 100%;
+    padding: 20px;
+}
+.subscription-wrapper h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.subscription-wrapper ul {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.subscription-wrapper ul li{
+    margin: 10px 0px;
+}
+.subscription-wrapper ul li span{
+    font-size: 18px;
+    color: #24cb43
+}
+.subscription-logo {
+    margin-right: 10px;
+}
+.subscription-apikey {
+    padding: 10px 10px;
+    display: flex;
+}
+.subscription-apikey span {
+    font-weight: 400;
+}
+.subscription-apikey-logos {
+    margin: 0px 10px;
+    color: #24cb43
+}
+.subscription-apikey-logos span{
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+.subscription-payment-method {
+    margin: 20px 0px;
+}
+.subscription-change-payment-method {
+    cursor: pointer;
+    color: #24cb43;
+}
+.subscription-change-payment-method:hover {
+    /* border-bottom: 1px solid #24cb43; */
+}
+.subscription-payment-method-select {
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 0px;
+}
+.subscription-payment-method-list {
+    padding-top: 10px;
+}
+.subscription-payment-method-item {
+    padding: 5px 0px;
+}
+.subscription-payment-method-item label{
+    margin: 0px 10px;
+}
+.subscription-payment-method-submit-btn {
+    margin-top: 15px;
+}
+.subscription-payment-method-success-message {
+    margin-top: 10px;
+    color: green;
+}
+.subscription-payment-method-error-message {
+    margin-top: 10px;
+    color: red;
+}
+@media (max-width: 474px) {
+    .subscription-col-flex {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -9,6 +9,83 @@ const LogoIcon = ({ color }) => {
   )
 }
 
+const CloseIcon = ({ color }) => {
+  return (
+    <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <g id="icons" stroke="none" fill="none">
+        <g id="icon/close" fill={color ? color : 'black'}>
+          <path d="M6.707 5.293L12 10.585l5.293-5.292a1 1 0 011.414 1.414L13.415 12l5.292 5.293a1 1 0 01-1.414 1.414L12 13.415l-5.293 5.292a1 1 0 11-1.414-1.414L10.585 12 5.293 6.707a1 1 0 011.414-1.414z" id="icon">
+          </path>
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+const LocationIcon = () => {
+  return (
+    <svg width="14" height="18" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M0.789062 9.17887C0.789062 4.19568 4.95327 0.167969 9.9903 0.167969C15.0415 0.167969 19.2057 4.19568 19.2057 9.17887C19.2057 11.69 18.2925 14.0212 16.7894 15.9972C15.1311 18.1768 13.0872 20.0758 10.7867 21.5664C10.2601 21.9109 9.78493 21.9369 9.20705 21.5664C6.89336 20.0758 4.84949 18.1768 3.20544 15.9972C1.70121 14.0212 0.789062 11.69 0.789062 9.17887ZM6.95793 9.45947C6.95793 11.1288 8.32014 12.4418 9.99041 12.4418C11.6618 12.4418 13.0371 11.1288 13.0371 9.45947C13.0371 7.80311 11.6618 6.42623 9.99041 6.42623C8.32014 6.42623 6.95793 7.80311 6.95793 9.45947Z" fill="#CFCED3"/>
+    </svg>
+  )
+}
+
+const MessageIcon = () => {
+  return (
+    <svg width="14" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M14.939 0C16.28 0 17.57 0.53 18.519 1.481C19.469 2.43 20 3.71 20 5.05V12.95C20 15.74 17.73 18 14.939 18H5.06C2.269 18 0 15.74 0 12.95V5.05C0 2.26 2.259 0 5.06 0H14.939ZM16.53 6.54L16.61 6.46C16.849 6.17 16.849 5.75 16.599 5.46C16.46 5.311 16.269 5.22 16.07 5.2C15.86 5.189 15.66 5.26 15.509 5.4L11 9C10.42 9.481 9.589 9.481 9 9L4.5 5.4C4.189 5.17 3.759 5.2 3.5 5.47C3.23 5.74 3.2 6.17 3.429 6.47L3.56 6.6L8.11 10.15C8.67 10.59 9.349 10.83 10.06 10.83C10.769 10.83 11.46 10.59 12.019 10.15L16.53 6.54Z" fill="#CFCED3"/>
+    </svg>
+  )
+}
+
+const UserIcon = () => {
+  return (
+    <svg width="14" height="16" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M13.294 5.29105C13.294 8.22808 10.9391 10.5831 8 10.5831C5.0619 10.5831 2.70601 8.22808 2.70601 5.29105C2.70601 2.35402 5.0619 0 8 0C10.9391 0 13.294 2.35402 13.294 5.29105ZM8 20C3.66237 20 0 19.295 0 16.575C0 13.8539 3.68538 13.1739 8 13.1739C12.3386 13.1739 16 13.8789 16 16.599C16 19.32 12.3146 20 8 20Z" fill="#CFCED3" />
+    </svg>
+  )
+}
+
+const PhoneIcon = () => {
+  return (
+    <svg width="14" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M9.53174 10.4724C13.5208 14.4604 14.4258 9.84672 16.9656 12.3848C19.4143 14.8328 20.8216 15.3232 17.7192 18.4247C17.3306 18.737 14.8616 22.4943 6.1846 13.8197C-2.49348 5.144 1.26158 2.67244 1.57397 2.28395C4.68387 -0.826154 5.16586 0.589383 7.61449 3.03733C10.1544 5.5765 5.54266 6.48441 9.53174 10.4724Z" fill="#CFCED3" />
+    </svg>
+  )
+}
+
+const ArrowDownIcon = ({ color }) => {
+  return (
+    <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L6.14286 6L11 1" stroke={color ? color : 'black'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+const ArrowUpIcon = ({ color }) => {
+  return (
+    <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11 5L6 1L0.999999 5" stroke={`${color}`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+const ContactIcon = ({ color }) => {
+  return (
+    <svg width="24" height="16" viewBox="0 0 34 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 1V21H33V1M1 1H33M1 1L17.5926 14L33 1" stroke={`${color}`} strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
 export {
-  LogoIcon
+  LogoIcon,
+  CloseIcon,
+  LocationIcon,
+  MessageIcon,
+  UserIcon,
+  PhoneIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  ContactIcon
 }

@@ -10,21 +10,26 @@
 }
 .homepage-subblock {
     display: flex;
+    flex-direction: column;
     padding-top: 4%;
     padding-left: 4%;
     padding-right: 8%;
     padding-bottom: 4%;
+    margin-bottom: 30px;
 }
-.homepage-subblock div {
-    width: 50%
-}
+
 .homepage-subblock-upper-left {
-    padding-right: 10%;
-    padding-left: 5%;
-    padding-top: 10%
+    padding-top: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.homepage-subblock-upper-left > div {
+    max-width: 370px;
 }
 .homepage-subblock-upper-right {
     /* padding-left: 2%; */
+    margin-top: 30px;
 }
 .homepage-subblock-upper-right img{
     /* border-top-left-radius: 50px; */
@@ -35,22 +40,62 @@
 .homepage-subblock-lower-left {
     padding-left: 5%;
     padding-right: 5%;
+    margin-top: 50px;
 }
 .homepage-subblock-lower-right {
     padding-left: 2%;
-    padding-right: 15%;
     padding-top: 2%;
+}
+.homepage-subblock-lower-right > div {
+    max-width: 325px;
 }
 .homepage-container h1 {
     font-family: 'Brown', sans-serif;
-    font-size: 60px;
+    font-size: 32px;
     font-weight: 300;
+    margin-bottom: 20px;
 }
 .homepage-container p {
     font-family: 'Brown', sans-serif;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
 }
 /* .homepage-image {
     width: 50%;
 } */
+.homepage-container .homepage-subblock:last-child {
+    flex-direction: column-reverse;
+}
+
+@media (min-width: 768px) {
+    .homepage-container h1 {
+        font-size: 42px;
+    }
+    .homepage-container p {
+        font-size: 20px;
+    }
+    .homepage-subblock {
+        flex-direction: row;
+    }
+    .homepage-container .homepage-subblock:last-child {
+        flex-direction: row;
+    }
+    .homepage-subblock > div {
+        width: 50%
+    }
+    .homepage-subblock-upper-right {
+        margin-top: 0;
+    }
+    .homepage-subblock-lower-left {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .homepage-container h1 {
+        font-size: 60px;
+    }
+    .homepage-container p {
+        font-size: 24px;
+    }
+}

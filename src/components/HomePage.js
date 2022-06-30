@@ -11,11 +11,13 @@ function HomePage() {
         <div className="homepage-container">
             <div className="homepage-subblock">
                 <div className="homepage-subblock-upper-left">
-                    <h1>Lead Capture</h1>
-                    <p>Generate more leads and improve your site engagement by integrating Honely's predictive analytics onto your website!</p>
-                    <button onClick={() => {
-                        window.location.href = '/leadgen'
-                    }}>Get Started</button>
+                    <div>
+                        <h1>Lead Capture</h1>
+                        <p>Generate more leads and improve your site engagement by integrating Honely's predictive analytics onto your website!</p>
+                        <button onClick={() => {
+                            window.location.href = '/leadgen'
+                        }}>Get Started</button>
+                    </div>
                 </div>
                 <div className="homepage-subblock-upper-right">
                     <img src="homepage-top-right.png"></img>
@@ -26,11 +28,13 @@ function HomePage() {
                     <img src="reportsplaceholder.png"></img>
                 </div>
                 <div className="homepage-subblock-lower-right">
-                    <h1>CMA's and Property Reports</h1>
-                    <p>Differentiate yourselves through data! Give your clients a look into the future through your reporting.</p>
-                    <button onClick={() => {
-                        window.location.href = '/reports'
-                    }}>Get Started</button>
+                    <div>
+                        <h1>CMA's and Property Reports</h1>
+                        <p>Differentiate yourselves through data! Give your clients a look into the future through your reporting.</p>
+                        <button onClick={() => {
+                            window.location.href = '/reports'
+                        }}>Get Started</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -71,10 +71,18 @@ function ReportsIntro(props) {
         window.dispatchEvent(new Event('resize'))
     }
     var user = {
-        name : props.userProfile.full_name,
-        email: props.userProfile.email,
-        phone: props.userProfile.phone_number,
+        name : '',
+        email: '',
+        phone: '',
         user_id: '512',
+    }
+    if (Object.keys(props).length !== 0) {
+        user = {
+            name : props.userProfile.full_name,
+            email: props.userProfile.email,
+            phone: props.userProfile.phone_number,
+            user_id: '512',
+        }
     }
     // var property = {
     //     "status": "Sold",

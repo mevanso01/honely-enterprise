@@ -27,6 +27,7 @@
 
 .widget-content-wrapper {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 .widget-loading-container {
@@ -44,8 +45,7 @@
 
 .widget-side-bar {
   background-color: #F6F6F6;
-  width: 350px;
-  padding: 25px 30px 100px 30px;
+  padding: 25px 20px 100px 20px;
 }
 .widget-block-section {
   margin: 30px 0;
@@ -274,12 +274,14 @@
 
 .widget-preview-container {
   flex: 1;
-  padding: 50px 30px;
+  padding: 50px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+.widget-preview-item {
+  min-width: 100%;
+}
 .widget-preview-item > p {
   font-size: 16px;
   line-height: 38px;
@@ -290,11 +292,10 @@
 .widget-icon-preview-container {
   box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.18);
   min-height: 200px;
-  min-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 150px;
+  margin-bottom: 70px;
 }
 .widget-logo-text {
   font-weight: 700;
@@ -312,10 +313,9 @@
 }
 
 .input-form-preview-container {
-  min-width: 500px;
   box-shadow: 4px 4px 19px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
-  padding: 40px 30px;
+  padding: 40px 20px;
   margin-bottom: 70px;
 }
 .input-form-preview-close-icon-container {
@@ -390,6 +390,7 @@
   text-overflow: ellipsis;
   transition: all 0.2s ease-in 0s;
   background: rgb(255, 255, 255);
+  min-width: initial;
 }
 .widget-bottom-btn-container {
   flex: 1 1 0%;
@@ -415,8 +416,7 @@
 .result-page-preview-container {
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.16);
   border-radius: 16px;
-  padding: 40px 30px;
-  min-width: 500px;
+  padding: 40px 20px;
 }
 .result-close-icon-container {
   display: flex;
@@ -518,4 +518,50 @@
 }
 .contact-broker-container a span {
   font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .widget-content-wrapper {
+    flex-direction: row;
+  }
+  .widget-side-bar {
+    width: 280px;
+    padding: 25px 30px 100px 30px;
+  }
+  .widget-preview-item {
+    min-width: initial;
+  }
+  .widget-preview-container {
+    padding: 50px 20px;
+  }
+  .widget-icon-preview-container {
+    min-width: 350px;
+    margin-bottom: 150px;
+  }
+  .input-form-preview-container {
+    min-width: 350px;
+  }
+  .result-page-preview-container {
+    min-width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .widget-side-bar {
+    width: 350px;
+  }
+  .widget-preview-container {
+    padding: 50px 30px;
+  }
+  .widget-icon-preview-container {
+    min-width: 500px;
+  }
+  .input-form-preview-container {
+    min-width: 500px;
+    padding: 40px 30px;
+  }
+  .result-page-preview-container {
+    min-width: 500px;
+    padding: 40px 30px;
+  }
 }

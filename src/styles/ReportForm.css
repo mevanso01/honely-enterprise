@@ -1,0 +1,388 @@
+/* ======================================================
+COMPONENT -  FORECAST FORM
+====================================================== */
+
+.form-overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(10, 10, 10, 0.5);
+    border-radius: 4px;
+    z-index: 999;
+}
+.form-overlay.active {
+    display: block;
+}
+.forecast-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 80vh;
+    max-width: 900px;
+    min-width: 300px;
+    min-height: 300px;
+    font-family: 'Poppins', 'Roboto', Arial, Verdana, Helvetica, sans-serif;
+    background: #ffffff;
+    border-radius: 5px;
+    z-index: 99;
+}
+.forecast-form-container.short {
+    height: 62vh;
+}
+.forecast-form-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background: #5a6778;
+    color: #ffffff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.forecast-form-title-bar span {
+    font-size: 18px;
+    line-height: 100%;
+}
+.forecast-form-title-bar i {
+    font-size: 30px;
+    cursor: pointer;
+}
+.forecast-form-title-bar i:hover {
+    color: #24cb43;
+}
+.fa-times-thin:before {
+    content: '\00d7';
+}
+.forecast-form-wrapper {
+    padding: 8px 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 84%;
+}
+.forecast-form-container.short .forecast-form-wrapper {
+    height: 79%;
+}
+.color-secondary {
+    color: #ff7d1f;
+}
+.font-bold {
+    font-weight: 600;
+}
+.forecast-form {
+    width: 100%;
+}
+.forecast-form input, .forecast-form select, .forecast-form textarea {
+      padding: 7px;
+}
+.forecast-form input[type="text"].error-input {
+    border-color: red !important;
+}
+.forecast-form input#agent-logo {
+    width: 98%;
+}
+.forecast-form input:read-only {
+    background: #efefef;
+}
+.forecast-form input:read-only:focus {
+    border-bottom-color: #cccccc;
+}
+.forecast-form select {
+    appearance: auto;
+    -moz-appearance: auto;
+    -webkit-appearance: auto;
+}
+.forecast-form label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.form-section {
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+}
+.form-section.noborder-nomargin{
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.form-section-title {
+    font-weight: 500;
+    color: #1a1d1b;
+}
+.form-section-title span {
+    text-transform: uppercase;
+}
+.form-row {
+    width: 100%;
+}
+.form-row.share-area {
+    max-width: 98%;
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: 1px dashed #bbbbbb;
+    border-radius: 5px;
+    background: #efefef;
+}
+.form-row textarea {
+    min-height: 100px;
+}
+.form-row-flex-2cols, .form-row-flex-3cols, .form-row-flex-4cols {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.form-row-flex-2cols p {
+    width: 44%;
+    margin-right: 1.5rem;
+}
+.form-row-flex-2cols p:last-of-type {
+    margin-right: 0;
+}
+.form-row-flex-3cols p {
+    width: 30%;
+    margin-right: 1.5rem;
+}
+.form-row-flex-3cols p:last-of-type {
+    margin-right: 0;
+}
+.form-row-flex-4cols p {
+    width: 22%;
+    margin-right: 1.5rem;
+}
+.form-row-flex-4cols p:last-of-type {
+    margin-right: 0;
+}
+.form-row-flex-4cols p.wide {
+    width: 30%;
+}
+.file-input-container {
+    width: 96%;
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border: 1px dashed #bbbbbb;
+    border-radius: 5px;
+}
+.file-input-label {
+    cursor: pointer;
+    font-weight: normal !important;
+    border: 1px solid #bbbbbb;
+    display: inline-block !important;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+.input-text-multi {
+    width: 100%;
+    padding: 3px 3px 0 3px;
+    border: 1px solid #cccccc;
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    background: #ffffff;
+    outline: 0;
+    -webkit-transition: all 0.40s ease-in-out;
+    -moz-transition: all 0.40s ease-in-out;
+    -ms-transition: all 0.40s ease-in-out;
+    -o-transition: all 0.40s ease-in-out;
+}
+.input-text-multi.active {
+    border-bottom-color: #24cb43;
+    border-bottom-width: 2px;
+}
+.input-text-multi-display {
+    display: inline;
+    font-size: 17px;
+}
+#share-emails-temp {
+    display: inline;
+    border: none;
+}
+.input-multi-item {
+    line-height: 100%;
+    margin-right: 3px;
+    border: 1px solid #24cb43;
+    border-radius: 10px;
+    padding: 0 3px 0 5px;
+}
+.input-multi-item i {
+    color: #24cb43;
+    cursor: pointer;
+    border-left: 1px solid #24cb43;
+    padding: 3px 3px 1px 5px;
+    margin-left: 3px;
+}
+.input-multi-item i:hover {
+    color: #222222;
+}
+.form-action-row {
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #bbbbbb;
+}
+.form-action-row-mobile {
+    display: none;
+    padding-top: 1rem;
+    text-align: center;
+}
+.form-action-row button, .form-action-row-mobile button {
+    background: #5a6778;;
+    color: #ffffff;
+    padding: 10px 15px;
+    margin-right: 1rem;
+    border: 1px solid #5a6778;;
+    border-radius: 5px;
+}
+.form-action-row button:last-of-type,
+.form-action-row-mobile button:last-of-type {
+    margin-right: 0;
+}
+.form-action-row button:hover, .form-action-row-mobile button:hover {
+    background: #ffffff;
+    color: #5a6778;
+}
+.form-action-row button:disabled, .form-action-row-mobile button:disabled {
+    background: #bbbbbb;
+    border: 1px solid #222222;
+    color: #222222;
+}
+.form-action-row button:disabled:hover, .form-action-row-mobile button:disabled:hover {
+    background: #bbbbbb;
+    border: 1px solid #222222;
+    color: #222222;
+}
+.charts-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.chart-container {
+    width: 22%;
+}
+.chart-container.chart-col-50 {
+    width: 50%;
+}
+.forecast-form-container .chart-container p {
+    font-weight: 500;
+    text-align: center;
+    border-top: 2px solid #24cb43;
+    padding-top: 5px;
+    margin: 0 auto;
+}
+.brokerage-logo-container {
+    width: 100%;
+    margin-bottom: 0 !important;
+    border: 1px solid #bbbbbb;
+    border-radius: 3px;
+    padding: 10px;
+}
+.brokerage-logo-container img {
+    display: block;
+    width: auto;
+    max-height: 50px;
+    margin: 0 auto;
+}
+.report-disclaimer {
+    color: grey;
+    font-family: 'Avalon Medium', arial;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 0px !important;
+}
+.report-honely-value-container {
+    width: 98%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.report-honely-value {
+    width: 47%;
+    text-align: center;
+    background: #eeeeee;
+    border-radius: 5px;
+    padding: 10px;
+}
+.report-honely-value-container p {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.report-honely-value-label {
+    color: #24cb43;
+}
+.forecast-form-overlay .section-loader-overlay {
+    z-index: 999;
+}
+@media only screen and (max-width: 1600px) {
+    .forecast-form-container {
+        height: 90vh;
+    }
+}
+@media (max-width: 1000px) {
+    .forecast-form-container {
+        width: 90%;
+        height: 90%;
+    }
+}
+@media (max-width: 800px) {
+    .form-row-flex-3cols p {
+        width: 45%;
+    }
+    .form-row-flex-4cols p.wide, .form-row-flex-4cols p, .chart-container {
+        width: 45%;
+    }
+}
+@media (max-width: 600px) {
+    .form-row-flex-3cols p {
+        width: 100%;
+        margin-right: 0;
+    }
+    .form-row-flex-2cols p {
+        width: 100%;
+        margin-right: 0;
+    }
+    .form-row-flex-4cols p.wide, .form-row-flex-4cols p, .chart-container, .chart-container.chart-col-50 {
+        width: 100%;
+        margin-right: 0;
+    }
+    .form-row.margin-top-sm {
+        margin-top: 1rem;
+    }
+    .file-input-container {
+        width: 100%;
+    }
+    .form-action-row {
+        display: none;
+    }
+    .form-action-row-mobile {
+        display: block;
+    }
+    .form-action-row-mobile button {
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+    .form-action-row-mobile button:last-of-type {
+        margin: 0 auto;
+    }
+    .forecast-form-wrapper {
+        height: 89%;
+    }
+}
+@media (max-width: 600px) {
+    .input-text-multi-display {
+        font-size: 15px;
+    }
+    .report-honely-value-container {
+        justify-content: center;
+    }
+    .report-honely-value {
+        width: 100%;
+    }
+    .report-honely-value:first-of-type {
+        margin-bottom: 10px;
+    }
+}

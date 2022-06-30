@@ -1,0 +1,152 @@
+.leadgenintro-container {
+    border: 1px solid white;
+    background-color: white;
+    /* border-radius: 10px; */
+    margin: 0px auto;
+    /* max-height: 1200px; */
+    width: 100%;
+    max-width: 1200px;
+    padding-top: 50px;
+    /* padding: 60px 20px 0px 100px; */
+}
+.leadgenintro-subblock {
+    display: flex;
+    padding-top: 4%;
+    padding-left: 4%;
+    padding-right: 8%;
+    padding-bottom: 4%;
+}
+.leadgenintro-subblock div {
+    width: 50%
+}
+.leadgenintro-subblock-upper-left {
+    padding-right: 10%;
+    padding-left: 5%;
+    padding-top: 10%
+}
+.leadgenintro-subblock-upper-right {
+    /* padding-left: 2%; */
+}
+.leadgenintro-subblock-upper-right img{
+    /* border-top-left-radius: 50px; */
+    /* border-bottom-left-radius: 50px; */
+    /* border: 2px solid black; */
+    max-height: 500px;
+}
+.leadgenintro-subblock-lower-left {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.leadgenintro-subblock-lower-right {
+    padding-left: 2%;
+    padding-right: 15%;
+    padding-top: 2%;
+}
+.leadgenintro-subblock-upper-left {
+    padding-right: 10%;
+    padding-left: 5%;
+    padding-top: 10%
+}
+.leadgenintro-subblock-upper-left p{
+    font-size: 22px;
+}
+.leadgenintro-subblock-upper-right {
+    /* padding-left: 2%; */
+}
+.leadgenintro-subblock-upper-right img{
+    /* border-top-left-radius: 50px; */
+    /* border-bottom-left-radius: 50px; */
+    /* border: 2px solid black; */
+    max-height: 500px;
+}
+.leadgenintro-header {
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.leadgenintro-header h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+}
+.leadgenintro-header-interior {
+    display: flex;
+    justify-content: space-between;
+}
+.leadgenintro-header-interior div{
+    width: 50%;
+}
+.leadgenintro-header-interior div p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+}
+.leadgenintro-upper {
+    margin-bottom: 60px;
+}
+.leadgenintro-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.leadgenintro-steps div{
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+    max-width: 30%
+}
+.leadgenintro-steps h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 20px;;
+}
+.leadgenintro-steps p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+}
+.leadgenintro-prompt {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.leadgenintro-prompt h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.leadgenintro-prompt p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+}
+.leadgenintro-lower {
+    background-color: #FEFDF7;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.leadgenintro-lower-text {
+    max-width: 400px;
+}
+.leadgenintro-lower-text h1 {
+    font-family: 'Popipns', sans-serif;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.leadgenintro-lower-text p {
+    font-family: 'Popipns', sans-serif;
+    font-size: 20px; 
+}
+.leadgenintro-lower-code-snippet {
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
+    padding: 10px 2% 10px 2%;
+    font-family: 'Space Mono', sans-serif;
+}

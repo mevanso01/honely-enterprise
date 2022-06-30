@@ -1,0 +1,86 @@
+.signup-container {
+    border: 1px solid white;
+    background-color: white;
+    /* border-radius: 10px; */
+    margin: 0px auto;
+    /* max-height: 1200px; */
+    width: 100%;
+    max-width: 1200px;
+    padding-top: 100px;
+    max-width: 700px;
+    /* padding: 60px 20px 0px 100px; */
+    text-align: center;
+}
+.signup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.signup-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 33px;
+}
+.signup-header p {
+    font-family: 'Brown', sans-serif;
+    color: #000000A8;
+    font-size: 19px;
+    font-weight: 300;
+    max-width: 500px;
+    text-align: center;
+    margin: 0px auto;
+}
+.signup-form {
+    max-width: 500px;
+    margin: 20px auto 60px;
+}
+.signup-form div {
+    margin: 30px auto;
+}
+.signup-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    font-size: 18px;
+    font-family: 'SF Pro Text', sans-serif;
+    color: #000000A8;
+}
+.signup-form input {
+    width: 500px;
+    max-width: 500px;
+    min-height: 60px;
+    min-width: 280px;
+    border: 1px solid #00000054;
+    border-radius: 2px;
+}
+
+.signup-form input[type=file]{
+    border: none;
+}
+
+input[type=file]::file-selector-button {
+    font-size: 12px;
+    min-width: 100px;
+    background: #FFFFFF;
+    color: #FF9900;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #FF9900;
+    border-radius: 10px;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: #5a6778;
+    color: #ffffff;
+    border: none;
+}
+
+.signup-errmsg {
+    color: red;
+    font-size: 20px;
+}
+a {
+    cursor: pointer;
+    font-size: 18px;
+    color: #FF9900;
+}

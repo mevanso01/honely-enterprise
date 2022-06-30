@@ -1,0 +1,42 @@
+.accountmanagement-container {
+    margin: 0px auto;
+    width: 100%;
+    padding: 20px 20px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.accountmanagement-index {
+    /* background-color: #F8F8F8; */
+    padding: 10px 20px 0px;
+    border-radius: 10px 0px 0px 10px;
+    white-space: nowrap;
+}
+.accountmanagement-index-item {
+    margin: 10px auto;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+}
+.accountmanagement-index-item:hover {
+    cursor: pointer;
+}
+.accountmanagement-index-item.active {
+    border-left: 8px solid #24cb43;
+    background-color: #f0fcec;
+}
+@media (max-width: 775px) {
+    .accountmanagement-container {
+        flex-direction: column;
+        margin: 10px auto 0;
+    }
+}
+@media (max-width: 645px) {
+    .accountmanagement-container {
+        margin: 60px auto 0;
+    }
+}
+@media (max-width: 315px) {
+    .accountmanagement-container {
+        margin: 80px auto 0;
+    }
+}

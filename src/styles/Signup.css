@@ -24,7 +24,7 @@
 .signup-header p {
     font-family: 'Brown', sans-serif;
     color: #000000A8;
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 300;
     max-width: 500px;
     text-align: center;
@@ -99,4 +99,8 @@ a {
     .signup-form label {
         font-size: 18px;
     }
+    .signup-header p {
+        font-size: 19px;
+    }
+
 }

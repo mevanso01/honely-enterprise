@@ -1,7 +1,7 @@
 .accountmanagement-container {
     margin: 0px auto;
     width: 100%;
-    padding: 20px 20px 0px 0px;
+    padding: 20px 0px 0px 0px;
     display: flex;
     justify-content: space-between;
 }
@@ -24,19 +24,8 @@
     border-left: 8px solid #24cb43;
     background-color: #f0fcec;
 }
-@media (max-width: 775px) {
+@media (max-width: 1200px) {
     .accountmanagement-container {
         flex-direction: column;
-        margin: 10px auto 0;
-    }
-}
-@media (max-width: 645px) {
-    .accountmanagement-container {
-        margin: 60px auto 0;
-    }
-}
-@media (max-width: 315px) {
-    .accountmanagement-container {
-        margin: 80px auto 0;
     }
 }

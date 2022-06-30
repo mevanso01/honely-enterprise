@@ -1,6 +1,5 @@
 .widget-container {
-  margin: 0px auto;
-  padding: 0px 20px;
+  flex: 1;
 }
 .widget-header-container {
   background-color: #4A4A4A;
@@ -9,7 +8,7 @@
 }
 .widget-header-container.empty {
   background-color: transparent;
-  display: none;
+  visibility: hidden;
 }
 .widget-header-btn {
   cursor: pointer;
@@ -525,6 +524,9 @@
 }
 
 @media (min-width: 768px) {
+  .widget-container {
+    padding-left: 20px;
+  }
   .widget-content-wrapper {
     flex-direction: row;
   }
@@ -558,14 +560,14 @@
     padding: 50px 30px;
   }
   .widget-icon-preview-container {
-    min-width: 500px;
+    min-width: 400px;
   }
   .input-form-preview-container {
-    min-width: 500px;
+    min-width: 400px;
     padding: 40px 30px;
   }
   .result-page-preview-container {
-    min-width: 500px;
+    min-width: 400px;
     padding: 40px 30px;
   }
 }

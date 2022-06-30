@@ -392,9 +392,9 @@ function Subscription(props) {
             <h3>Subscription Details</h3>
             <ul>
                 {/* <li><i className="fas fa-arrow-right subscription-logo" />Current Pay Cycle Start Date: <span className="newsitem-date mdi mdi-calendar-month-outline user-sub-color-primary">Sat, 02 Apr 2022</span></li> */}
-                <li><div className="subscription-col-flex"><i className="fas fa-arrow-right subscription-logo" /> Current Pay Cycle Start Date: <span className="newsitem-date mdi mdi-calendar-month-outline user-sub-color-primary">{props.userProfile.subscription_start_data.substring(0,11)}</span></div></li>
+                <li><div className="subscription-col-flex"><span><i className="fas fa-arrow-right subscription-logo" /> Current Pay Cycle Start Date: </span><span className="newsitem-date mdi mdi-calendar-month-outline user-sub-color-primary">{props.userProfile.subscription_start_data.substring(0,11)}</span></div></li>
                 {/* <li><i className="fas fa-arrow-right subscription-logo" />Current Pay Cycle Renewal Date: <span className="newsitem-date mdi mdi-calendar-month-outline">Mon, 02 May 2022</span></li> */}
-                <li><div className="subscription-col-flex"><i className="fas fa-arrow-right subscription-logo" />Current Pay Cycle Renewal Date: <span className="newsitem-date mdi mdi-calendar-month-outline">{props.userProfile.subscription_end_data.substring(0,11)}</span></div></li>
+                <li><div className="subscription-col-flex"><span><i className="fas fa-arrow-right subscription-logo" />Current Pay Cycle Renewal Date: </span><span className="newsitem-date mdi mdi-calendar-month-outline">{props.userProfile.subscription_end_data.substring(0,11)}</span></div></li>
                 {/* <li><i className="fas fa-arrow-right subscription-logo" />Projected Bill Amount: <span>$100.00</span></li> */}
             </ul>
             <ApiKeySection />

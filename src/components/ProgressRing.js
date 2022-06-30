@@ -41,7 +41,7 @@ const ProgressRing = (props) => {
         <g
           style={{
             transformOrigin: `${halfSize}px ${halfSize}px`,
-            transform: 'rotate(-90deg)'
+            transform: 'rotate(0deg)'
           }}
         >
           <circle

@@ -70,40 +70,36 @@ import {
         <div className="header-items-container">
           <nav>
             <ul className="header-items" >
-              {/* <li> */}
-            {/* <img onClick={() => {window.location.href = '/'}} src="logo_honely.png" style={{width:"100px", marginRight: "20px", display:"inline", cursor: "pointer"}}></img> */}
-
-            {/* </li> */}
-              {
-                (props.authFlag || window.location.pathname === '/leadgen' || window.location.pathname === '/reports' ) && 
-                <li className={`header-item ${(path.pathname === '/' || path.pathname === '/leadgen') ? 'active' : ''}`} >
-                  <Link to="/leadgen">Lead Generation</Link>
-                </li>
-              }
-              {
-                (props.authFlag || window.location.pathname === '/leadgen' || window.location.pathname === '/reports' ) && 
-                <li className={`header-item ${path.pathname === '/reports' ? 'active' : ''}`}>
-                  <Link to="/reports">Reports</Link>
-                </li>
-              }
-              {
-                props.authFlag && 
-                <li className={`header-item ${path.pathname === '/dashboard' ? 'active' : ''}`} style={{display: 'none'}}>
-                <Link to="/dashboard">Dashboard</Link>
-                </li>
-              }
-              {
-                props.authFlag && 
-                <li className={`header-item ${path.pathname === '/account-management' ? 'active' : ''}`} style={{display: 'none'}}>
-                  <Link to="/account-management">Account Management</Link>
-                </li>
-              }
-              {
-                props.authFlag && 
-                <li className={`header-item ${path.pathname === '/customize-widget' ? 'active' : ''}`} style={{display: 'none'}} id="customize-widget-header-option">
-                <Link to="/customize-widget">Customize Widget</Link>
-                </li>
-              }
+            {
+              (window.location.pathname === '/' || window.location.pathname === '/leadgen' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma' ) && 
+              <li className={`header-item ${path.pathname === '/leadgen' ? 'active' : ''}`} >
+                <Link to="/leadgen">Lead Capture</Link>
+              </li>
+            }
+            {
+              (window.location.pathname === '/' || window.location.pathname === '/leadgen' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma'  ) && 
+              <li className={`header-item ${path.pathname === '/reports' ? 'active' : ''}`}>
+                <Link to="/reports">Report Generation</Link>
+              </li>
+            }
+            {
+              props.authFlag && 
+              <li className={`header-item ${path.pathname === '/dashboard' ? 'active' : ''}`} style={{display: 'none'}}>
+              <Link to="/dashboard">Dashboard</Link>
+              </li>
+            }
+            {
+              props.authFlag && 
+              <li className={`header-item ${path.pathname === '/account-management' ? 'active' : ''}`} style={{display: 'none'}}>
+                <Link to="/account-management">Account Management</Link>
+              </li>
+            }
+            {
+              props.authFlag && 
+              <li className={`header-item ${path.pathname === '/customize-widget' ? 'active' : ''}`} style={{display: 'none'}} id="customize-widget-header-option">
+              <Link to="/customize-widget">Customize Widget</Link>
+              </li>
+            }
             </ul>
           </nav>
         </div>

@@ -1,6 +1,6 @@
 .widget-container {
   margin: 0px auto;
-  padding: 20px 20px 0px;
+  padding: 0px 20px;
 }
 .widget-header-container {
   background-color: #4A4A4A;
@@ -9,6 +9,7 @@
 }
 .widget-header-container.empty {
   background-color: transparent;
+  display: none;
 }
 .widget-header-btn {
   cursor: pointer;
@@ -309,7 +310,7 @@
   border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .input-form-preview-container {
@@ -348,7 +349,7 @@
 }
 .widget-input-wrapper svg {
   position: absolute;
-  left: 14px;
+  /* left: 14px; */
 }
 .widget-input-wrapper input {
   border-width: 1px;
@@ -487,6 +488,9 @@
   font-size: 20px;
   line-height: 24px;
   flex: 1 1 0%;
+}
+.result-main-item svg {
+  margin-left: 0px;
 }
 .widget-powered-by-container {
   border-style: solid;

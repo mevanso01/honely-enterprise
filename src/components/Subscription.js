@@ -166,9 +166,9 @@ function Subscription(props) {
             <h3>Widget Script</h3><br></br>
             <span>Place this script in the header of your code base to install the widget.</span><br></br><br></br>
             <div className="subscription-apikey" style={{border: '1px solid #00000054', borderRadius: '5px', padding: '20px', backgroundColor: '#0e0e0e', color: 'white'}}>
-            <span>{"<script>https://developers.honely.com/widget/load-script?api-key=" + props.userProfile.api_key + "</script>"}</span>
+            <span>{'<script src="https://developers.honely.com/widget/load-script?api-key=' + props.userProfile.api_key + '"></script>'}</span>
             <div className='subscription-apikey-logos'>
-            <span onClick={()=>{navigator.clipboard.writeText('https://developers.honely.com/widget/load-script?api-key=' + props.userProfile.api_key)}}className="mdi mdi-content-copy" />
+            <span onClick={()=>{navigator.clipboard.writeText('<script src="https://developers.honely.com/widget/load-script?api-key=' + props.userProfile.api_key + '"></script>')}}className="mdi mdi-content-copy" />
             </div>
             </div>
             </div>
@@ -213,6 +213,7 @@ function Subscription(props) {
       }
     }
     function generateApiKey () {
+      if(props.userProfile.payment_type !== null) {
         let config = {
           headers: {
             'Authorization': 'Bearer ' + props.jwt
@@ -233,6 +234,9 @@ function Subscription(props) {
               props.doSignOut()
             }
           })
+        } else {
+          window.location.href = data.stripeUrl
+        }
       }
       function CreditsSection () {
         return (
@@ -397,7 +401,10 @@ function Subscription(props) {
             <br></br><br></br>
             <WidgetSection />
             <br></br><br></br>
-            <CreditsSection />
+            {
+              (props.userProfile.payment_type !== null) &&
+              <CreditsSection />
+            }
             <br></br><br></br>
             <div className="subscription-payment-method">
             <h3>Payment Method</h3>
@@ -430,9 +437,12 @@ function Subscription(props) {
                 <div className="subscription-wrapper">
                      <h3>Subscription</h3>
                     <br></br><br></br>
-                    <button onClick={() => {window.location.href=data.stripeUrl}}>Subscribe now</button>
+                    <button onClick={() => {window.location.href=data.stripeUrl}}>Add Payment Method</button>
                     <br></br><br></br><br></br>
-                    <CreditsSection />
+                    {
+              (props.userProfile.payment_type !== null) &&
+              <CreditsSection />
+            }
                 </div>
             )
         }
@@ -441,9 +451,12 @@ function Subscription(props) {
                 <div className="subscription-wrapper">
                      <h3>Subscription</h3>
                     <br></br><br></br>
-                    <button onClick={generateApiKey}>Generate API Key</button>
+                    <button onClick={generateApiKey}>Subscribe</button>
                     <br></br><br></br>
-                    <CreditsSection />
+                    {
+              (props.userProfile.payment_type !== null) &&
+              <CreditsSection />
+            }
                     <br></br><br></br>
             <div className="subscription-payment-method">
             <h3>Payment Method</h3>

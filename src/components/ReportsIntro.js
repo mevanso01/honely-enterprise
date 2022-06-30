@@ -71,9 +71,9 @@ function ReportsIntro(props) {
         window.dispatchEvent(new Event('resize'))
     }
     var user = {
-        name : 'xyz xyz',
-        email: 'xyz@xyz.com',
-        phone: '9848022338',
+        name : props.userProfile.full_name,
+        email: props.userProfile.email,
+        phone: props.userProfile.phone_number,
         user_id: '512',
     }
     // var property = {
@@ -575,7 +575,17 @@ function ReportsIntro(props) {
                         </div>
                     </div>
                     <div className="reportsintro-popup-options">
+                        {
+                            Object.keys(props).length !== 0 &&
+                            <div className="reportsintro-popup-options">
+                            <p style={{color: 'red', fontWeight: '600'}}>{errMsg}</p>
+                            <input type='checkbox' id="creditsFlag" onChange={() => handleCreditsFlag()}></input>
+                            <label>Use credits for report generation- Available: {props.userProfile.credits}</label>
+                            </div>
+                        }
+
                         <div className="reportsintro-popup-option">
+                            
                             <div className="reportsintro-popup-option-left">
                                 <div>
                                     <i className="mdi mdi-checkbox-marked-circle" />
@@ -670,97 +680,146 @@ function ReportsIntro(props) {
                                 }}>Continue</button>
                             </div>
                         </div>
-                        {
+                        {/* {
                             Object.keys(props).length !== 0 &&
                             <div>
                             <p style={{color: 'red', fontWeight: '600'}}>{errMsg}</p>
                             <input type='checkbox' id="creditsFlag" onChange={() => handleCreditsFlag()}></input><label>Use credits for report generation- Available: {props.userProfile.credits}</label>
                             </div>
-                        }
+                        } */}
                     </div>
                 </div>
             </div>
             <ReportFormContainer />
-            <div>
-                <div className="reportsintro-upper">
-                    <div className="reportsintro-searchbar">
-                    {/* <Spearow />
-                    <Spearow />
-                    <Spearow /> */}
-                    {/* <input
-                    name="charmander"
-                    onChange={(e) => handleInputChange(e)}
-                    value={collectionInfo.charmander}
-                    placeholder="Charmander"
-                    ></input> */}
-                    <p>Search property Address for a Honely Property Report</p>
-                    <HonelySearchSimple inCma={false} setPopupDisplay={setPopupDisplay} setForecast={setForecast} setProperty={setProperty}/>
-                    <div>
-                    </div>
-                    </div>
-                    <div className="reportsintro-features">
-                    <h1>What Do You Get with Honely's Reporting Software?</h1>
-                    <ul>
-                        <li>
-                            <div>
+            {
+                props.userProfile && 
+                <div>
+                    <div className="reportsintro-upper">
+                        <div className="reportsintro-searchbar">
+                        {/* <Spearow />
+                        <Spearow />
+                        <Spearow /> */}
+                        {/* <input
+                        name="charmander"
+                        onChange={(e) => handleInputChange(e)}
+                        value={collectionInfo.charmander}
+                        placeholder="Charmander"
+                        ></input> */}
+                        <p>Search property Address for a Honely Property Report</p>
+                        <HonelySearchSimple inCma={false} setPopupDisplay={setPopupDisplay} setForecast={setForecast} setProperty={setProperty}/>
+                        <div>
+                        </div>
+                        </div>
+                        <div className="reportsintro-features">
+                        <h1>What Do You Get with Honely's Reporting Software?</h1>
+                        <ul>
+                            <li>
+                                <div>
+                                    <i className="mdi mdi-checkbox-marked-circle" />
+                                </div>
+                                <div>
+                                    <p>Standard MLS data</p><p>(Beds, baths, sqft, etc.)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
                                 <i className="mdi mdi-checkbox-marked-circle" />
-                            </div>
-                            <div>
-                                <p>Standard MLS data</p><p>(Beds, baths, sqft, etc.)</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                            <i className="mdi mdi-checkbox-marked-circle" />
-                            </div>
-                            <div>
-                                <p>Property Value Estimates and Forecasts</p><p>(Current, 3 month, 1, 2, 3 years)</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                            <i className="mdi mdi-checkbox-marked-circle" />
-                            </div>
-                            <div>
-                            <p>Predictive Neighborhood Analysis</p><p>(Price appreciation, migration trends, rankings, etc.)</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                            <i className="mdi mdi-checkbox-marked-circle" />
-                            </div>
-                            <div>
-                            <p>Build CMAs with Honely's comparable algorithm</p><p>(on up to 10 comparable properties)</p>
-                            </div>
-                        </li>
-                    </ul>
+                                </div>
+                                <div>
+                                    <p>Property Value Estimates and Forecasts</p><p>(Current, 3 month, 1, 2, 3 years)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                <i className="mdi mdi-checkbox-marked-circle" />
+                                </div>
+                                <div>
+                                <p>Predictive Neighborhood Analysis</p><p>(Price appreciation, migration trends, rankings, etc.)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                <i className="mdi mdi-checkbox-marked-circle" />
+                                </div>
+                                <div>
+                                <p>Build CMAs with Honely's comparable algorithm</p><p>(on up to 10 comparable properties)</p>
+                                </div>
+                            </li>
+                        </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="reportsintro-report-credits">
-                <img src="honely_report_credits.png"></img>
-            </div>
-            <br></br><br></br><br></br><br></br><br></br>
-            <div  className="leadgenintro-steps">
-                    <div>
-                        <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-1-circle" />
-                        <br></br><br></br>
-                        <h1>Enter Your Subject Property</h1>
-                        <p>Enter the address of the  property that you are basing your report on.</p>
+            }
+            
+            {
+                !props.userProfile && <div>
+                    <div className="homepage-subblock">
+                        <div className="homepage-subblock-lower-left">
+                            <img src="reports.png"></img>
+                        </div>
+                        <div className="homepage-subblock-lower-right">
+                            <h1>CMA's and Property Reports</h1>
+                            <p>Download informative and sophisticated property reports to procure and impress clients!  </p>
+                            <button onClick={() => {
+                                window.location.href = '/signup'
+                            }}>Get Started</button>
+                        </div>
                     </div>
-                    <div>
-                    <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-2-circle" />
-                        <br></br><br></br>
-                        <h1>Choose Singular or CMA Report</h1>
-                        <p>Choose whether you want to purchase a report on a single property or a CMA with multiple. </p>
+                    
+                    {/* Pricing */}
+                    <div className="reportsintro-report-credits">
+                        {/* <img src="honely_report_credits.png"></img> */}
+                        <div>
+                            <h1>Pricing</h1>
+                            <p>Save 50% when you pay with report credits.</p>
+                        </div>
+
+                        <div className="reportsintro-report-credits pricing">
+                            <div className="left-side">
+                                <h2>Pay per use</h2>
+                                <div className="reportsintro-report-credits pricing line">
+                                    <img src="single-report.png"></img>
+                                    <p>$0.50 for each single report.</p>
+                                </div>
+                                <div className="reportsintro-report-credits pricing line">
+                                    <img src="sma-report.png"></img>
+                                    <p>$1.00 for each CMA report.</p>
+                                </div>
+                            </div>
+
+                            <div className="right-side">
+                                <h2>Purchase Credits</h2>
+                                <p>10 Credits for $10</p>
+                                <p>25 Credits for $22.50 (save 10%)</p>
+                                <p>50 Credits for $40 (save 20%)</p>
+                                <p>100 Credits for $75 (save 25%)</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                    <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-3-circle" />
-                        <br></br><br></br>
-                        <h1>Select Comparables</h1>
-                        <p>If you chose a CMA, either use our suggested properties or eneter your own. After, download the report to show your clients! </p>
+                    
+                    <div  className="leadgenintro-steps">
+                        <div>
+                            <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-1-circle" />
+                            
+                            <h1>Enter Your Subject Property</h1>
+                            <p>Enter the address of the  property that you are basing your report on.</p>
+                        </div>
+                        <div>
+                            <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-2-circle" />
+                                
+                                <h1>Choose Singular or CMA Report</h1>
+                                <p>Choose whether you want to purchase a report on a single property or a CMA with multiple. </p>
+                        </div>
+                        <div>
+                            <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-3-circle" />
+                            
+                            <h1>Select Comparables</h1>
+                            <p>If you chose a CMA, either use our suggested properties or eneter your own. After, download the report to show your clients! </p>
+                        </div>
                     </div>
                 </div>
+            }
+            
         </div>
     )
 }

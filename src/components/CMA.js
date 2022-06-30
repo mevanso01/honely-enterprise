@@ -5,6 +5,7 @@ import ReportForm from './ReportForm'
 import axios from 'axios';
 import generateSideBySidePayload from '../functionalities/CMAPayloadGenerator'
 import PaymentConfirmationPopup from "./PaymentConfirmationPopup"
+import SuggestedPropertyCard from "./SuggestedPropertyCard";
 function CMA(props) {
     // const [cmaPayload, setCmaPayload] = useState(null)
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
@@ -15,9 +16,9 @@ function CMA(props) {
     const [comparablePropertyList, setComparablePropertyList] = useState({})
     const [errMsg, setErrMsg] = useState('')
     var user = {
-        name : 'xyz xyz',
-        email: 'xyz@xyz.com',
-        phone: '9848022338',
+        name : props.userProfile.full_name,
+        email: props.userProfile.email,
+        phone: props.userProfile.phone_number,
         user_id: '512',
     }
     function showReportForm() {
@@ -32,11 +33,17 @@ function CMA(props) {
         window.dispatchEvent(new Event('resize'))
     }
     useEffect(() => {
+        console.log('vx: userprofile', props.userProfile)
         var pika = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array
         axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + pika[0])
         .then((response) => {
-            setComparablePropertyList(response.data.rows)
-            console.log('vx: comparablePropertyList is', comparablePropertyList)
+            // setComparablePropertyList(response.data.rows)
+            // console.log('vx: comparablePropertyList is', comparablePropertyList)
+            window.sessionStorage.removeItem('CMAComparableHomes')
+            var pika = {
+                array: response.data.rows
+            }
+            window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(pika))
         })
         //vx: not needed anymore most probably...
         // var propertyListVar = []
@@ -77,6 +84,7 @@ function CMA(props) {
                             <td>{pika[x].NUM_BEDS.data + '/' + pika[x].NUM_BATHS.data}</td>
                             <td>{pika[x].YEAR_BUILT.data}</td>
                             <td>{pika[x].LIST_PRICE.data}</td>
+                            <i className="fa fa-times" style={{color: '#EFEFEF'}}/>
                         </tr>
                     )
                 } else {
@@ -297,23 +305,15 @@ function CMA(props) {
     }
     function ComparableProperties() {
         var ans = []
-        for (let x=0; x<comparablePropertyList.length; x++) {
+        var pika = JSON.parse(window.sessionStorage.getItem('CMAComparableHomes')).array
+        for (let x=0; x<10; x++) {
             ans.push(
-                <p>{comparablePropertyList[x].full_address}</p>
+                <SuggestedPropertyCard property={pika[x]} setForecast={setForecast} setErrMsg={setErrMsg} setProperty={setProperty} showReportForm={showReportForm} />
             )
         }
-        console.log('vx: ostrich', comparablePropertyList)
         return (
-            <div>
+            <div className="cma-comparable-properties">
                 {ans}
-            </div>
-        )
-    }
-
-    function ComparablePropertyTemplate() {
-        return (
-            <div className="cma-comparable-property">
-                <img src=""></img>
             </div>
         )
     }
@@ -392,17 +392,14 @@ function CMA(props) {
             </div>
         </div>
         <div className="comparable-properties-container">
-        {/* <div className="section-heading">Add Suggested Comparable Properties</div> */}
-        <div className="comparable-properties">
-          {/* <property-block
-            :property-data="property"
-            :comparable="true"
-            :compact="false"
-            :key="property.property_id"
-          /> */}
-          {/* <ComparableProperties /> */}
-          {/* <ComparablePropertyTemplate /> */}
-        </div>
+        <div className="section-heading">Add Suggested Comparable Properties</div>
+        {/* <div className="cma-comparable-properties">
+          <SuggestedPropertyCard />
+          <SuggestedPropertyCard />
+          <SuggestedPropertyCard />
+          <SuggestedPropertyCard />
+        </div> */}
+        <ComparableProperties />
       </div>
     </div>
         </div>

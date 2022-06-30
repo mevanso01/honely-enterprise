@@ -159,8 +159,10 @@ function ReportForm(props) {
           const agentName = document.getElementById('agent-name').value
           const agentEmail = document.getElementById('agent-email').value
           const agentPhone = document.getElementById('agent-phone').value
-          let shareEmails = document.getElementById('share-emails').value
-          let shareMessage = document.getElementById('share-message').value
+        //   let shareEmails = document.getElementById('share-emails').value
+          let shareEmails = null
+        //   let shareMessage = document.getElementById('share-message').value
+          let shareMessage = null
           let appraisal = formatCurrency(props.property.valuation.appraisal)
           const appraisalAfter = document.getElementById('report-honey-value-after').innerText
           let apn = getAPN()
@@ -2691,16 +2693,16 @@ function ReportForm(props) {
         document.getElementById('report-loader').classList.add('active')
       }
     function disableSubmitButton () {
-        document.getElementById('btn_doShareReport').disabled = true
-        document.getElementById('btn_doShareReport_mobile').disabled = true
+        // document.getElementById('btn_doShareReport').disabled = true
+        // document.getElementById('btn_doShareReport_mobile').disabled = true
         document.getElementById('btn_doDownloadReport').disabled = true
         document.getElementById('btn_doDownloadReport_mobile').disabled = true
         document.getElementById('btn_doUpdateEstimate').disabled = true
         document.getElementById('btn_doUpdateEstimate_mobile').disabled = true
       }
     function enableSubmitButton () {
-        document.getElementById('btn_doShareReport').disabled = false
-        document.getElementById('btn_doShareReport_mobile').disabled = false
+        // document.getElementById('btn_doShareReport').disabled = false
+        // document.getElementById('btn_doShareReport_mobile').disabled = false
         document.getElementById('btn_doDownloadReport').disabled = false
         document.getElementById('btn_doDownloadReport_mobile').disabled = false
         document.getElementById('btn_doUpdateEstimate').disabled = false
@@ -3251,7 +3253,7 @@ function ReportForm(props) {
               </div>
             </div>
             </div>
-            <div class="form-section">
+            <div class="form-section" style={{display: 'none'}}>
             <p class="form-section-title"><span><i class="fas fa-chart-line"></i> Rental Trends</span></p>
             <div class="charts-row">
               <div class="chart-container chart-col-25">
@@ -3290,8 +3292,8 @@ function ReportForm(props) {
             </div>
           </div>
             <div class="form-section share-area noborder-nomargin">
-            <p class="form-section-title"><i class="fas fa-share-alt"></i> <span>Share Honely Report (Optional)</span></p>
-            <div class="form-row">
+            {/* <p class="form-section-title"><i class="fas fa-share-alt"></i> <span>Share Honely Report (Optional)</span></p> */}
+            {/* <div class="form-row">
               <p>
                 <label>Emails (use commas " , " to separate multiple emails)</label>
                 <div class="input-text-multi" id="share-emails-input-container">
@@ -3304,13 +3306,13 @@ function ReportForm(props) {
                 <label>Message</label>
                 <textarea name="share-message" id="share-message" placeholder="enter your message"></textarea>
               </p>
-            </div>
+            </div> */}
             <div>
           <p class="report-disclaimer">Honely provides the Honely AI, data, website and brand &amp; links &ldquo;as is,&rdquo; &ldquo;with all faults&rdquo; and &ldquo;as available.&rdquo; <br></br>* The Honely revaluation currenty takes into account only valid changes to inputs such as property size, number of bedrooms, and number of bathrooms.</p>
           </div>
           <div class="form-action-row-mobile">
             <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate_mobile">Update Estimate</button>
-            <button onClick={() => {doGenerateReport()}} id="btn_doShareReport_mobile">Share Report</button>
+            {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport_mobile">Share Report</button> */}
             <button onClick={() => {
                 var pika = null
                 if (props.creditsFlag) {
@@ -3326,13 +3328,13 @@ function ReportForm(props) {
                 window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
                 setShowPaymentPopup(true)
             }} id="btn_doDownloadReport_mobile">Generate Report</button>
-            <button onClick={() => {doCMAAction()}} id="btn_doDownloadReport_mobileCMA">CMA</button>
+            <button onClick={() => {doCMAAction()}} id="btn_doDownloadReport_mobileCMA">Add to CMA Report</button>
             {/* <button @click="doGenerateCMA" id="btn_generateCma_mobile">Generate CMA</button> */}
           </div>
           </div>
           <div class="form-action-row">
         <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate">Update Estimate</button>
-        <button onClick={() => {doGenerateReport()}} id="btn_doShareReport">Share Report</button>
+        {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport">Share Report</button> */}
         <button onClick={() => {
             var pika = null
             if (props.creditsFlag) {
@@ -3348,7 +3350,7 @@ function ReportForm(props) {
             window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
             setShowPaymentPopup(true)
         }} id="btn_doDownloadReport">Generate Report</button>
-        <button onClick={() => {doCMAAction()}} id="btn_doDownloadReportCMA">CMA</button>
+        <button onClick={() => {doCMAAction()}} id="btn_doDownloadReportCMA">Add to CMA Report</button>
       </div>
                 </div>
             </div>

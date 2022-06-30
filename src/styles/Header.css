@@ -51,15 +51,16 @@
 .header-items li {
     margin: 0px 10px;
     padding: 5px 0px;
+    min-width: 151px;
 }
 .header-items li:hover {
     cursor: pointer;
 }
 .header-items li.active {
-    border-bottom: 3px solid #24cb43;
+    /* border-bottom: 3px solid #24cb43; */
 }
 .header-items li.active a {
-    color: #24cb43 ;
+    /* color: #24cb43 ; */
 }
 .header-item {
 

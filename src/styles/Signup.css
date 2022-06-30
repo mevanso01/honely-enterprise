@@ -50,7 +50,31 @@
     max-width: 500px;
     min-height: 60px;
     min-width: 280px;
+    border: 1px solid #00000054;
+    border-radius: 2px;
 }
+
+.signup-form input[type=file]{
+    border: none;
+}
+
+input[type=file]::file-selector-button {
+    font-size: 12px;
+    min-width: 100px;
+    background: #FFFFFF;
+    color: #FF9900;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #FF9900;
+    border-radius: 10px;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: #5a6778;
+    color: #ffffff;
+    border: none;
+}
+
 .signup-errmsg {
     color: red;
     font-size: 20px;

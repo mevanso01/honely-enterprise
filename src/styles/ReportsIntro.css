@@ -16,7 +16,7 @@
 }
 .reportsintro-searchbar {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 35px;
     padding-bottom: 20px;
     max-width: 500px;
     margin: 0 auto;
@@ -62,10 +62,90 @@
     font-family: 'Ubuntu', sans-serif;
     font-size: 12px;
 }
-.reportsintro-report-credits {
+/* .reportsintro-report-credits {
     margin: 60px auto 0;
     max-width: 1450px;
+} */
+.reportsintro-report-credits {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+    padding: 0;
 }
+
+.reportsintro-report-credits img {
+    max-width: 25px;
+    max-height: 28px;
+    padding: 5px;
+    margin: 3px;
+}
+
+.reportsintro-report-credits h1{
+    font-family: 'Brown', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px;
+}
+
+.reportsintro-report-credits p {
+    font-family: 'Brown', sans-serif;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 5px;
+    
+    /* padding-top: 1rem; */
+}
+
+.reportsintro-report-credits .pricing {
+    display: flex;
+    flex-direction: row;
+}
+
+.reportsintro-report-credits .pricing .line{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    align-items: center;
+}
+
+.reportsintro-report-credits .left-side{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+
+}
+.reportsintro-report-credits .right-side{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+
+.reportsintro-report-credits h2{
+    font-family: 'Brown', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px;
+}
+
+.reportsintro-report-credits .right-side p{
+    font-family: 'Brown', sans-serif;
+    font-size: 1rem;
+    margin: 5px;
+    padding: 3px 0;
+}
+.reportsintro-report-credits .left-side p{
+    font-family: 'Brown', sans-serif;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0;
+    padding: 3px 0;
+}
+
 .reportsintro-popup {
     display: none;
     position: fixed;
@@ -110,7 +190,12 @@
 }
 .reportsintro-popup-options {
     padding: 5%;
+    padding-top: 0;
 }
+.reportsintro-popup-options input[type=checkbox]{
+    margin: 8px;
+}
+
 .reportsintro-popup-option {
     display: flex;
     justify-content: space-between;
@@ -142,18 +227,114 @@
     font-size: 20px;
 }
 
-@media (min-width: 768px) {
-    .reportsintro-features ul li p:first-child {
-        font-size: 16px;
+.homepage-subblock-lower-left {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.homepage-subblock-lower-left img{
+    display: flex;
+    max-width: 300px;
+    align-items: center;
+    justify-content: center;
+}
+
+.homepage-subblock-lower-right {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+.homepage-subblock-lower-right h1 {
+    font-family: 'Brown', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px;
+}
+
+.homepage-subblock-lower-right p {
+    font-family: 'Brown', sans-serif;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 5px;
+    padding-top: 1rem;
+}
+
+.homepage-subblock-lower-right button {
+    margin-top: 3rem;
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.homepage-subblock div {
+    width: 100%;
+}
+
+.leadgenintro-steps {
+    display: flex;
+    justify-content: space-between;
+}
+.leadgenintro-steps div{
+    text-align: center;
+    flex: 1;
+    padding: 5px;
+}
+.leadgenintro-steps h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.leadgenintro-steps p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 768px) {
+    .homepage-subblock {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-bottom: 3rem;
     }
-    .reportsintro-features ul li p:last-child {
-        font-size: 14px;
+    .homepage-subblock-lower-right button {
+        margin-top: 1.5rem;
+        max-width: 300px;
+        min-width: 300px;
     }
-    .reportsintro-features ul li i {
-        font-size: 30px;
+
+    .leadgenintro-steps {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 30px;
     }
-    .reportsintro-features h1 {
-        font-size: 24px;
-        line-height: 30px;
+
+    .leadgenintro-steps div{
+        min-width: 100%;
+        padding-right: 3px;
+        text-align: center;
+        flex: 1;
+    }
+    .reportsintro-report-credits .pricing {
+        display: flex;
+        flex-direction: column;
+    }
+    .reportsintro-report-credits .left-side{
+        margin: 16px 0;
+    
+    }
+    .reportsintro-report-credits .right-side{
+        margin: 16px 0;
     }
 }

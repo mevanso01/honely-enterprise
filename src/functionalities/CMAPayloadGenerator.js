@@ -1,9 +1,20 @@
 function generateSideBySidePayload() {
     var indexFieldMap = {
-        0: 'SQFT',  // sqft
-        1: 'NUM_BEDS',  // beds
-        2: 'NUM_BATHS',  // baths
-        3: 'YEAR_BUILT',  // yr built
+        0: 'LIST_PRICE',  
+        1: 'SALE_PRICE',
+        2: 'SALE_DATE',
+        3: 'VALUATION_PRICE',
+        4: 'ASSESSED_VALUE',
+        5: 'STYLE',
+        6: 'NUM_BEDS',
+        7: 'NUM_BATHS',
+        8: 'ROOM_COUNT',
+        9: 'SQFT',
+        10: 'YEAR_BUILT',
+        11: 'PARKING_TYPE',
+        12: 'PROPERTY_TAX',
+        13: 'TAX_YEAR'
+
     }
     var sbsPayloadArr = []
     var pika = JSON.parse(window.sessionStorage.getItem('CMA')).array
@@ -77,16 +88,46 @@ function generateSideBySidePayload() {
                 ],
                 "array": [
                     [
-                        "Sq Ft",
+                        "List price",
                     ],
                     [
-                        "Beds",
+                        "Sale price",
                     ],
                     [
-                        "Baths",
+                        "Sale date",
                     ],
                     [
-                        "Yr built",
+                        "Valuation price",
+                    ],
+                    [
+                        "Assessed value",
+                    ],
+                    [
+                        "Style",
+                    ],
+                    [
+                        "Bedrooms",
+                    ],
+                    [
+                        "Bathroom",
+                    ],
+                    [
+                        "Total rooms",
+                    ],
+                    [
+                        "SQft",
+                    ],
+                    [
+                        "Year of build",
+                    ],
+                    [
+                        "Garage/Parking",
+                    ],
+                    [
+                        "Taxes",
+                    ],
+                    [
+                        "Tax Year",
                     ],
                 ]
             }
@@ -166,7 +207,7 @@ function generateSideBySidePayload() {
             // vx: construct PROPERTY_IMG_x, PROPERTY_ADD_x,  COMPARABLE_LIST
             sbsPayloadArr[index]['PROPERTY_IMG_' + ptr2 + '']['data'] = pika[x].IMG_LOCATION.data
             sbsPayloadArr[index]['PROPERTY_ADD_' + ptr2 + '']['data'] = pika[x].ADDRESS_1.data + ' ' + pika[x].CITY.data + ' ' + pika[x].STATE.data + ' ' + pika[x].ZIP.data
-            for(let y=0; y<4; y++) {
+            for(let y=0; y<14; y++) {
                 sbsPayloadArr[index].COMPARABLE_LIST.data.array[y].push(pika[x][indexFieldMap[y]]['data'])
             }
             ptr2++

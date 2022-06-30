@@ -17,7 +17,12 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
         //     setIsLoggedIn(false)
         // })
         if (Object.keys(props).length !== 0) { //logged in
-            getStripeUrl()
+            if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'ACTIVE')) { // subscribed
+                //go to accountmanagement/subscription
+                window.location.href = '/account-management/subscription'
+            } else {
+                getStripeUrl()
+            }
         }
         if (window.location.pathname !== '/' && window.location.pathname !== '/leadgen') {
             window.location.href = '/'
@@ -76,6 +81,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
         }
     }
 
+    if(Object.keys(props).length === 0 || !(typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'ACTIVE'))) {
     return (
         <div className="leadgenintro-container">
             <div className="leadgenintro-upper">
@@ -113,7 +119,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
                 {
                    typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'INACTIVE' || props.userProfile.status === 'COMPLETED') && 
                    <div  className="leadgenintro-prompt">
-                   {/* <h1>$24.99 to start per month</h1> */}
+                   <h1>$24.99 to start per month</h1>
                    <p>Your subscription package provides you all the tools you need to start using the Honely lead capture on your own website. Generate an API key on subscription page to get started</p>
                    <button onClick={() => {
                        registerAction()
@@ -164,5 +170,6 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
             </div>
         </div>
     )
+            }
 }
 export default LeadGenIntro;

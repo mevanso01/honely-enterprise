@@ -211,15 +211,21 @@ function HonelySearchSimple(props) {
             <div className="search-input-wrapper">
             <input
                 type="text"
+                autoFocus
                 id="search-input-simple"
                 className="search-input"
-                placeholder="Add another property address"
+                placeholder="Enter the property address for the report"
                 autoComplete="off"
                 onKeyUp={() => {doSearch()}}
 
             ></input>
             <Loading />
-            <span className="mdi mdi-magnify search-icon"></span>
+            {/* <span className="mdi mdi-magnify search-icon"></span> */}
+            <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="9" cy="9" r="8.25" stroke="black" stroke-width="1.5"/>
+                <line x1="18.9481" y1="22.5555" x2="13.4071" y2="15.4634" stroke="black" stroke-width="1.5"/>
+            </svg>
+
             </div>
             <Message />
             <SearchResultContainer />

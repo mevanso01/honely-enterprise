@@ -259,16 +259,17 @@ function App() {
           <Route path="/leadgen" element={<LeadGenIntro userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateUserProfile={updateUserProfile}/>} />
           <Route path="/reports" element={<ReportsIntro userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateAuthState={updateAuthState}/>} />
           <Route path="/dashboard" element={<Dashboard userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
-          <Route path="/account-management" element={<AccountManagement />} >
+          <Route path="/account-management" element={<AccountManagement userProfile={data.userProfile} />} >
             <Route index element={<UserProfile userProfile={data.userProfile} jwt={data.jwt} updateUserProfile={updateUserProfile} doSignOut={doSignOut} />} />
             <Route path="user-profile" element={<UserProfile userProfile={data.userProfile} jwt={data.jwt} updateUserProfile={updateUserProfile} doSignOut={doSignOut}/>} />
             <Route path="subscription" element={<Subscription userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateUserProfile={updateUserProfile}/>} />
             <Route path="change-password" element={<ChangePassword jwt={data.jwt} auth={Auth} doSignOut={doSignOut}/>} />
             <Route path="payment-history" element={<PaymentHistory jwt={data.jwt} doSignOut={doSignOut}/>} />
             <Route path="future-value-config" element={<FutureValueConfig userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
+            <Route path="customize-widget" element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} />
           </Route>
           <Route path="/cma" element={<CMA userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateUserProfile={updateUserProfile} />} />
-          <Route path="/customize-widget" element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} />
+          {/* <Route path="/customize-widget" element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} /> */}
           <Route path="*" element={<LeadGenIntro userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateUserProfile={updateUserProfile}/>} />
         </Routes>
         </div>
@@ -286,7 +287,7 @@ function App() {
           <Header signOut={doSignOut} authFlag={false}/>
         <div className="section-wrapper">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LeadGenIntro />} />
           <Route path="/leadgen" element={<LeadGenIntro />} />
           <Route path="/reports" element={<ReportsIntro />} />
           <Route path="/signup" element={<Signup updateAuthState={updateAuthState}/>} />

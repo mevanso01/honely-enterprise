@@ -14,7 +14,7 @@ import {
     Outlet
   } from "react-router-dom";
 //   const location = window.location.pathname;
-function AccountManagement() {
+function AccountManagement(props) {
     var path = useLocation();
     function selectAccIndexSection(index) {
         const x = document.getElementsByClassName('accountmanagement-index-item')
@@ -49,12 +49,19 @@ function AccountManagement() {
         // if (location === '/account-management/future-value-config') {
         //     headerItems[3].classList.add('active')
         // }
-        if (location === '/account-management/payment-history') {
-            headerItems[3].classList.add('active')
-        }
+        // if (location === '/account-management/payment-history') {
+        //     headerItems[3].classList.add('active')
+        // }
+        if (location === '/account-management/customize-widget') {
+          headerItems[3].classList.add('active')
+      }
     }
     useEffect(() => {
         setActiveStyle()
+        if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status !== 'ACTIVE') {
+          var pika = document.getElementById('customize-widget-sidebar-option')
+          pika.style = "display: none"
+        }
       }, [path]);
     return (
         <div>
@@ -64,20 +71,23 @@ function AccountManagement() {
           <div className="accountmanagement-index">
         <nav>
           <ul>
-            <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(0)}}>
+            <li className="accountmanagement-index-item" style={{display:'none'}} onClick={() => {selectAccIndexSection(0)}}>
               <Link to={`user-profile`}>Edit User Info</Link>
             </li>
             <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(1)}}>
               <Link to={`subscription`}>Subscription and API Key</Link>
             </li>
-            <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(2)}}>
+            <li className="accountmanagement-index-item" style={{display:'none'}} onClick={() => {selectAccIndexSection(2)}}>
               <Link to={`change-password`}>Change Password</Link>
             </li>
             {/* <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(3)}}>
               <Link to={`future-value-config`}>Future Value Config</Link>
             </li> */}
-            <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(3)}}>
+            {/* <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(3)}}>
               <Link to={`payment-history`}>Payment History</Link>
+            </li> */}
+            <li className="accountmanagement-index-item" id="customize-widget-sidebar-option" onClick={() => {selectAccIndexSection(3)}}>
+              <Link to={`customize-widget`}>Customize Widget</Link>
             </li>
           </ul>
         </nav>

@@ -1,8 +1,10 @@
 .suggested-property-card-container {
   max-width: 340px;
+  min-width: 337px;
   border-radius: 20px;
   border: 1px solid #C4C4C4;
   position: relative;
+  margin-bottom: 30px;
 }
 .card-bage-icon-container {
   position: absolute;
@@ -11,7 +13,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  z-index: 100;
+  z-index: 50;
 }
 .card-bage-icon-container .check-btn {
   background: #FF9900;
@@ -26,7 +28,7 @@
   align-items: center;
   justify-content: center;
   color: #FFF;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .card-bage-icon-container .plus-btn {
   background: #fff;

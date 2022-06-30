@@ -6,10 +6,6 @@ import config from '../configs/aws-exports'
 Amplify.configure(config)
 
 function Signup(props) {
-    var inputBorderProperties = {
-        border: '1px solid #00000054',
-        borderRadius: '2px',
-    }
 
     useEffect(() => {
         document.getElementById("signup-phone").addEventListener("keypress", function (evt) {
@@ -168,40 +164,40 @@ function Signup(props) {
             <div className="signup-form">
             <div>
             <label>Company Name</label>
-            <input type="text" id='signup-companyname' style={inputBorderProperties} maxLength={100}></input>
+            <input type="text" id='signup-companyname'  maxLength={100}></input>
             </div>
             <div>
             <label>Full Name</label>
-            <input type="text" id='signup-fullname' style={inputBorderProperties} maxLength={50}></input>
+            <input type="text" id='signup-fullname'  maxLength={50}></input>
             </div>
             <div>
             <label>Phone Number</label>
-            <input type="text" id='signup-phone' style={inputBorderProperties} minLength={12} maxLength={12}></input>
+            <input type="text" id='signup-phone'  minLength={12} maxLength={12}></input>
             </div>
             <div>
             <label>Email</label>
-            <input type="email" id='signup-email' style={inputBorderProperties} maxLength={50}></input>
+            <input type="email" id='signup-email'  maxLength={50}></input>
             </div>
             <div>
             <label>Password</label>
-            <input type="password" id='signup-password' style={inputBorderProperties} maxLength={50}></input>
+            <input type="password" id='signup-password'  maxLength={50}></input>
             </div>
             <div>
             <label>Company Website</label>
-            <input type="text" id='signup-website' style={inputBorderProperties}></input>
+            <input type="text" id='signup-website' ></input>
             </div>
             <div>
             <label>Upload Logo</label>
             <input type="file" id='signup-logo' onChange={(event) => {
                     // console.log('vx: event.target.files[0]', event.target.files[0])
                     setSelectedFile(event.target.files[0])
-                }} style={inputBorderProperties}></input>
+                }} ></input>
             </div>
             {
                 confCodeSent &&
                 <div>
                 <label>Email Confirmation Code</label>
-                <input type="text" id='signup-confcode' style={inputBorderProperties} maxLength={10}></input>
+                <input type="text" id='signup-confcode'  maxLength={10}></input>
                 </div>
             }
             Already have an account? <a onClick={() => {

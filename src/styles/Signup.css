@@ -6,7 +6,7 @@
     /* max-height: 1200px; */
     width: 100%;
     max-width: 1200px;
-    padding-top: 100px;
+    padding-top: 70px;
     max-width: 700px;
     /* padding: 60px 20px 0px 100px; */
     text-align: center;
@@ -18,7 +18,8 @@
 .signup-header h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 33px;
+    font-size: 24px;
+    line-height: 32px;
 }
 .signup-header p {
     font-family: 'Brown', sans-serif;
@@ -32,6 +33,7 @@
 .signup-form {
     max-width: 500px;
     margin: 20px auto 60px;
+    padding: 0 10px;
 }
 .signup-form div {
     margin: 30px auto;
@@ -41,14 +43,12 @@
     text-align: left;
     margin-bottom: 10px;
     margin-left: 5px;
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'SF Pro Text', sans-serif;
     color: #000000A8;
 }
 .signup-form input {
-    width: 500px;
-    max-width: 500px;
-    min-height: 60px;
+    min-height: 50px;
     min-width: 280px;
     border: 1px solid #00000054;
     border-radius: 2px;
@@ -83,4 +83,20 @@ a {
     cursor: pointer;
     font-size: 18px;
     color: #FF9900;
+}
+
+@media (min-width: 768px) {
+    .signup-container {
+        padding-top: 100px;
+    }
+    .signup-header h1 {
+        font-size: 33px;
+        font-size: 40px;
+    }
+    .signup-form input {
+        min-height: 60px;
+    }
+    .signup-form label {
+        font-size: 18px;
+    }
 }

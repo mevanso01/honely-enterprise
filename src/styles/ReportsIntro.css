@@ -12,6 +12,7 @@
     max-width: 1200px;
     margin: 0 auto;
     background-color: #F5F5F5;
+    padding: 0 15px;
 }
 .reportsintro-searchbar {
     text-align: center;
@@ -33,7 +34,8 @@
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 20px;
+    line-height: 24px;
 }
 .reportsintro-features ul {
     max-width: 500px;
@@ -48,15 +50,17 @@
 }
 .reportsintro-features ul li i {
     color: #E4A14E;
-    font-size: 30px;
+    font-size: 24px;
     margin-right: 5px;
 }
 .reportsintro-features ul li p:first-child{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    font-size: 14px;
 }
 .reportsintro-features ul li p:last-child{
     font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
 }
 .reportsintro-report-credits {
     margin: 60px auto 0;
@@ -136,4 +140,20 @@
 .reportsintro-popup-options label {
     font-weight: 500;
     font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    .reportsintro-features ul li p:first-child {
+        font-size: 16px;
+    }
+    .reportsintro-features ul li p:last-child {
+        font-size: 14px;
+    }
+    .reportsintro-features ul li i {
+        font-size: 30px;
+    }
+    .reportsintro-features h1 {
+        font-size: 24px;
+        line-height: 30px;
+    }
 }

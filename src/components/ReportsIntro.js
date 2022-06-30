@@ -740,7 +740,7 @@ function ReportsIntro(props) {
             <div className="reportsintro-report-credits">
                 <img src="honely_report_credits.png"></img>
             </div>
-            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br>
             <div  className="leadgenintro-steps">
                     <div>
                         <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-1-circle" />

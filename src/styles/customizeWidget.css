@@ -432,6 +432,9 @@
   align-items: center;
   justify-content: center;
 }
+.result-close-icon-container span svg {
+  margin-left: 0;
+}
 .result-header-item {
   border-bottom-width: 1px;
   border-style: solid;

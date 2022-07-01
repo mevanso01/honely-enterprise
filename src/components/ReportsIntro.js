@@ -586,9 +586,11 @@ function ReportsIntro(props) {
                         {
                             Object.keys(props).length !== 0 &&
                             <div className="reportsintro-popup-options">
-                            <p style={{color: 'red', fontWeight: '600'}}>{errMsg}</p>
-                            <input type='checkbox' id="creditsFlag" onChange={() => handleCreditsFlag()}></input>
-                            <label>Use credits for report generation- Available: {props.userProfile.credits}</label>
+                                <p style={{color: 'red', fontWeight: '600'}}>{errMsg}</p>
+                                <div className="popup-option-header">
+                                    <input type='checkbox' id="creditsFlag" onChange={() => handleCreditsFlag()}></input>
+                                    <label>Use credits for report generation- Available: {props.userProfile.credits}</label>
+                                </div>
                             </div>
                         }
 

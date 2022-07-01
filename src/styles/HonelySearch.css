@@ -104,6 +104,10 @@ input.search-input:focus {
 .search-result-container ul li:last-of-type {
     border-bottom: none;
 }
+.search-result-container ul li .search-result-col:last-child {
+    display: flex;
+    align-items: center;
+}
 .search-result-container .search-result-col:first-of-type {
     max-width: 340px;
     white-space: nowrap;

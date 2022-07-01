@@ -1,9 +1,10 @@
 .cma-section {
     background-color: white;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 20px;
 }
 .cma-header {
     margin-bottom: 60px;
@@ -20,26 +21,29 @@
     border-radius: 7px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    font-size: 25px;
+    font-size: 16px;
 }
 .cma-header h1{
     font-family: 'Roboto', sans-serif;
-    font-size: 45px;
+    font-size: 32px;
     font-weight: 900;
     margin-bottom: 10px;
 }
 .cma-header p{
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     /* width: 40%; */
 }
 .cma-selected-properties {
-    margin-bottom: 60px;;
+    margin-bottom: 60px;
+    overflow: auto;
+    
 }
 .cma-selected-properties table{
     table-layout: auto;
     width: 100%;
+    min-width: 500px;
 }
 .cma-selected-properties table tr {
     font-family: 'Roboto', sans-serif !important;
@@ -56,13 +60,16 @@
 }
 .cma-selected-properties table tr th{
     font-family: 'Roboto', sans-serif !important;
-    font-size: 20px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
     padding: 8px;
+    white-space: nowrap;
 }
 .cma-selected-properties table tr td{
     padding: 8px;
     text-align: center;
+    font-size: 12px;
+    line-height: 20px;
 }
 .cma-selected-properties table tr th:first-child{
     text-align: left;
@@ -71,7 +78,6 @@
     text-align: left;
 }
 .cma-property-search-block {
-    padding: 40px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -80,11 +86,11 @@
 }
 .cma-property-search-sub-block {
     margin: 0 auto;
-    min-width: 550px;
+    width: 100%;
 }
 .cma-property-search-sub-block h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
 }
@@ -97,8 +103,54 @@
 .cma-comparable-property {
     max-width: 300px;
 }
-.cma-comparable-properties {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.comparable-properties-container .section-heading {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+@media (min-width: 768px) {
+    .cma-section {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 50px;
+    }
+    .cma-comparable-properties {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% + 30px);
+        margin-left: -15px;
+    }
+    .cma-header h1 {
+        font-size: 45px;
+    }
+    .cma-header p {
+        font-size: 20px;
+    }
+    .cma-continue-btn button {
+        font-size: 25px;
+    }
+    .comparable-properties-container .section-heading {
+        font-size: 28px;
+        line-height: 32px;
+    }
+    .cma-property-search-sub-block {
+        min-width: 550px;
+        width: initial;
+    }
+    .cma-property-search-block {
+        padding: 40px;
+    }
+    .cma-property-search-sub-block h1 {
+        font-size: 24px;
+    }
+    .cma-selected-properties table tr th {
+        font-size: 20px !important;
+    }
+    .cma-selected-properties table tr td {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1024px) {
+
 }

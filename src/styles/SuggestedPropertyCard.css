@@ -1,10 +1,8 @@
 .suggested-property-card-container {
-  max-width: 340px;
-  min-width: 337px;
+  margin: 0 0 30px 0;
   border-radius: 20px;
   border: 1px solid #C4C4C4;
   position: relative;
-  margin-bottom: 30px;
 }
 .card-bage-icon-container {
   position: absolute;
@@ -78,6 +76,7 @@
 }
 .property-image-container .progress-bar svg {
   transform: rotateY(180deg) rotateZ(-20deg);
+  margin-left: 0;
 }
 .suggested-property-card-container .card-content {
   padding: 15px;
@@ -131,4 +130,17 @@
   font-weight: 700;
   font-size: 14px;
   text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .suggested-property-card-container {
+    width: calc(50% - 30px);
+    margin: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .suggested-property-card-container {
+    width: calc(33.33% - 30px);
+  }
 }

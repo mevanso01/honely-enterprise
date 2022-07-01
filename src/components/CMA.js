@@ -34,17 +34,16 @@ function CMA(props) {
     }
     useEffect(() => {
         console.log('vx: userprofile', props.userProfile)
-        var pika = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array
-        axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + pika[0])
-        .then((response) => {
-            // setComparablePropertyList(response.data.rows)
-            // console.log('vx: comparablePropertyList is', comparablePropertyList)
-            window.sessionStorage.removeItem('CMAComparableHomes')
-            var pika = {
-                array: response.data.rows
-            }
-            window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(pika))
-        })
+        // var pika = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array
+        // axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + pika[0])
+        // .then((response) => {
+        //     // setComparablePropertyList(response.data.rows)
+        //     window.sessionStorage.removeItem('CMAComparableHomes')
+        //     var pika = {
+        //         array: response.data.rows
+        //     }
+        //     window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(pika))
+        // })
         //vx: not needed anymore most probably...
         // var propertyListVar = []
         // var subjectPropertyPayloadVar =  JSON.parse(window.sessionStorage.getItem('subjectPropertyPayload'))
@@ -305,12 +304,14 @@ function CMA(props) {
     }
     function ComparableProperties() {
         var ans = []
+        if (JSON.parse(window.sessionStorage.getItem('CMAComparableHomes'))) {
         var pika = JSON.parse(window.sessionStorage.getItem('CMAComparableHomes')).array
         for (let x=0; x<10; x++) {
             ans.push(
                 <SuggestedPropertyCard property={pika[x]} setForecast={setForecast} setErrMsg={setErrMsg} setProperty={setProperty} showReportForm={showReportForm} />
             )
         }
+    }
         return (
             <div className="cma-comparable-properties">
                 {ans}

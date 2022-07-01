@@ -164,6 +164,16 @@ function HonelySearchSimple(props) {
                 pika = lala.array
             }
             // var pika = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array
+            if (!props.inCma) {
+                axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + response.data.property_forecast.property_id)
+                .then((response) => {
+                    window.sessionStorage.removeItem('CMAComparableHomes')
+                    var lala2 = {
+                        array: response.data.rows
+                    }
+                    window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(lala2))
+                })
+            }
             if (!props.inCma || !pika.includes(response.data.property_forecast.property_id)) {
                 props.setForecast(response.data)
                 console.log('vx: forecast state set as...', response.data)

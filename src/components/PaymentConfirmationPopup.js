@@ -8,32 +8,13 @@ function PaymentConfirmationPopup(props) {
     // const [charge, setCharge] = useState('')
     const [showLoading, setShowLoading] = useState(false)
     useEffect(() => {
-        console.log('vx: gengar!', props.creditsFlag)
+        console.log('vx: gengar!', JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount)
     })
     function removePaymentPopup() {
         // document.getElementById('paymentconfirmation-overlay').classList.remove('active')
         window.sessionStorage.removeItem('PaymentPopup')
         props.setShowPaymentPopup(false)
     }
-    // function Charge() {
-    //         var radioElements =  document.getElementsByName('noOfCreditsToBuy')
-    //         var ans = null
-    //         for (let x=0; x< radioElements.length; x++) {
-    //             if(radioElements !== null && typeof radioElements !== 'undefined') {
-    //                 if(radioElements[x].checked === true) {
-    //                     ans = radioElements[x].value
-    //                     break
-    //                 }
-    //             }
-    //         }
-    //         var creditAmount = ans
-    //         if (creditAmount == 10) {
-    //             return (
-    //                 // <span>{'$' + 9.99}</span>
-    //                 <span>{'$' + props.charge}</span>
-    //             )
-    //         }
-    // }
     return (
         <div className="paymentconfirmation-popup active" id="paymentconfirmation-overlay">
             <div className="paymentconfirmation-popup-container">
@@ -44,12 +25,24 @@ function PaymentConfirmationPopup(props) {
                 </div>
             </div>
             <div className="paymentconfirmation-popup-body">
-                {
+                {/* {
                     (typeof props.creditsFlag === 'undefined' || props.creditsFlag === null || props.creditsFlag === false) &&
                     <p>You will be charged <span>${JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount}</span></p>
                 }
                 {
                     (props.creditsFlag === true) && 
+                    <p>You will be charged <span>{JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount} credit(s)</span></p>
+                } */}
+                {
+                    props.purchaseCreditsMode && typeof JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount !== 'undefined' &&
+                    <p>You will be charged <span>${JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount}</span></p>
+                }
+                {
+                    !props.purchaseCreditsMode && typeof JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount !== 'undefined' &&
+                    <p>You will be charged <span>${JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount}</span></p>
+                }
+                {
+                    !props.purchaseCreditsMode && typeof JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount !== 'undefined' &&
                     <p>You will be charged <span>{JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount} credit(s)</span></p>
                 }
                 {

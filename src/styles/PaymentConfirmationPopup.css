@@ -48,3 +48,8 @@
     font-weight: 400;
     font-size: 20px;
 }
+@media (max-width: 768px) {
+    .paymentconfirmation-popup-container {
+        padding: 30px;
+    }
+}

@@ -83,6 +83,20 @@ function ReportForm(props) {
         }
       }
     function doCMAAction () {
+        if (!props.inCMA) {
+        var pika = null
+        if (props.creditsFlag) {
+            pika = {
+                creditAmount: 2
+            }
+        } else {
+            pika = {
+                dollarAmount: 1
+            }
+        }
+      window.sessionStorage.removeItem('PaymentPopup')
+      window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+    }
         doGenerateReport(false, true)
     }
     function doDownloadReport () {
@@ -2948,7 +2962,7 @@ function ReportForm(props) {
         <div className="form-overlay" id="report-form-overlay">
             {
                 showPaymentPopup && 
-                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={doDownloadReport} creditsFlag={props.creditsFlag}/>
+                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={doDownloadReport} creditsFlag={props.creditsFlag} purchaseCreditsMode={false}/>
             }
             <div className="forecast-form-container">
             <div className="forecast-form-title-bar">

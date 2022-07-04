@@ -136,114 +136,6 @@ function CMA(props) {
         }
     }
     function generateCMA() {
-        var venus = {
-            "template": "template_honely_comparable_3x.html",
-            "CUSTOM_LOGO": {
-                "type": "text",
-                "data": "https://honely-files-public.s3.amazonaws.com/report/logo_honely_report_default.png"
-            },
-            "ADDRESS_1": {
-                "type": "text",
-                "data": "746 HARRISON AVE"
-            },
-            "ADDRESS_2": {
-                "type": "text",
-                "data": " "
-            },
-            "CITY": {
-                "type": "text",
-                "data": "HARRISON"
-            },
-            "STATE": {
-                "type": "text",
-                "data": "NJ"
-            },
-            "ZIP": {
-                "type": "text",
-                "data": "07029"
-            },
-            "PROPERTY_IMG_1": {
-                "type": "image",
-                "data": "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=40.747871,-74.148703+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko"
-            },
-            "PROPERTY_ADD_1": {
-                "type": "text",
-                "data": "123 Sample Street, NY 12345"
-            },
-            "PROPERTY_IMG_2": {
-                "type": "image",
-                "data": "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=26.338312,-80.093064+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko"
-            },
-            "PROPERTY_ADD_2": {
-                "type": "text",
-                "data": "231 Sample Street, NY 12345"
-            },
-            "PROPERTY_IMG_3": {
-                "type": "image",
-                "data": "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=26.338312,-80.093064+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko"
-            },
-            "PROPERTY_ADD_3": {
-                "type": "text",
-                "data": "231 Sample Street, NY 12345"
-            },
-            "PROPERTY_IMG_4": {
-                "type": "image",
-                "data": "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=26.338312,-80.093064+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko"
-            },
-            "PROPERTY_ADD_4": {
-                "type": "text",
-                "data": "231 Sample Street, NY 12345"
-            },
-            "COMPARABLE_LIST": {
-                "type": "array",
-                "data": {
-                    "row_class": null,
-                    "cell_class": [
-                        "first-cell border-bottom",
-                        "cell-bg border-right border-bottom",
-                        "border-bottom border-right",
-                        "border-bottom"
-                    ],
-                    "array": [
-                        [
-                            "status",
-                            "Active",
-                            "Active",
-                            "Sold"
-                        ],
-                        [
-                            "List price",
-                            "$267,000",
-                            "$259,090",
-                            "$300,000"
-                        ],
-                        [
-                            "Sale price",
-                            "$266,000",
-                            "$253,000",
-                            "$297,000"
-                        ],
-                        [
-                            "List Date",
-                            "2022-06-01",
-                            "2021-09-22",
-                            "2021-08-15"
-                        ],
-                        [
-                            "Sale Date",
-                            "N/A",
-                            "2022-02-15",
-                            "2022-01-25"
-                        ]
-                    ]
-                }
-            }
-        }
-        var raichu = {
-            user_id: "512",
-            mode : 'multiple',
-            report_data_list: [venus]
-        }
           var sideBySidePayload = generateSideBySidePayload()
           console.log('vx: tralalala1', sideBySidePayload)
           var pika = JSON.parse(window.sessionStorage.getItem('CMA')).array
@@ -285,13 +177,14 @@ function CMA(props) {
                     }
                   }
                 var payload = null
-                if (props.creditsFlag) {
-                    payload = {
-                        'credit-amount': 2
-                    }
-                } else {
+                if (typeof JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount !== 'undefined') {
                     payload = {
                         'dollar-amount': 1
+                    }
+                }
+                if (typeof JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount !== 'undefined') {
+                    payload = {
+                        'credit-amount': 2
                     }
                 }
                 axios.post('https://developers.honely.com/user/buy-report', payload, config)
@@ -323,7 +216,7 @@ function CMA(props) {
         <div>
             {
                 showPaymentPopup && 
-                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={generateCMA} creditsFlag={props.creditsFlag}/>
+                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={generateCMA} purchaseCreditsMode={false}/>
             }
             <br></br><br></br>
             <div className="section cma-section">
@@ -339,18 +232,6 @@ function CMA(props) {
                   if (lala.length <= 1) {
                     setErrMsg('Please add at least one property to compare with.')
                   } else {
-                    var pika = null
-                  if (props.creditsFlag) {
-                      pika = {
-                          creditAmount: 2
-                      }
-                  } else {
-                      pika = {
-                          dollarAmount: 1
-                      }
-                  }
-                window.sessionStorage.removeItem('PaymentPopup')
-                window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
                 setShowPaymentPopup(true)
                   }
               }}>Continue <i className="fa fa-arrow-right"></i></button>

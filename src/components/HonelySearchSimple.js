@@ -218,13 +218,13 @@ function HonelySearchSimple(props) {
     }
     return (
         <div className="search-container">
-            <div className="search-input-wrapper">
+            <div className="search-input-wrapper" style={{background: 'white', padding: '2px'}}>
             <input
                 type="text"
                 autoFocus
                 id="search-input-simple"
                 className="search-input"
-                placeholder="Enter the property address for the report"
+                placeholder="Enter the address for the property report"
                 autoComplete="off"
                 onKeyUp={() => {doSearch()}}
 

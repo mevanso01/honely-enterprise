@@ -188,7 +188,7 @@ function Signup(props) {
             </div>
             <div>
             <label>Upload Logo</label>
-            <input type="file" id='signup-logo' onChange={(event) => {
+            <input type="file" id='signup-logo' style={{border: 'none'}} onChange={(event) => {
                     // console.log('vx: event.target.files[0]', event.target.files[0])
                     setSelectedFile(event.target.files[0])
                 }} ></input>

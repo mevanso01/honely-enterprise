@@ -21,7 +21,9 @@ import {
       if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status !== 'ACTIVE') {
         var pika = document.getElementById('customize-widget-header-option')
         console.log('vx: pika from viridian', pika)
-        pika.style = "display: none"
+        if(pika){
+          pika.style = "display: none"
+        }
       }
     }, [path]);
 
@@ -71,13 +73,13 @@ import {
           <nav>
             <ul className="header-items" >
             {
-              (window.location.pathname === '/' || window.location.pathname === '/leadgen' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma' ) && 
+              (window.location.pathname === '/' || window.location.pathname === '/leadgen' || window.location.pathname === '/signin' || window.location.pathname === '/signup' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma' ) && 
               <li className={`header-item ${path.pathname === '/leadgen' ? 'active' : ''}`} >
                 <Link to="/leadgen">Lead Capture</Link>
               </li>
             }
             {
-              (window.location.pathname === '/' || window.location.pathname === '/leadgen' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma'  ) && 
+              (window.location.pathname === '/' || window.location.pathname === '/signin' || window.location.pathname === '/signup' || window.location.pathname === '/leadgen' || window.location.pathname.startsWith('/account-management') || window.location.pathname === '/reports' ||  window.location.pathname === '/cma'  ) && 
               <li className={`header-item ${path.pathname === '/reports' ? 'active' : ''}`}>
                 <Link to="/reports">Report Generation</Link>
               </li>

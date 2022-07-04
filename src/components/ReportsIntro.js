@@ -3,6 +3,7 @@ import '../styles/ReportsIntro.css'
 import HonelySearchSimple from "./HonelySearchSimple";
 import ReportForm from './ReportForm'
 import axios from 'axios';
+import PaymentConfirmationPopup from './PaymentConfirmationPopup'
 
 function ReportsIntro(props) {
     const [subjectProperty, setSubjectProperty] = useState('')
@@ -10,6 +11,8 @@ function ReportsIntro(props) {
     const [property, setProperty] = useState(null)
     const [errMsg, setErrMsg] = useState('')
     const [optionLists, setOptionLists] = useState({})
+    const [showPaymentPopup, setShowPaymentPopup] = useState(false)
+    const [stripeUrl, setStripeUrl] = useState(null)
     // const [forCMA, setForCMA] = useState(null)
     // var forCMA = null
     // const [walkScore, setWalkScore] = useState(null)
@@ -25,8 +28,12 @@ function ReportsIntro(props) {
     //       console.log('vx:', collectionInfo)
     // }
     useEffect(() => {
+        if (Object.keys(props).length !== 0) { //logged in
+            getStripeUrl()
+        }
         window.sessionStorage.removeItem('CMA')
         window.sessionStorage.removeItem('CMASubjectPropertyId')
+        window.sessionStorage.removeItem('CMAComparableHomes')
         axios.get('https://api.honely.com/lookup/drop_down')
         .then((response) => {
             if (response.data) {
@@ -70,6 +77,146 @@ function ReportsIntro(props) {
         document.getElementById('report-form-overlay').classList.add('active')
         window.dispatchEvent(new Event('resize'))
     }
+    function askPaymentConfirmation () {
+        var radioElements =  document.getElementsByName('noOfCreditsToBuy')
+        var ans = null
+        for (let x=0; x< radioElements.length; x++) {
+          if(radioElements[x].checked === true) {
+            ans = radioElements[x].value
+            console.log(ans);
+            break
+          }
+        }
+        if (ans !== null) {
+            setShowPaymentPopup(true)
+        }
+    }
+    function getStripeUrl() {
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + props.jwt
+            }
+          }
+          console.log('vx: config from hoenn region', config)
+          axios.post( 
+              'https://developers.honely.com/create-stripe-session?source=REPORT', {},
+              config
+            )
+            .then( ( response ) => {
+              console.log( 'vx: stripe url from subscription', response.data.data.url )
+              setStripeUrl(response.data.data.url)
+              console.log('vx: url set to state', stripeUrl)
+            } )
+            .catch((error) => {
+              if (error.message === 'Request failed with status code 401') {
+                props.doSignOut()
+              }
+            })
+    }
+    function CreditsSection () {
+        return (
+          <div>
+            {
+              showPaymentPopup && 
+              <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={buyCredits} creditsFlag={null} purchaseCreditsMode={true} />
+            }
+            <br></br>
+            <h3>Report Credits</h3>
+            <br></br><br></br><br></br>
+            <div className="reportsintro-credits-subsection">
+            {/* <p>Available credits: {props.userProfile.credits}</p> */}
+            <h2>How many credits would you like to purchase?</h2>
+            <br></br>
+            <h4>(Available credits: {props.userProfile.credits})</h4>
+            <br></br><br></br>
+            <div>
+            <input type="radio" id={10} value={10} onChange={() => {
+              // setCreditAmount(10);
+              var pika = {
+                creditAmount: 10,
+                dollarAmount: 9.99
+              }
+              window.sessionStorage.removeItem('PaymentPopup')
+              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+              }} name="noOfCreditsToBuy"></input><label>10 credits for $9.99</label>
+            <br></br><br></br>
+            <input type="radio" id={25} value={25} onChange={() => {
+              var pika = {
+                creditAmount: 25,
+                dollarAmount: 19.99
+              }
+              window.sessionStorage.removeItem('PaymentPopup')
+              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+            }} name="noOfCreditsToBuy"></input><label>25 credits for $19.99</label>
+            <br></br><br></br>
+            <input type="radio" id={50} value={50} onChange={() => {
+              var pika = {
+                creditAmount: 50,
+                dollarAmount: 39.99
+              }
+              window.sessionStorage.removeItem('PaymentPopup')
+              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+            }} name="noOfCreditsToBuy"></input><label>50 credits for $39.99</label>
+            <br></br><br></br>
+            <input type="radio" id={100} value={100} onChange={() => {
+              var pika = {
+                creditAmount: 100,
+                dollarAmount: 74.99
+              }
+              window.sessionStorage.removeItem('PaymentPopup')
+              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+            }} name="noOfCreditsToBuy"></input><label>100 credits for $74.99</label>
+            </div>
+            <br></br><br></br><br></br>
+            {
+              (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status === 'CONFIRMED') &&
+              <button onClick={() => {
+                var radioElements =  document.getElementsByName('noOfCreditsToBuy')
+                var ans = null
+                for (let x=0; x< radioElements.length; x++) {
+                  if(radioElements[x].checked === true) {
+                    ans = radioElements[x].value
+                    console.log(ans);
+                    break
+                  }
+                }
+                if (ans !== null) {
+                    window.location.href=stripeUrl
+                }
+                }}>Buy</button>
+            }
+            {
+              !(typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status === 'CONFIRMED') &&
+              <button onClick={() => {askPaymentConfirmation()}}>Buy</button>
+            }
+            </div>
+            <br></br><br></br><br></br><br></br>
+          </div>
+        )
+      }
+      function buyCredits() {
+        let config = {
+          headers: {
+            'Authorization': 'Bearer ' + props.jwt
+          }
+        }
+        var body = {
+          "credit-amount": JSON.parse(window.sessionStorage.getItem('PaymentPopup')).creditAmount,
+          "dollar-amount": JSON.parse(window.sessionStorage.getItem('PaymentPopup')).dollarAmount,
+        }
+        axios.post('https://developers.honely.com/user/dollar-exchange', body, config)
+        .then((response) => {
+          window.sessionStorage.removeItem('PaymentPopup')
+          window.location.reload()
+        })
+        .catch((error) => {
+          if (error.message === 'Request failed with status code 401') {
+            props.doSignOut()
+          } else {
+            console.log('vx: error purchasing credits', error.message)
+          }
+        })
+      }
     var user = {
         name : '',
         email: '',
@@ -84,494 +231,6 @@ function ReportsIntro(props) {
             user_id: '512',
         }
     }
-    // var property = {
-    //     "status": "Sold",
-    //     "confidence_score": "5.5",
-    //     "rental_estimate": null,
-    //     "address": {
-    //     "property_id": "85691865",
-    //     "fips": "34017",
-    //     "apn": "04  00044-0000-00028-  02",
-    //     "street_number": "746",
-    //     "street_pre_direction": null,
-    //     "street_name": "HARRISON",
-    //     "street_suffix": "AVE",
-    //     "street_post_direction": null,
-    //     "unit_type": null,
-    //     "unit_number": null,
-    //     "full_address": "746 Harrison Ave Harrison NJ 07029",
-    //     "city": "HARRISON",
-    //     "state": "NJ",
-    //     "zip_code": "07029",
-    //     "zip_plus_four_code": "1909",
-    //     "latitude": "40.747871",
-    //     "longitude": "-74.148703",
-    //     "geocoding_accuracy": "-74.148703",
-    //     "census_tract": "013500",
-    //     "carrier_code": "C012"
-    //     },
-    //     "tax": [
-    //     {
-    //     "year": "2021",
-    //     "property_tax": 10652.01,
-    //     "land": "200000.0",
-    //     "additions": "274900.0",
-    //     "rate_code_area": null,
-    //     "assessed_value": "474900.0"
-    //     }
-    //     ],
-    //     "valuation": {
-    //     "assessed_value": "474900.0",
-    //     "appraisal": "594281.0355081952",
-    //     "list_price": "590000.0",
-    //     "date": "2021"
-    //     },
-    //     "structure": {
-    //     "year_built": "1960",
-    //     "effective_year_built": "1960",
-    //     "rooms_count": "0.0",
-    //     "beds_count": "6.0",
-    //     "baths": "2.0",
-    //     "partial_baths_count": "0.0",
-    //     "units_count": null,
-    //     "total_area_sq_ft": "1938.0",
-    //     "stories": "2 Stories",
-    //     "plumbing_fixtures": null,
-    //     "air_conditioning_type": null,
-    //     "amenities": null,
-    //     "architecture_type": null,
-    //     "basement_type": null,
-    //     "condition": null,
-    //     "construction_type": "Frame",
-    //     "exterior_features": null,
-    //     "exterior_wall_type": null,
-    //     "flooring_types": null,
-    //     "heating_type": "Gas",
-    //     "heating_fuel_type": null,
-    //     "interior_wall_type": null,
-    //     "other_rooms": null,
-    //     "parking_type": "Attached Garage",
-    //     "accessor_parking_type": null,
-    //     "listing_parking_type": "ATTACHED GARAGE",
-    //     "garage_type": null,
-    //     "parking_spaces_count": "0",
-    //     "pool_type": null,
-    //     "roof_material_type": null,
-    //     "roof_style_type": null,
-    //     "sewer_type": null,
-    //     "water_type": null
-    //     },
-    //     "sale_history": [],
-    //     "is_blocked": "YES"
-    //     }
-    // var forecast = {
-    //     "zipcode": "07029",
-    //     "city": "HARRISON",
-    //     "state": "NJ",
-    //     "zip_code_listing_statistics": {
-    //     "average_rental_income": 2491,
-    //     "total_listing_on_marker": 3,
-    //     "sold_properties_last_month": null,
-    //     "average_sqft": 257.32,
-    //     "median_days_on_market": 1.5,
-    //     "great_school_rating": null,
-    //     "median_sold_price": 508000,
-    //     "median_listings_price": 569000
-    //     },
-    //     "property_forecast": {
-    //     "property_id": "85691865",
-    //     "rental_estimate": null,
-    //     "confidence_score": "5.5",
-    //     "fips": "34017",
-    //     "apn": "04  00044-0000-00028-  02",
-    //     "address": "746 Harrison Ave Harrison NJ 07029",
-    //     "latitude": "40.747871",
-    //     "longitude": "-74.148703",
-    //     "list_price": "590000.0",
-    //     "appraisal": "594281.0355081952",
-    //     "appraisal_low": "443868.50542107096",
-    //     "appraisal_high": "744693.5655953193",
-    //     "assessed_value": "474900.0",
-    //     "beds_count": "6.0",
-    //     "baths": "2.0",
-    //     "realtor": "",
-    //     "property_status": "Sold",
-    //     "total_area_sq_ft": "1938.0",
-    //     "posted_date": "2021-07-10",
-    //     "percentage_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "0.93"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "4.63"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "14.54"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "24.84"
-    //     }
-    //     ],
-    //     "value_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "599824.25"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "621778.22"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "680672.27"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "741925.99"
-    //     }
-    //     ],
-    //     "average_zip_code_value": "535017.4920109232",
-    //     "property_valued_compared_to_zipcode": "11.08"
-    //     },
-    //     "neighborhood": {
-    //     "percentage_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "1.12"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "5.45"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "16.31"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "27.67"
-    //     }
-    //     ],
-    //     "value_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "541023.21"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "564158.28"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "622277.37"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "683070.86"
-    //     }
-    //     ],
-    //     "past_percentage_change": [
-    //     {
-    //     "year": "May 2021",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "May 2020",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "May 2019",
-    //     "change": null
-    //     }
-    //     ],
-    //     "zipcode_growth_state_ranking_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "387"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "330"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "327"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "276"
-    //     }
-    //     ],
-    //     "zipcode_growth_national_ranking_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "17590"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "20623"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "18812"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "14115"
-    //     }
-    //     ],
-    //     "avg_value_state_ranking_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": "278"
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "283"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "282"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "276"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "271"
-    //     }
-    //     ],
-    //     "avg_value_national_ranking_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": "5467"
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "5550"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "5897"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "5786"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "5508"
-    //     }
-    //     ],
-    //     "total_state_rank": "595",
-    //     "total_national_rank": "32966",
-    //     "competitive_score": null,
-    //     "competition_statements": "1|2|3|4",
-    //     "current_value": "535017.49"
-    //     },
-    //     "surrounding_zipcode": {
-    //     "null": "NO",
-    //     "percentage_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "2.96"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "12.93"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "29.90"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "45.29"
-    //     }
-    //     ]
-    //     },
-    //     "state_statistics": {
-    //     "average_rental_income": 2284,
-    //     "total_listing_on_marker": 5505,
-    //     "sold_properties_last_month": 2236,
-    //     "average_sqft": 257.5,
-    //     "median_days_on_market": 2,
-    //     "great_school_rating": null,
-    //     "median_sold_price": 400000,
-    //     "median_listings_price": 549000,
-    //     "percentage_change_forecasts": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": null
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": "2.85"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": "12.71"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": "29.14"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": "43.81"
-    //     }
-    //     ]
-    //     },
-    //     "moving_trends": {
-    //     "null": "NO",
-    //     "total_state_rank": "593",
-    //     "total_country_rank": "38108",
-    //     "net_in": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": -0.23
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": 0.34
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": 0.05
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": 0.2
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": 0.34
-    //     }
-    //     ],
-    //     "move_in_percentage_change_forecast": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": 0.32
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": 0.7
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": 0.67
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": 0.8
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": 0.92
-    //     }
-    //     ],
-    //     "move_out_percentage_change_forecast": [
-    //     {
-    //     "year": "May 2022",
-    //     "change": 0.55
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "change": 0.36
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "change": 0.62
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "change": 0.6
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "change": 0.58
-    //     }
-    //     ],
-    //     "state_rankings": [
-    //     {
-    //     "year": "May 2022",
-    //     "rank": "549"
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "rank": "25"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "rank": "215"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "rank": "65"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "rank": "25"
-    //     }
-    //     ],
-    //     "country_rankings": [
-    //     {
-    //     "year": "May 2022",
-    //     "rank": "34588"
-    //     },
-    //     {
-    //     "year": "August 2022",
-    //     "rank": "4570"
-    //     },
-    //     {
-    //     "year": "May 2023",
-    //     "rank": "15372"
-    //     },
-    //     {
-    //     "year": "May 2024",
-    //     "rank": "7332"
-    //     },
-    //     {
-    //     "year": "May 2025",
-    //     "rank": "4570"
-    //     }
-    //     ]
-    //     },
-    //     "is_blocked": "NO"
-    //     }
     return (
         <div className="reportsintro-container">
             <div className="reportsintro-popup" id="reportsintro-overlay">
@@ -622,9 +281,9 @@ function ReportsIntro(props) {
                                         var pika = props.userProfile.credits - 2
                                         // if chose credits and they insuffient
                                         if (creditsFlag && (pika < 0)) {
-                                            setErrMsg('Insufficient credits. Please go to account management section to purchase credits!')
-                                        } else if (!creditsFlag && props.userProfile !== null && props.userProfile.status !== 'ACTIVE') {
-                                            setErrMsg('Payment method not set up. Please go to account management section to setup Payment method')
+                                            setErrMsg('Insufficient credits. Please purchase credits!')
+                                        } else if (!creditsFlag && props.userProfile !== null && props.userProfile.default_payment_method === null) {
+                                            window.location.href=stripeUrl
                                         } else {
                                             showReportForm(true)
                                         }
@@ -660,9 +319,9 @@ function ReportsIntro(props) {
                                         var pika = props.userProfile.credits - 2
                                         // if chose credits and they insuffient
                                         if (creditsFlag && (pika < 0)) {
-                                            setErrMsg('Insufficient credits. Please go to account management section to purchase credits!')
-                                        } else if (!creditsFlag && props.userProfile !== null && props.userProfile.status !== 'ACTIVE') {
-                                            setErrMsg('Payment method not set up. Please go to account management section to setup Payment method')
+                                            setErrMsg('Insufficient credits. Please purchase credits!')
+                                        } else if (!creditsFlag && props.userProfile !== null && props.userProfile.default_payment_method === null) {
+                                            window.location.href=stripeUrl
                                         } else {
                                             showReportForm(false)
                                         }
@@ -670,7 +329,7 @@ function ReportsIntro(props) {
                                 }}>Continue</button>
                             </div>
                         </div>
-                        <div className="reportsintro-popup-option">
+                        {/* <div className="reportsintro-popup-option">
                             <div className="reportsintro-popup-option-left">
                                 <div>
                                     <i className="mdi mdi-checkbox-marked-circle" />
@@ -689,7 +348,7 @@ function ReportsIntro(props) {
                                    }
                                 }}>Continue</button>
                             </div>
-                        </div>
+                        </div> */}
                         {/* {
                             Object.keys(props).length !== 0 &&
                             <div>
@@ -715,13 +374,16 @@ function ReportsIntro(props) {
                         value={collectionInfo.charmander}
                         placeholder="Charmander"
                         ></input> */}
-                        <p>Search property Address for a Honely Property Report</p>
+                        <p>Generate a Property Report</p>
+                        <br></br><br></br>
                         <HonelySearchSimple inCma={false} setPopupDisplay={setPopupDisplay} setForecast={setForecast} setProperty={setProperty}/>
+                        <br></br><br></br>
                         <div>
                         </div>
                         </div>
                         <div className="reportsintro-features">
                         <h1>What Do You Get with Honely's Reporting Software?</h1>
+                        <br></br><br></br>
                         <ul>
                             <li>
                                 <div>
@@ -756,6 +418,13 @@ function ReportsIntro(props) {
                                 </div>
                             </li>
                         </ul>
+                        </div>
+                        <br></br><br></br>
+                        <div className="reportsintro-credits-section">
+                        {
+                            (props.userProfile.default_payment_type !== null) &&
+                            <CreditsSection />
+                        }
                         </div>
                     </div>
                 </div>
@@ -824,7 +493,7 @@ function ReportsIntro(props) {
                             <span style={{fontSize: '70px', color: 'black'}}className="mdi mdi-numeric-3-circle" />
                             
                             <h1>Select Comparables</h1>
-                            <p>If you chose a CMA, either use our suggested properties or eneter your own. After, download the report to show your clients! </p>
+                            <p>If you chose a CMA, either use our suggested properties or enter your own. After, download the report to show your clients! </p>
                         </div>
                     </div>
                 </div>

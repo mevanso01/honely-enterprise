@@ -37,7 +37,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
           }
           console.log('vx: config from hoenn region', config)
           axios.post( 
-              'https://developers.honely.com/create-stripe-session', {},
+              'https://developers.honely.com/create-stripe-session?source=LEADGEN', {},
               config
             )
             .then( ( response ) => {

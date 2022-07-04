@@ -3,6 +3,7 @@ import '../styles/Subscription.css'
 import '../styles/PaymentConfirmationPopup.css'
 import axios from 'axios';
 import PaymentConfirmationPopup from './PaymentConfirmationPopup'
+import { TrinitySpinner } from 'loading-animations-react';
 
 function Subscription(props) {
     const [data, setData] = useState({
@@ -13,6 +14,7 @@ function Subscription(props) {
     // const [creditAmount, setCreditAmount] = useState(0)
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
     const [paymentMethodList, setPaymentMethodList] = useState([])
+    const [showLoading, setShowLoading] = useState(false)
     const [paymentMethodStatusMsg, setPaymentMethodStatusMsg] = useState({
       successMessage: '',
       errorMessage: '',
@@ -26,7 +28,7 @@ function Subscription(props) {
             }
           }
           axios.post( 
-              'https://developers.honely.com/create-stripe-session', {},
+              'https://developers.honely.com/create-stripe-session?source=LEADGEN', {},
               config
             )
             .then( ( response ) => {
@@ -70,6 +72,11 @@ function Subscription(props) {
         getStripeUrl()
         getPaymentMethodList()
         console.log('vx: from subscription page, user profile is', props.userProfile)
+        if (props && props.userProfile && props.userProfile.status === 'PAYMENT_PENDING') {
+          setTimeout(() => {
+            window.location.reload()
+          }, 500)
+        }
       },[]);
     function regenerateApiKey() {
         let config = {
@@ -213,7 +220,8 @@ function Subscription(props) {
       }
     }
     function generateApiKey () {
-      if(props.userProfile.payment_type !== null) {
+      if(props.userProfile.default_payment_type !== null) {
+        setShowLoading(true)
         let config = {
           headers: {
             'Authorization': 'Bearer ' + props.jwt
@@ -243,7 +251,7 @@ function Subscription(props) {
           <div>
             {
               showPaymentPopup && 
-              <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={buyCredits} creditsFlag={null}/>
+              <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={buyCredits} creditsFlag={null} purchaseCreditsMode={true}/>
             }
             <br></br>
             <h3>Report Credits</h3>
@@ -401,10 +409,10 @@ function Subscription(props) {
             <br></br><br></br>
             <WidgetSection />
             <br></br><br></br>
-            {
+            {/* {
               (props.userProfile.payment_type !== null) &&
               <CreditsSection />
-            }
+            } */}
             <br></br><br></br>
             <div className="subscription-payment-method">
             <h3>Payment Method</h3>
@@ -427,22 +435,22 @@ function Subscription(props) {
                     <br></br><br></br>
                     <WidgetSection />
                     <br></br><br></br>
-                    <CreditsSection />
+                    {/* <CreditsSection /> */}
                 </div>
             )
         }
         }
-        if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status === 'CONFIRMED') {
+        if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status === 'CONFIRMED' ) {
             return(
                 <div className="subscription-wrapper">
                      <h3>Subscription</h3>
                     <br></br><br></br>
                     <button onClick={() => {window.location.href=data.stripeUrl}}>Add Payment Method</button>
                     <br></br><br></br><br></br>
-                    {
+                    {/* {
               (props.userProfile.payment_type !== null) &&
               <CreditsSection />
-            }
+            } */}
                 </div>
             )
         }
@@ -451,12 +459,21 @@ function Subscription(props) {
                 <div className="subscription-wrapper">
                      <h3>Subscription</h3>
                     <br></br><br></br>
-                    <button onClick={generateApiKey}>Subscribe</button>
-                    <br></br><br></br>
                     {
+                      showLoading && 
+                      <div style={{width: '50px'}}>
+                      <TrinitySpinner color="#24cb43" width="10"/>
+                      </div>
+                    }
+                    {
+                      !showLoading &&
+                      <button onClick={generateApiKey}>Subscribe</button>
+                    }
+                    <br></br><br></br>
+                    {/* {
               (props.userProfile.payment_type !== null) &&
               <CreditsSection />
-            }
+            } */}
                     <br></br><br></br>
             <div className="subscription-payment-method">
             <h3>Payment Method</h3>

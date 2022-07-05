@@ -159,15 +159,15 @@ const PollQuestion = (props) => {
         <div className='requirement-checkbox'>
           <button
             className='poll-checkbox-btn'
-            onClick={() => handleUpdateItem(poll.order, { required: !poll.required })}
+            onPointerDown={() => handleUpdateItem(poll.order, { required: !poll.required })}
           >
             {poll.required ? (
               <span className='mdi mdi-checkbox-marked-outline active' />
             ) : (
               <span className='mdi mdi-checkbox-blank-outline' />
             )}
+            Make this steo a requirement
           </button>
-          <p>Make this steo a requirement</p>
         </div>
       </div>
     )
@@ -205,22 +205,6 @@ const PollQuestion = (props) => {
     })
   };
 
-  const targetHasProp = (target, hasProp) => {
-    while (target) {
-      if (hasProp(target)) {
-        return true;
-      }
-      target = target.parentElement;
-    }
-    return false;
-  };
-
-  const shouldCancelSortStart = (coach) => {
-    return targetHasProp(coach.target, (el) => {
-      return ['button'].includes(el.tagName.toLowerCase());
-    });
-  };
-
   return (
     <section className='widget-block-section'>
       <h3>Poll Question</h3>
@@ -231,7 +215,6 @@ const PollQuestion = (props) => {
         handleDeletePoll={handleDeletePoll}
         handleUpdateOption={handleUpdateOption}
         handleAddPollOption={handleAddPollOption}
-        shouldCancelStart={shouldCancelSortStart}
       />
       <div className='add-item-containter'>
         <div className='widget-block-divider' />

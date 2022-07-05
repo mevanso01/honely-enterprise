@@ -213,6 +213,9 @@
   outline: none;
   padding: 0;
   min-width: initial;
+  display: flex;
+  align-items: center;
+  color: #000000;
 }
 .poll-checkbox-btn:hover {
   background-color: transparent;

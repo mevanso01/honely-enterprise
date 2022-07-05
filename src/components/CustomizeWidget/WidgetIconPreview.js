@@ -9,7 +9,8 @@ const WidgetIconPreview = (props) => {
     <div
       className='widget-icon-preview-container'
       style={{
-        backgroundColor: widgetConfig.colors.background_color
+        backgroundColor: widgetConfig.colors.background_color,
+        flexDirection: widgetConfig.position === 'LEFT' ? 'row-reverse' : 'row'
       }}
     >
       <span

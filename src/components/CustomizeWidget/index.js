@@ -225,6 +225,27 @@ const CustomizeWidget = (props) => {
                 />
               </section>
               <section className='widget-block-section'>
+                <h3>Position</h3>
+                <div className='position-wraper'>
+                  <div className='widget-radio-item' onClick={() => handleUpdateWidgetConfig({ position: 'LEFT' })}>
+                    {widgetConfig?.position === 'LEFT' ? (
+                      <span className='mdi mdi-radiobox-marked' />
+                    ) : (
+                      <span className='mdi mdi-radiobox-blank' />
+                    )}
+                    <label>Left</label>
+                  </div>
+                  <div className='widget-radio-item' onClick={() => handleUpdateWidgetConfig({ position: 'RIGHT' })}>
+                    {widgetConfig?.position === 'RIGHT' ? (
+                      <span className='mdi mdi-radiobox-marked' />
+                    ) : (
+                      <span className='mdi mdi-radiobox-blank' />
+                    )}
+                    <label>Right</label>
+                  </div>
+                </div>
+              </section>
+              <section className='widget-block-section'>
                 <h2>INPUT FORM</h2>
                 <h3>Title</h3>
                 <input

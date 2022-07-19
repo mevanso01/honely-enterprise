@@ -319,16 +319,16 @@ COMPONENT -  FORECAST FORM
 }
 @media only screen and (max-width: 1600px) {
     .forecast-form-container {
-        height: 90vh;
+        /* height: 90vh; */
     }
 }
 @media (max-width: 1000px) {
     .forecast-form-container {
         width: 90%;
-        height: 90%;
+        height: 80%;
     }
 }
-@media (max-width: 576px) {
+@media (max-width: 600px) {
     .forecast-form-container {
         width: 100%;
         height: 100%;

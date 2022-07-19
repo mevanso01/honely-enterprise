@@ -52,6 +52,7 @@ function Signup(props) {
         phone = phone.replace(/\D/g,'')
         var email = document.getElementById('signup-email').value
         var password = document.getElementById('signup-password').value
+        var confirmPassword = document.getElementById('signup-confirm-password').value
         var website = document.getElementById('signup-website').value
         var marketingConsent = true
         if (fullName === null || fullName === '') {
@@ -62,6 +63,8 @@ function Signup(props) {
             setErrMsg('Password does not satisfy all requirements')
         } else if (phone !== null && phone !== '' && phone.length !== 10) {
             setErrMsg('Invalid phone number')
+        } else if (password !== confirmPassword) {
+            setErrMsg('Passwords do not match')
         } else {
             var companyLogo = getBase64(selectedFile)
             unconfirmedUserCreation(fullName, email, password, phone, marketingConsent, companyName, website, companyLogo )
@@ -181,6 +184,10 @@ function Signup(props) {
             <div>
             <label>Password</label>
             <input type="password" id='signup-password'  maxLength={50}></input>
+            </div>
+            <div>
+            <label>Confirm Password</label>
+            <input type="password" id='signup-confirm-password'  maxLength={50}></input>
             </div>
             <div>
             <label>Company Website</label>

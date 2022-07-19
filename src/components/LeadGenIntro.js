@@ -19,7 +19,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
         if (Object.keys(props).length !== 0) { //logged in
             if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'ACTIVE')) { // subscribed
                 //go to accountmanagement/subscription
-                window.location.href = '/account-management/subscription'
+                window.location.href = '/account-management/customize-widget'
             } else {
                 getStripeUrl()
             }
@@ -91,7 +91,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
                 <div className="leadgenintro-subblock-upper-left">
                     <p>Generate more leads and improve your site engagement by integrating Honely's predictive analytics onto your website!</p>
                 </div>
-                <div className="leadgenintro-subblock-upper-right">
+                <div className="leadgenintro-subblock-upper-right" style={{padding: '5%'}}>
                     <img src="homepage-top-right.png"></img>
                 </div>
             </div>
@@ -109,8 +109,8 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
                 {
                     (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && props.userProfile.status === 'CONFIRMED' || Object.keys(props).length === 0) &&
                     <div  className="leadgenintro-prompt">
-                    <h1>$24.99 per month</h1>
-                    <p>This affordable monthly rate equips your website with a premier lead capture tool and a competitive advantage. Each additional API call is $1.</p>
+                    <h1>$19.99 per month</h1>
+                    <p>This affordable monthly rate equips your website with a premier lead capture tool and a competitive advantage.</p>
                     <button onClick={() => {
                         registerAction()
                     }}>Register</button>
@@ -119,7 +119,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
                 {
                    typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'INACTIVE' || props.userProfile.status === 'COMPLETED') && 
                    <div  className="leadgenintro-prompt">
-                   <h1>$24.99 to start per month</h1>
+                   <h1>$19.99 to start per month</h1>
                    <p>Your subscription package provides you all the tools you need to start using the Honely lead capture on your own website. Generate an API key on subscription page to get started</p>
                    <button onClick={() => {
                        registerAction()
@@ -129,8 +129,8 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
                 {
                    typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'ACTIVE') && 
                    <div  className="leadgenintro-prompt">
-                   {/* <h1>$24.99 to start per month</h1> */}
-                   {/* <p>This subscription package provides you all the tools you need to start using the Honely lead capture on your own website. Get started with a monthly rate. Each additional API is $1. Generate an API key on subscription page to get started</p> */}
+                   {/* <h1>$19.99 to start per month</h1> */}
+                   {/* <p>This subscription package provides you all the tools you need to start using the Honely lead capture on your own website. Get started with a monthly rate. Generate an API key on subscription page to get started</p> */}
                    <button onClick={() => {
                        window.location.href = '/dashboard'
                    }}>Go to dashboard</button>

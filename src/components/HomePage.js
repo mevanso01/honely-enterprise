@@ -19,7 +19,7 @@ function HomePage() {
                         }}>Get Started</button>
                     </div>
                 </div>
-                <div className="homepage-subblock-upper-right">
+                <div className="homepage-subblock-upper-right" style={{padding: '5%'}}>
                     <img src="homepage-top-right.png"></img>
                 </div>
             </div>

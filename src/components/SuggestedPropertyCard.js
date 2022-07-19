@@ -7,7 +7,9 @@ import axios from 'axios'
 
 const SuggestedPropertyCard = (props) => {
   useEffect(() => {
-    
+    if(!JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array.includes(props.property.property_id)) {
+      document.getElementById('cma-property-card-' + props.property.property_id).classList.add("mousedover")
+    }
   })
   function getForecast(value) {
     axios.get('https://api.honely.com/searches/forecast?address=' + value + '&user_id=512')
@@ -39,8 +41,15 @@ function getPropertyData(propertyId) {
       })
   }
 }
+function propertyCardClickAction() {
+  if (!JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array.includes(props.property.property_id)) {
+    getForecast(props.property.full_address)
+  }
+}
   return (
-    <div className='suggested-property-card-container'>
+    <div id={'cma-property-card-' + props.property.property_id} className='suggested-property-card-container' onClick={() => {
+      propertyCardClickAction()
+    }}>
       <div className='card-bage-icon-container'>
         {
           JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array.includes(props.property.property_id) &&
@@ -50,11 +59,7 @@ function getPropertyData(propertyId) {
         }
         {
           !JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array.includes(props.property.property_id) &&
-          <button onClick={
-            () => {
-              getForecast(props.property.full_address)
-            }
-          } className='plus-btn'>
+          <button className='plus-btn'>
             <span className='mdi mdi-plus' />
           </button>
         }

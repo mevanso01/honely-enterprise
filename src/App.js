@@ -260,7 +260,8 @@ function App() {
           <Route path="/reports" element={<ReportsIntro userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateAuthState={updateAuthState}/>} />
           <Route path="/dashboard" element={<Dashboard userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
           <Route path="/account-management" element={<AccountManagement userProfile={data.userProfile} />} >
-            <Route index element={<UserProfile userProfile={data.userProfile} jwt={data.jwt} updateUserProfile={updateUserProfile} doSignOut={doSignOut} />} />
+            <Route index element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} />
+            {/* <Route index element={<UserProfile userProfile={data.userProfile} jwt={data.jwt} updateUserProfile={updateUserProfile} doSignOut={doSignOut} />} /> */}
             <Route path="user-profile" element={<UserProfile userProfile={data.userProfile} jwt={data.jwt} updateUserProfile={updateUserProfile} doSignOut={doSignOut}/>} />
             <Route path="subscription" element={<Subscription userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} updateUserProfile={updateUserProfile}/>} />
             <Route path="change-password" element={<ChangePassword jwt={data.jwt} auth={Auth} doSignOut={doSignOut}/>} />

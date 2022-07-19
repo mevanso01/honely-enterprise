@@ -5,9 +5,11 @@ import Chart from "react-apexcharts";
 import PaymentConfirmationPopup from "./PaymentConfirmationPopup"
 function ReportForm(props) {
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
+    const [initialRate, setInitialRate] = useState(1)
     useEffect(() => {
+        doInitialEstimate()
         populateFields()
-    })
+    }, [])
     function removeReportForm() {
         document.getElementById('report-form-overlay').classList.remove('active')
     }
@@ -83,27 +85,55 @@ function ReportForm(props) {
         }
       }
     function doCMAAction () {
-        if (!props.inCMA) {
-        var pika = null
-        if (props.creditsFlag) {
-            pika = {
-                creditAmount: 2
+        doUpdateHonelyEstimate()
+        setTimeout(() => {
+            if (!props.inCMA) {
+                var pika = null
+                if (props.creditsFlag) {
+                    pika = {
+                        creditAmount: 2
+                    }
+                } else {
+                    pika = {
+                        dollarAmount: 1
+                    }
+                }
+              window.sessionStorage.removeItem('PaymentPopup')
+              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
             }
-        } else {
-            pika = {
-                dollarAmount: 1
-            }
-        }
-      window.sessionStorage.removeItem('PaymentPopup')
-      window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+                doGenerateReport(false, true)
+        }, 500)
+    //     if (!props.inCMA) {
+    //     var pika = null
+    //     if (props.creditsFlag) {
+    //         pika = {
+    //             creditAmount: 2
+    //         }
+    //     } else {
+    //         pika = {
+    //             dollarAmount: 1
+    //         }
+    //     }
+    //   window.sessionStorage.removeItem('PaymentPopup')
+    //   window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
+    // }
+    //     doGenerateReport(false, true)
     }
-        doGenerateReport(false, true)
-    }
+    // async function doDownloadReport () {
+    //     await new Promise((resolve) => {
+    //         resolve(doUpdateHonelyEstimate())
+    //     })
+    //     doGenerateReport(false, false)
+    //   }
     function doDownloadReport () {
-        doGenerateReport(false, false)
+        doUpdateHonelyEstimate()
+        setTimeout(() => {
+            doGenerateReport(false, false)
+        }, 500)
       }
     function doGenerateReport (shareMode, cmaMode) {
-        console.log('vx: props.forCMA', props.forCMA)
+        console.log('vx: doGenerateReport execution begins')
+        // console.log('vx: props.forCMA', props.forCMA)
         // constants
         const chartExportOptions = {
           width: '300',
@@ -1205,6 +1235,153 @@ function ReportForm(props) {
           })
         })
       }
+      function doInitialEstimate () {
+        // TO DO WHEN API is ready
+        // get all the inputs from user
+        // console.log(props.property)
+        if (props.property) {
+          const propertyId = props.property.address.property_id
+          const fips = props.property.address.fips
+          let zip = props.property.address.zip_code
+          let yearBuilt = props.property.structure.year_built
+          let stories = props.property.structure.stories
+          let sqft = props.property.structure.total_area_sq_ft
+          let numBeds = props.property.structure.beds_count
+          let numBaths = props.property.structure.baths
+          let numPartialBaths = props.property.structure.partial_baths_count
+          let roomCount = props.property.structure.rooms_count
+          let parkingSpaces = props.property.structure.parking_spaces_count
+          let plumbingCount = props.property.structure.plumbing_fixtures
+
+          // check numerical inputs
+          if (!validateNumericalInput(sqft)) {
+            sqft = 0
+          }
+          if (!validateNumericalInput(numBeds)) {
+            numBeds = 0
+          }
+          if (!validateNumericalInput(numBaths)) {
+            numBaths = 0
+          }
+          if (!validateNumericalInput(numPartialBaths)) {
+            numPartialBaths = 0
+          }
+          if (!validateNumericalInput(roomCount)) {
+            roomCount = 0
+          }
+          if (!validateNumericalInput(parkingSpaces)) {
+            parkingSpaces = 0
+          }
+          if (!validateNumericalInput(plumbingCount)) {
+            plumbingCount = 0
+          }
+
+          // update null data
+          if (zip === null || zip === '') {
+            zip = null
+          }
+          if (yearBuilt !== null || yearBuilt !== '') {
+            yearBuilt = yearBuilt.toString()
+          }
+          if (stories == null) {
+            stories = 0
+          } else {
+            stories = doConvertDropdownToCode('stories', stories)
+          }
+
+          const body = {
+            basic_info: {
+              property_id: propertyId,
+              fips: fips,
+              zip: zip,
+              year_build: yearBuilt,
+            },
+            numerical: {
+              sqft: formatNumber(sqft),
+              num_beds: numBeds,
+              num_baths: numBaths,
+              num_partial_baths: numPartialBaths,
+              room_count: roomCount,
+              parking_spaces: parkingSpaces,
+              plumbing_count: plumbingCount,
+            },
+            category: {
+              stories: stories,
+              other_rooms: null,
+              air_condition: null,
+              heat_type: null,
+              heat_fuel_type: null,
+              pool_type: null,
+              building_condition: null,
+              architecture: null,
+              construction: null,
+              basement_type: null,
+              roof_style: null,
+              roof_material_type: null,
+              exterior_walls: null,
+              interior_walls: null,
+              flooring: null,
+              garage_type: null,
+              water_type: null,
+              sewer_type: null,
+            },
+          }
+          // console.log(JSON.stringify(body))
+        //   const self = this
+          const apiURL = 'https://api.honely.com/calculator/honely_calculator'
+
+          fetch(apiURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }).then(function (response) {
+            // console.log(response)
+            return response.json()
+          }).then(function (data) {
+            // console.log(data)
+            if (data) {
+              if (data.current_value) {
+                // self.initialRate = data.current_value
+                setInitialRate(data.current_value)
+              }
+            }
+          }).catch((err) => {
+            console.log('[ERROR] Honely calculator API failed =>', err)
+          })
+        }
+      }
+      function doGetForecastResult (data) {
+        if (data) {
+          // console.log('inital: ' + this.initialRate)
+          console.log('vx: props.forecast.property_forecast.appraisal', props.forecast.property_forecast.appraisal)
+          console.log('vx: data.current_value', data.current_value)
+          console.log('vx: initialRate', initialRate)
+          if (props.forecast.property_forecast.appraisal && data.current_value) {
+            if (parseFloat(data.current_value) !== parseFloat(initialRate)) {
+                console.log('vx: psyduck4', parseFloat(props.forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate)))
+              return parseFloat(props.forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate))
+            } else {
+                console.log('vx: psyduck3', props.forecast.property_forecast.appraisal)
+              return parseFloat(props.forecast.property_forecast.appraisal)
+            }
+          } else {
+            console.log('vx: psyduck1')
+            return null
+          }
+        } else {
+            console.log('vx: psyduck2')
+          return null
+        }
+      }
+      function doUpdateCalculatorResult (data) {
+        if (data) {
+          document.getElementById('report-honey-value-after').innerHTML = formatCurrency(doGetForecastResult(data))
+        } else {
+          document.getElementById('report-honey-value-after').innerHTML = '--'
+        }
+      }
     function doConvertDropdownToCode (dropdown, option) {
         if (dropdown && option) {
           if (dropdown === 'stories') {
@@ -1353,7 +1530,7 @@ function ReportForm(props) {
           // display loader and disable button
           // loading = true
           displayLoader()
-          const self = this
+        //   const self = this
           const apiURL = 'https://api.honely.com/calculator/honely_calculator'
           console.log('[INFO] Start Honely calculator......')
 
@@ -1369,22 +1546,22 @@ function ReportForm(props) {
           }).then(function (data) {
             // console.log(data)
             // self.loading = false
-            self.hideLoder()
+            hideLoder()
 
             // update component
             if (data) {
               // console.log(data.current_value)
               // document.getElementById('forecast-result-after').innerHTML = self.formatCurrency(self.doGetForecastResult(data))
-              if (self.doGetForecastResult(data) && self.doGetForecastResult(data) != null) {
-                self.doUpdateCalculatorResult(data)
+              if (doGetForecastResult(data) && doGetForecastResult(data) != null) {
+                doUpdateCalculatorResult(data)
               } else {
-                self.doUpdateCalculatorResult(null)
+                doUpdateCalculatorResult(null)
               }
             }
             console.log('[INFO] Finished processing Honely calculator......')
           }).catch((err) => {
             // self.loading = false
-            self.hideLoder()
+            hideLoder()
             console.log('[ERROR] Honely calculator API failed =>', err)
           })
         }
@@ -2711,16 +2888,16 @@ function ReportForm(props) {
         // document.getElementById('btn_doShareReport_mobile').disabled = true
         document.getElementById('btn_doDownloadReport').disabled = true
         document.getElementById('btn_doDownloadReport_mobile').disabled = true
-        document.getElementById('btn_doUpdateEstimate').disabled = true
-        document.getElementById('btn_doUpdateEstimate_mobile').disabled = true
+        // document.getElementById('btn_doUpdateEstimate').disabled = true
+        // document.getElementById('btn_doUpdateEstimate_mobile').disabled = true
       }
     function enableSubmitButton () {
         // document.getElementById('btn_doShareReport').disabled = false
         // document.getElementById('btn_doShareReport_mobile').disabled = false
         document.getElementById('btn_doDownloadReport').disabled = false
         document.getElementById('btn_doDownloadReport_mobile').disabled = false
-        document.getElementById('btn_doUpdateEstimate').disabled = false
-        document.getElementById('btn_doUpdateEstimate_mobile').disabled = false
+        // document.getElementById('btn_doUpdateEstimate').disabled = false
+        // document.getElementById('btn_doUpdateEstimate_mobile').disabled = false
       }
     function doReportTextColorCode (num, before, after) {
         if (num) {
@@ -3218,7 +3395,7 @@ function ReportForm(props) {
               </p>
             </div>
             </div>
-            <div className="form-section">
+            <div className="form-section" style={{display: 'none'}}>
             <p className="form-section-title"><span><i className="fas fa-chart-line"></i> Neighborhood Forecast</span></p>
             <div className="charts-row">
             <div className="chart-container">
@@ -3325,7 +3502,7 @@ function ReportForm(props) {
           <p class="report-disclaimer">Honely provides the Honely AI, data, website and brand &amp; links &ldquo;as is,&rdquo; &ldquo;with all faults&rdquo; and &ldquo;as available.&rdquo; <br></br>* The Honely revaluation currenty takes into account only valid changes to inputs such as property size, number of bedrooms, and number of bathrooms.</p>
           </div>
           <div class="form-action-row-mobile">
-            <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate_mobile">Update Estimate</button>
+            {/* <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate_mobile">Update Estimate</button> */}
             {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport_mobile">Share Report</button> */}
             <button onClick={() => {
                 var pika = null
@@ -3346,8 +3523,10 @@ function ReportForm(props) {
             {/* <button @click="doGenerateCMA" id="btn_generateCma_mobile">Generate CMA</button> */}
           </div>
           </div>
-          <div class="form-action-row">
-        <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate">Update Estimate</button>
+                </div>
+            </div>
+            <div class="form-action-row" style={{backgroundColor:'white'}}>
+        {/* <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate">Update Estimate</button> */}
         {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport">Share Report</button> */}
         <button onClick={() => {
             var pika = null
@@ -3366,8 +3545,6 @@ function ReportForm(props) {
         }} id="btn_doDownloadReport">Generate Report</button>
         <button onClick={() => {doCMAAction()}} id="btn_doDownloadReportCMA">Add to CMA Report</button>
       </div>
-                </div>
-            </div>
             </div>
         </div>
     )

@@ -37,23 +37,23 @@ function AccountManagement(props) {
         for (let x=0;x<headerItems.length;x++) {
             headerItems[x].classList.remove('active')
         }
-        if (location === '/account-management/user-profile' || location === '/account-management/' || location === '/account-management') {
-            headerItems[0].classList.add('active')
-        }
-        if (location === '/account-management/subscription') {
+        if (location === '/account-management/user-profile' || location === '/account-management/subscription') {
             headerItems[1].classList.add('active')
         }
-        if (location === '/account-management/change-password') {
-            headerItems[2].classList.add('active')
-        }
+        // if (location === '/account-management/subscription') {
+        //     headerItems[1].classList.add('active')
+        // }
+        // if (location === '/account-management/change-password') {
+        //     headerItems[2].classList.add('active')
+        // }
         // if (location === '/account-management/future-value-config') {
         //     headerItems[3].classList.add('active')
         // }
         // if (location === '/account-management/payment-history') {
         //     headerItems[3].classList.add('active')
         // }
-        if (location === '/account-management/customize-widget') {
-          headerItems[3].classList.add('active')
+        if (location === '/account-management/customize-widget' || location === '/account-management') {
+          headerItems[0].classList.add('active')
       }
     }
     useEffect(() => {
@@ -71,24 +71,24 @@ function AccountManagement(props) {
           <div className="accountmanagement-index">
         <nav>
           <ul>
-            <li className="accountmanagement-index-item" style={{display:'none'}} onClick={() => {selectAccIndexSection(0)}}>
-              <Link to={`user-profile`}>Edit User Info</Link>
+            <li className="accountmanagement-index-item" id="customize-widget-sidebar-option" onClick={() => {selectAccIndexSection(3)}}>
+              <Link to={`customize-widget`}>Customize Widget</Link>
             </li>
             <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(1)}}>
-              <Link to={`subscription`}>Subscription and API Key</Link>
+              <Link to={`subscription`}>Subscription Details</Link>
+            </li>
+            {/* <li className="accountmanagement-index-item" style={{display:'none'}} onClick={() => {selectAccIndexSection(0)}}>
+              <Link to={`user-profile`}>Edit User Info</Link>
             </li>
             <li className="accountmanagement-index-item" style={{display:'none'}} onClick={() => {selectAccIndexSection(2)}}>
               <Link to={`change-password`}>Change Password</Link>
-            </li>
+            </li> */}
             {/* <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(3)}}>
               <Link to={`future-value-config`}>Future Value Config</Link>
             </li> */}
             {/* <li className="accountmanagement-index-item" onClick={() => {selectAccIndexSection(3)}}>
               <Link to={`payment-history`}>Payment History</Link>
             </li> */}
-            <li className="accountmanagement-index-item" id="customize-widget-sidebar-option" onClick={() => {selectAccIndexSection(3)}}>
-              <Link to={`customize-widget`}>Customize Widget</Link>
-            </li>
           </ul>
         </nav>
         </div>

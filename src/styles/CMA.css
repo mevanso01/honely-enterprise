@@ -1,156 +1,284 @@
 .cma-section {
-    background-color: white;
-    padding-left: 10px;
-    padding-right: 10px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 20px;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20px;
+  margin-top: 80px;
+  margin-bottom: 40px;
 }
 .cma-header {
-    margin-bottom: 60px;
-    display: flex;
+  margin-bottom: 20px;
+  /* display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
 }
 .cma-continue-btn {
-    /* margin-right: 7% */
+  /* margin-right: 7% */
 }
 .cma-continue-btn button {
-    /* background-color: white;
+  /* background-color: white;
     color: black; */
-    border-radius: 7px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    font-size: 16px;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 16px;
 }
-.cma-header h1{
-    font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    font-weight: 900;
-    margin-bottom: 10px;
+.cma-header h1 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 25px;
+  text-align: center;
+  margin-bottom: 15px;
 }
-.cma-header p{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    /* width: 40%; */
+.cma-header p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
 }
 .cma-selected-properties {
-    margin-bottom: 60px;
-    overflow: auto;
-    
+  margin-bottom: 20px;
+  overflow: auto;
 }
-.cma-selected-properties table{
-    table-layout: auto;
-    width: 100%;
-    min-width: 500px;
+.cma-selected-properties table {
+  table-layout: auto;
+  width: 100%;
+  min-width: 500px;
 }
 .cma-selected-properties table tr {
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 15px;
-    font-weight: 400;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 15px;
+  font-weight: 400;
 }
 .cma-selected-properties table tr:nth-child(odd) {
-    background-color: #EFEFEF;
+  background-color: #efefef;
 }
 .cma-selected-properties table tr:first-child {
-    font-size: 20px !important;
-    font-weight: 500 !important;
-    background-color: white !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  background-color: white !important;
 }
-.cma-selected-properties table tr th{
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    padding: 8px;
-    white-space: nowrap;
+.cma-selected-properties table tr th {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  padding: 8px;
+  white-space: nowrap;
 }
-.cma-selected-properties table tr td{
-    padding: 8px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 20px;
+.cma-selected-properties table tr td {
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
 }
-.cma-selected-properties table tr th:first-child{
-    text-align: left;
+.cma-selected-properties table tr th:first-child {
+  text-align: left;
 }
-.cma-selected-properties table tr td:first-child{
-    text-align: left;
+.cma-selected-properties table tr td:first-child {
+  text-align: left;
 }
 .cma-property-search-block {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    /* background-color: #EFEFEF; */
-    margin-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #efefef;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  padding: 50px;
 }
 .cma-property-search-sub-block {
-    margin: 0 auto;
-    width: 100%;
+  margin: 0 auto;
+  width: 100%;
 }
 .cma-property-search-sub-block h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  margin-bottom: 15px;
 }
-.cma-comparable-properties-block h1{
-    font-family: 'Roboto', sans-serif;
-    font-size: 36px;
-    font-weight: 500;
-    margin-bottom: 10px;
+.cma-comparable-properties-block h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 .cma-comparable-property {
-    max-width: 300px;
+  max-width: 300px;
 }
 .comparable-properties-container .section-heading {
-    font-size: 20px;
-    line-height: 26px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  margin: 35px 0;
+}
+
+.cma-property-small-bold {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+}
+
+.view-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 25px;
+}
+
+.view-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.comparable-properties-semi-bold-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+    width: 100%;
+    background-color: #F8F8F8;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 15px;
+}
+
+.generate-report-container {
+  border-top: 1px solid rgba(0, 0, 0, 0.33);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.generate-report-btn {
+  width: 150px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 @media (min-width: 768px) {
-    .cma-section {
-        padding-left: 50px;
-        padding-right: 50px;
-        padding-top: 50px;
-    }
-    .cma-comparable-properties {
-        display: flex;
-        flex-wrap: wrap;
-        width: calc(100% + 30px);
-        margin-left: -15px;
-    }
-    .cma-header h1 {
-        font-size: 45px;
-    }
-    .cma-header p {
-        font-size: 20px;
-    }
-    .cma-continue-btn button {
-        font-size: 25px;
-    }
-    .comparable-properties-container .section-heading {
-        font-size: 28px;
-        line-height: 32px;
-    }
-    .cma-property-search-sub-block {
-        min-width: 550px;
-        width: initial;
-    }
-    .cma-property-search-block {
-        padding: 40px;
-    }
-    .cma-property-search-sub-block h1 {
-        font-size: 24px;
-    }
-    .cma-selected-properties table tr th {
-        font-size: 20px !important;
-    }
-    .cma-selected-properties table tr td {
-        font-size: 15px;
-    }
+  .cma-section {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+  }
+  .cma-comparable-properties {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+  }
+  .cma-header {
+    margin-bottom: 60px;
+  }
+  .cma-header h1 {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 58px;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  .cma-header p {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+  .cma-continue-btn button {
+    font-size: 25px;
+  }
+  .comparable-properties-container .section-heading {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+    text-align: center;
+    margin: 65px 0;
+  }
+  .cma-property-search-sub-block {
+    min-width: 550px;
+    width: initial;
+  }
+  .cma-property-search-block {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #efefef;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    padding: 60px;
+  }
+  .cma-property-search-sub-block h1 {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .cma-selected-properties table tr th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+  }
+  .cma-selected-properties table tr th {
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    line-height: 28px;
+  }
+  .cma-selected-properties table tr td {
+    font-size: 15px;
+  }
+  .cma-property-small-bold {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: right;
+  }
+  .comparable-properties-semi-bold-text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+    width: 100%;
+    background-color: #F8F8F8;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 15px;
+  }
+  .generate-report-container {
+    border-top: 1px solid rgba(0, 0, 0, 0.33);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .generate-report-btn {
+    width: 250px;
+    height: 50px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
 }
 
 @media (min-width: 1024px) {
-
 }

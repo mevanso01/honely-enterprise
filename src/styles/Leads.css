@@ -1,0 +1,250 @@
+.leads-content {
+  padding: 0 50px 50px 50px;
+}
+
+.leads-top {
+  padding-bottom: 50px;
+  /* border-bottom: 0.5px solid rgba(0, 0, 0, 0.33); */
+}
+
+.leads-title {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
+  margin-bottom: 45px;
+}
+
+.leads-notes {
+}
+
+.leads-bold {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.leads-text {
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 21px;
+  margin-bottom: 35px;
+}
+
+.contact-support-btn {
+  width: 260px;
+  height: 66px;
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.leads-bottom {
+}
+
+.leads-options {
+  margin: 35px 0;
+}
+
+.leads-regular {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.radio-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.leads-radio-btn {
+  margin-right: 35px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+/* .radio-btn-container input[type="radio"]:after {
+  width: 22px;
+  height: 22px;
+  border-radius: 15px;
+  top: -5px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+.radio-btn-container input[type="radio"]:checked:after {
+  width: 22px;
+  height: 22px;
+  border-radius: 15px;
+  top: -5px;
+  left: -1px;
+  position: relative;
+  background-color: #000000;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+} */
+
+.leads-radio-label {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.space-bottom {
+  margin-bottom: 20px;
+}
+
+.leads-get-instructions-btn {
+  width: 260px;
+  height: 66px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  background: #FF9900;
+  color: white;
+  border-radius: 12px;
+  justify-content: center;
+}
+
+/* .leads-get-instructions-btn:hover {
+  background: #5a6778;
+  color: #ffffff;
+} */
+
+@media (max-width: 500px) {
+  .leads-content {
+    padding: 0 50px 50px 50px;
+  }
+
+  .leads-top {
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.33);
+  }
+
+  .leads-title {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 35px;
+  }
+
+  .leads-notes {
+  }
+
+  .leads-bold {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .leads-text {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 25px;
+  }
+
+  .contact-support-btn {
+    width: 180px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
+
+  .leads-bottom {
+  }
+
+  .leads-options {
+    margin: 35px 0;
+  }
+
+  .leads-regular {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .radio-btn-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .leads-radio-btn {
+    margin-right: 15px;
+    height: 15px;
+    width: 15px;
+  }
+
+  /* input[type="radio"]:after {
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    top: -12px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  }
+
+  input[type="radio"]:checked:after {
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    top: -12px;
+    left: -1px;
+    position: relative;
+    background-color: #000000;
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  } */
+
+  .leads-radio-label {
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  .space-bottom {
+    margin-bottom: 20px;
+  }
+
+  .leads-get-instructions-btn {
+    width: 180px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

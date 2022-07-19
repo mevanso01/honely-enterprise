@@ -1,0 +1,242 @@
+.wordpress-content {
+  max-width: 800px;
+}
+
+.wordpress-guide-section {
+  padding-bottom: 35px;
+  margin-bottom: 35px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.33);
+}
+
+.wordpress-guide-steps {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wordpress-guide-step {
+  color: #ff7d1f;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 5px 0;
+  line-height: 32px;
+}
+
+.wordpress-guide-header {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
+}
+
+.word-press-guide-dropdown-img {
+  width: 461px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.wordpress-guide-details {
+  margin: 45px 0;
+}
+
+.wordpress-guide-detail-step {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.wordpress-guide-detail-img {
+  width: 572px;
+  height: 279px;
+  object-fit: contain;
+  object-position: left;
+}
+
+.wordpress-guide-orange {
+  color: #ff9900;
+  font-weight: 400;
+}
+
+.wordpress-guide-api-key-container {
+  background-color: black;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.wordpress-guide-api-key {
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  margin: 0;
+  width: 90%;
+  word-wrap: break-word;
+}
+
+.wordpress-guide-copy-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.wordpress-guide-complte-btn {
+  background: #ff9900;
+  border-radius: 12px;
+  width: 260px;
+  height: 66px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.wordpress-guide-last-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f8f8;
+}
+
+.wordpress-guide-computer-screen {
+  width: 250px;
+  height: 205px;
+  object-fit: contain;
+}
+
+.wordpress-guide-search-form {
+  width: 150px;
+  height: 230px;
+  object-fit: contain;
+}
+
+.no-underline {
+  border-bottom: none;
+}
+
+@media (max-width: 500px) {
+  .wordpress-content {
+    max-width: 800px;
+  }
+
+  .wordpress-guide-section {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.33);
+  }
+
+  .wordpress-guide-steps {
+    margin: 15px 0;
+  }
+
+  .wordpress-guide-step {
+    color: #ff7d1f;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 5px 0;
+    line-height: 20px;
+  }
+
+  .wordpress-guide-header {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 44px;
+  }
+
+  .word-press-guide-dropdown-img {
+    width: 250px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .wordpress-guide-details {
+    margin: 45px 0;
+  }
+
+  .wordpress-guide-detail-step {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .wordpress-guide-detail-img {
+    width: 250px;
+    height: 150px;
+    object-fit: contain;
+  }
+
+  .wordpress-guide-orange {
+    color: #ff9900;
+    font-weight: 400;
+  }
+
+  .wordpress-guide-api-key-container {
+    background-color: black;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+  }
+
+  .wordpress-guide-api-key {
+    font-weight: 500;
+    font-size: 10px;
+    color: white;
+    margin: 0;
+  }
+
+  .wordpress-guide-copy-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .wordpress-guide-complte-btn {
+    background: #ff9900;
+    border-radius: 12px;
+    width: 130px;
+    height: 33px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+  }
+
+  .wordpress-guide-last-step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: #f8f8f8;
+  }
+
+  .wordpress-guide-computer-screen {
+    width: 150px;
+    height: 155px;
+    object-fit: contain;
+  }
+
+  .wordpress-guide-search-form {
+    width: 100px;
+    height: 170px;
+    object-fit: contain;
+  }
+
+  .no-underline {
+    border-bottom: none;
+  }
+}

@@ -1,31 +1,43 @@
 .accountmanagement-container {
-    margin: 0px auto;
-    width: 100%;
-    padding: 20px 0px 0px 0px;
-    display: flex;
-    justify-content: space-between;
+  margin: 0px auto;
+  width: 100%;
+  padding: 20px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
 }
 .accountmanagement-index {
-    /* background-color: #F8F8F8; */
-    padding: 10px 20px 0px;
-    border-radius: 10px 0px 0px 10px;
-    white-space: nowrap;
+  /* background-color: #F8F8F8; */
+  padding: 3.5rem 80px 0px 80px;
+  border-radius: 10px 0px 0px 10px;
+  white-space: nowrap;
 }
 .accountmanagement-index-item {
-    margin: 10px auto;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 10px;
+  margin: auto;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+}
+.accountmanagement-index-item a {
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
 }
 .accountmanagement-index-item:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .accountmanagement-index-item.active {
-    border-left: 8px solid #24cb43;
-    background-color: #f0fcec;
+  border-left: 8px solid #FF9900;
+  background-color: #FF99001D;
 }
 @media (max-width: 1200px) {
-    .accountmanagement-container {
-        flex-direction: column;
-    }
+  .accountmanagement-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .accountmanagement-index {
+    padding: 3.5rem 20px 0px 50px;
+  }
 }

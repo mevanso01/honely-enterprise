@@ -19,7 +19,7 @@ function LeadGenIntro(props) {  //vx : can presence or absence of props convey a
         if (Object.keys(props).length !== 0) { //logged in
             if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && ( props.userProfile.status === 'ACTIVE')) { // subscribed
                 //go to accountmanagement/subscription
-                window.location.href = '/account-management/customize-widget'
+                window.location.href = '/account-management/leads'
             } else {
                 getStripeUrl()
             }

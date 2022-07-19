@@ -3,7 +3,1021 @@ import '../styles/ReportForm.css'
 import axios from 'axios';
 import Chart from "react-apexcharts";
 import PaymentConfirmationPopup from "./PaymentConfirmationPopup"
-function ReportForm(props) {
+import CreditsBanner from "./CreditsBanner";
+import File from "../assets/images/file.png";
+import Files from "../assets/images/files.png";
+function ReportFormV2(props) {
+    var inCMA = false
+    var creditsFlag = false
+    var forecast = {
+        "zipcode": "07029",
+        "city": "HARRISON",
+        "state": "NJ",
+        "zip_code_listing_statistics": {
+            "average_rental_income": 2491,
+            "total_listing_on_marker": 3,
+            "sold_properties_last_month": null,
+            "average_sqft": 257.32,
+            "median_days_on_market": 1.5,
+            "great_school_rating": null,
+            "median_sold_price": 508000,
+            "median_listings_price": 569000
+        },
+        "property_forecast": {
+            "property_id": "85691865",
+            "rental_estimate": null,
+            "confidence_score": "5.5",
+            "fips": "34017",
+            "apn": "04  00044-0000-00028-  02",
+            "address": "746 Harrison Ave Harrison NJ 07029",
+            "latitude": "40.747871",
+            "longitude": "-74.148703",
+            "list_price": "590000.0",
+            "appraisal": "594281.0355081952",
+            "appraisal_low": "443868.50542107096",
+            "appraisal_high": "744693.5655953193",
+            "assessed_value": "474900.0",
+            "beds_count": "6.0",
+            "baths": "2.0",
+            "realtor": "",
+            "property_status": "Sold",
+            "total_area_sq_ft": "1938.0",
+            "posted_date": "2021-07-10",
+            "percentage_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "0.93"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "4.63"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "14.54"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "24.84"
+                }
+            ],
+            "value_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "599824.25"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "621778.22"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "680672.27"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "741925.99"
+                }
+            ],
+            "average_zip_code_value": "535017.4920109232",
+            "property_valued_compared_to_zipcode": "11.08"
+        },
+        "neighborhood": {
+            "percentage_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "1.12"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "5.45"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "16.31"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "27.67"
+                }
+            ],
+            "value_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "541023.21"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "564158.28"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "622277.37"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "683070.86"
+                }
+            ],
+            "past_percentage_change": [
+                {
+                    "year": "July 2021",
+                    "change": null
+                },
+                {
+                    "year": "July 2020",
+                    "change": null
+                },
+                {
+                    "year": "July 2019",
+                    "change": null
+                }
+            ],
+            "zipcode_growth_state_ranking_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "387"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "330"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "327"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "276"
+                }
+            ],
+            "zipcode_growth_national_ranking_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "17590"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "20623"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "18812"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "14115"
+                }
+            ],
+            "avg_value_state_ranking_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": "278"
+                },
+                {
+                    "year": "October 2022",
+                    "change": "283"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "282"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "276"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "271"
+                }
+            ],
+            "avg_value_national_ranking_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": "5467"
+                },
+                {
+                    "year": "October 2022",
+                    "change": "5550"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "5897"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "5786"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "5508"
+                }
+            ],
+            "total_state_rank": "595",
+            "total_national_rank": "32966",
+            "competitive_score": null,
+            "competition_statements": "1|2|3|4",
+            "current_value": "535017.49"
+        },
+        "surrounding_zipcode": {
+            "null": "NO",
+            "percentage_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "2.96"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "12.93"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "29.90"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "45.29"
+                }
+            ]
+        },
+        "state_statistics": {
+            "average_rental_income": 2284,
+            "total_listing_on_marker": 5505,
+            "sold_properties_last_month": 2236,
+            "average_sqft": 257.5,
+            "median_days_on_market": 2,
+            "great_school_rating": 5.5,
+            "median_sold_price": 400000,
+            "median_listings_price": 549000,
+            "percentage_change_forecasts": [
+                {
+                    "year": "July 2022",
+                    "change": null
+                },
+                {
+                    "year": "October 2022",
+                    "change": "2.85"
+                },
+                {
+                    "year": "July 2023",
+                    "change": "12.71"
+                },
+                {
+                    "year": "July 2024",
+                    "change": "29.14"
+                },
+                {
+                    "year": "July 2025",
+                    "change": "43.81"
+                }
+            ]
+        },
+        "moving_trends": {
+            "null": "NO",
+            "total_state_rank": "593",
+            "total_country_rank": "38108",
+            "net_in": [
+                {
+                    "year": "July 2022",
+                    "change": -0.23
+                },
+                {
+                    "year": "October 2022",
+                    "change": 0.34
+                },
+                {
+                    "year": "July 2023",
+                    "change": 0.05
+                },
+                {
+                    "year": "July 2024",
+                    "change": 0.2
+                },
+                {
+                    "year": "July 2025",
+                    "change": 0.34
+                }
+            ],
+            "move_in_percentage_change_forecast": [
+                {
+                    "year": "July 2022",
+                    "change": 0.32
+                },
+                {
+                    "year": "October 2022",
+                    "change": 0.7
+                },
+                {
+                    "year": "July 2023",
+                    "change": 0.67
+                },
+                {
+                    "year": "July 2024",
+                    "change": 0.8
+                },
+                {
+                    "year": "July 2025",
+                    "change": 0.92
+                }
+            ],
+            "move_out_percentage_change_forecast": [
+                {
+                    "year": "July 2022",
+                    "change": 0.55
+                },
+                {
+                    "year": "October 2022",
+                    "change": 0.36
+                },
+                {
+                    "year": "July 2023",
+                    "change": 0.62
+                },
+                {
+                    "year": "July 2024",
+                    "change": 0.6
+                },
+                {
+                    "year": "July 2025",
+                    "change": 0.58
+                }
+            ],
+            "state_rankings": [
+                {
+                    "year": "July 2022",
+                    "rank": "549"
+                },
+                {
+                    "year": "October 2022",
+                    "rank": "25"
+                },
+                {
+                    "year": "July 2023",
+                    "rank": "215"
+                },
+                {
+                    "year": "July 2024",
+                    "rank": "65"
+                },
+                {
+                    "year": "July 2025",
+                    "rank": "25"
+                }
+            ],
+            "country_rankings": [
+                {
+                    "year": "July 2022",
+                    "rank": "34588"
+                },
+                {
+                    "year": "October 2022",
+                    "rank": "4570"
+                },
+                {
+                    "year": "July 2023",
+                    "rank": "15372"
+                },
+                {
+                    "year": "July 2024",
+                    "rank": "7332"
+                },
+                {
+                    "year": "July 2025",
+                    "rank": "4570"
+                }
+            ]
+        },
+        "is_blocked": "NO"
+    }
+    var optionLists={
+        "water_code": {
+            "1": "Cistern",
+            "2": "Municipal",
+            "3": "None",
+            "4": "Spring",
+            "5": "Well",
+            "6": "Yes"
+        },
+        "sewer_code": {
+            "1": "Municipal",
+            "2": "None",
+            "3": "Storm",
+            "4": "Septic",
+            "5": "Yes"
+        },
+        "stories_code": {
+            "100": "1 Story",
+            "125": "1.25 Stories",
+            "150": "1.5 Stories",
+            "175": "1.75 Stories",
+            "200": "2 Stories",
+            "225": "2.25 Stories",
+            "250": "2.5 Stories",
+            "275": "2.75 Stories",
+            "300": "3 Stories",
+            "325": "3.25 Stories",
+            "350": "3.5 Stories",
+            "375": "3.75 Stories",
+            "400": "4 Stories",
+            "425": "4.25 Stories",
+            "450": "4.5 Stories",
+            "475": "4.75 Stories",
+            "500": "5 Stories",
+            "525": "5.25 Stories",
+            "550": "5.5 Stories",
+            "575": "5.75 Stories",
+            "600": "6 Stories",
+            "650": "6.5 Stories",
+            "700": "7 Stories",
+            "750": "7.5 Stories",
+            "800": "8 Stories",
+            "850": "8.5 Stories",
+            "900": "9 Stories",
+            "950": "9.5 Stories",
+            "1000": "10 Stories",
+            "1100": "11 Stories",
+            "1200": "12 Stories",
+            "1300": "13 Stories",
+            "1400": "14 Stories",
+            "1500": "15 Stories",
+            "1600": "16 Stories",
+            "1700": "17 Stories",
+            "1800": "18 Stories",
+            "1900": "19 Stories",
+            "2000": "20 Stories",
+            "2100": "21 Stories",
+            "2200": "22 Stories",
+            "2300": "23 Stories",
+            "2400": "24 Stories",
+            "2500": "25 Stories",
+            "2600": "26 Stories",
+            "2700": "27 Stories",
+            "2800": "28 Stories",
+            "2900": "29 Stories",
+            "3000": "30 Stories",
+            "3100": "31 Stories",
+            "3200": "32 Stories",
+            "3300": "33 Stories",
+            "3400": "34 Stories",
+            "3500": "35 Stories",
+            "3600": "36 Stories",
+            "3700": "37 Stories",
+            "3800": "38 Stories",
+            "3900": "39 Stories",
+            "4000": "40 Stories",
+            "4100": "41 Stories",
+            "4200": "42 Stories",
+            "4300": "43 Stories",
+            "4400": "44 Stories",
+            "4500": "45 Stories",
+            "4600": "46 Stories",
+            "4700": "47 Stories",
+            "4800": "48 Stories",
+            "4900": "49 Stories",
+            "5000": "50 Stories",
+            "5100": "51 Stories",
+            "5200": "52 Stories",
+            "5300": "53 Stories",
+            "5400": "54 Stories",
+            "5500": "55 Stories",
+            "5600": "56 Stories",
+            "5700": "57 Stories",
+            "5800": "58 Stories",
+            "5900": "59 Stories",
+            "6000": "60 Stories",
+            "6100": "61 Stories",
+            "6200": "62 Stories",
+            "6300": "63 Stories",
+            "6400": "64 Stories",
+            "6500": "65 Stories",
+            "6600": "66 Stories",
+            "6700": "67 Stories",
+            "6800": "68 Stories",
+            "6900": "69 Stories",
+            "7000": "70 Stories",
+            "7100": "71 Stories",
+            "7200": "72 Stories",
+            "7300": "73 Stories",
+            "7400": "74 Stories",
+            "7500": "75 Stories",
+            "7600": "76 Stories",
+            "7700": "77 Stories",
+            "7800": "78 Stories",
+            "7900": "79 Stories",
+            "8000": "80 Stories",
+            "8100": "81 Stories",
+            "8200": "82 Stories",
+            "8300": "83 Stories",
+            "8400": "84 Stories",
+            "8500": "85 Stories",
+            "8700": "87 Stories",
+            "8800": "88 Stories",
+            "8900": "89 Stories",
+            "9000": "90 Stories",
+            "9100": "91 Stories",
+            "9200": "92 Stories",
+            "9300": "93 Stories",
+            "9400": "94 Stories",
+            "9500": "95 Stories",
+            "9600": "96 Stories",
+            "9700": "97 Stories",
+            "9800": "98 Stories",
+            "9900": "99 Stories",
+            "10000": "100 Stories",
+            "10400": "104 Stories",
+            "10500": "105 Stories",
+            "11200": "112 Stories",
+            "11400": "114 Stories",
+            "11900": "119 Stories",
+            "12500": "125 Stories"
+        },
+        "roof_cover_code": {
+            "1": "Asbestos",
+            "2": "Built-up",
+            "3": "Composition Shingle",
+            "4": "Concrete",
+            "5": "Metal",
+            "6": "Slate",
+            "7": "Rock / Gravel",
+            "8": "Tar & Gravel",
+            "9": "Bermuda",
+            "10": "Masonite/ Cement Shake",
+            "11": "Fiberglass",
+            "12": "Aluminum",
+            "13": "Wood Shake/ Shingles",
+            "14": "Other",
+            "15": "Asphalt",
+            "16": "Roll Composition",
+            "17": "Steel",
+            "18": "Tile",
+            "19": "Urethane",
+            "20": "Shingle (Not Wood)",
+            "21": "Wood",
+            "22": "Gypsum",
+            "23": "Ceramic tile",
+            "24": "Clay tile",
+            "25": "Concrete tile",
+            "26": "Copper",
+            "27": "Tin",
+            "28": "Solar"
+        },
+        "roof_type_code": {
+            "1": "Gable",
+            "2": "Bowstring Truss",
+            "3": "Re-inforced Concrete",
+            "4": "Dome",
+            "5": "Steel Frm/Truss",
+            "6": "Flat",
+            "7": "Gable or Hip",
+            "8": "Hip",
+            "9": "IRR/Cathedral",
+            "10": "Gambrel",
+            "11": "Mansard",
+            "12": "Prestress Concrete",
+            "13": "Rigid Frm Bar JT",
+            "14": "Shed",
+            "15": "Sawtooth",
+            "16": "Wood Truss"
+        },
+        "interior_walls_code": {
+            "1": "Brick",
+            "2": "Concrete",
+            "3": "Gypsum Board/Drywall/Sheetrock/Wallboard",
+            "4": "Log",
+            "5": "Cement Board",
+            "6": "Plaster",
+            "7": "Stone",
+            "8": "Metal",
+            "9": "Unfinished",
+            "10": "Wood",
+            "11": "Block",
+            "12": "Glass",
+            "13": "Finished/Painted",
+            "14": "Decorative/Custom",
+            "15": "Masonry",
+            "16": "Composition",
+            "17": "Other",
+            "18": "Paneling",
+            "19": "Vinyl",
+            "20": "Plywood/Minimum"
+        },
+        "construction_type_code": {
+            "1": "Adobe",
+            "2": "Brick",
+            "3": "Concrete",
+            "4": "Concrete Block",
+            "5": "Dome",
+            "6": "Frame",
+            "7": "Heavy",
+            "8": "Light",
+            "9": "Log",
+            "10": "Manufactured",
+            "11": "Other",
+            "12": "Masonry",
+            "13": "Metal",
+            "14": "Steel",
+            "15": "Stone",
+            "16": "Tilt-up (pre-cast concrete)",
+            "17": "Wood",
+            "18": "Mixed"
+        },
+        "floor_cover_code": {
+            "1": "Brick",
+            "2": "Concrete",
+            "3": "Covered",
+            "4": "Floating Floor/laminate",
+            "5": "Granite",
+            "6": "Linoleum",
+            "7": "Marble",
+            "8": "Stone",
+            "9": "Carpet",
+            "10": "Parquet",
+            "11": "Ceramic",
+            "12": "Slate",
+            "13": "Tile",
+            "14": "Vinyl",
+            "15": "Wood",
+            "16": "Combination",
+            "17": "Terrazzo",
+            "18": "Asbestos",
+            "19": "Dirt/Earth/Soil",
+            "20": "Cork",
+            "21": "Plywood",
+            "22": "Faux Wood Tile",
+            "23": "Softwood",
+            "24": "Hardwood"
+        },
+        "exterior_walls_code": {
+            "1": "Asbestos shingle",
+            "2": "Brick",
+            "3": "Brick veneer",
+            "4": "Block",
+            "5": "Composition/Composite",
+            "6": "Concrete",
+            "7": "Concrete Block",
+            "8": "Glass",
+            "9": "Log",
+            "10": "Metal",
+            "11": "Rock, Stone",
+            "12": "Stucco",
+            "13": "Tile",
+            "14": "Tilt-up (pre-cast concrete)",
+            "15": "Other",
+            "16": "Wood Shingle",
+            "17": "Wood",
+            "18": "Wood Siding",
+            "19": "Siding (Alum/Vinyl)",
+            "20": "Adobe",
+            "21": "Shingle (Not Wood)",
+            "22": "Marble",
+            "23": "Combination",
+            "24": "Masonry",
+            "25": "Siding Not (aluminum, vinyl, etc.)",
+            "26": "EIFS / Synthetic Stucco",
+            "27": "Fiber cement siding (Hardi-board/Hardi-plank)",
+            "28": "Aluminum siding",
+            "29": "Vinyl siding",
+            "30": "Concrete tile",
+            "31": "Clay tile",
+            "32": "Ceramic tile"
+        },
+        "building_condition_code": {
+            "1": "Excellent",
+            "2": "Fair",
+            "3": "Good",
+            "4": "Poor",
+            "5": "Unsound",
+            "6": "Average",
+            "7": "Very Good"
+        },
+        "geo_code_accuracy": {
+            "5": "Record was coded to the 5-digit ZIP code centroid(U.S.) or the first 3-digit Postal Code Level(Canada)",
+            "7": "Record was coded to the ZIP + 2 centroid",
+            "9": "Record was coded to the ZIP + n4 centroid(U.S.) or the full 6-digit Postal COde Level(Canada)",
+            "A": "Record was coded to interpolated rooftop level",
+            "B": "Record was coded to the rooftop level",
+            "X": "Record was not coded"
+        },
+        "basement_code": {
+            "1": "Daylight, Full",
+            "2": "Full Basement",
+            "3": "Improved Basement(Finished)",
+            "4": "Daylight, Partial",
+            "5": "No Basement",
+            "6": "Partial Basement",
+            "7": "Unfinished Basement",
+            "8": "Unspecified Basement",
+            "9": "Unspecified Basement",
+            "10": "Daylight/Walkout"
+        },
+        "style_code": {
+            "1": "Traditional",
+            "2": "A-Frame",
+            "3": "Bungalow",
+            "4": "Cape Cod",
+            "5": "Colonial",
+            "6": "English",
+            "7": "French Provincial",
+            "8": "Georgian",
+            "9": "High-rise",
+            "10": "Modern",
+            "11": "Ranch/Rambler",
+            "12": "Spanish",
+            "13": "Tudor",
+            "14": "Mediterranean",
+            "15": "Conventional",
+            "16": "Other",
+            "17": "Prefab, Modular",
+            "18": "Mansion",
+            "19": "Raised Ranch",
+            "20": "Dome",
+            "21": "Contemporary",
+            "22": "Unfinished/Under Construction",
+            "23": "Victorian",
+            "24": "Cottage",
+            "25": "Custom",
+            "26": "Log Cabin/Rustic",
+            "27": "Historical",
+            "28": "unknown",
+            "29": "CONDO",
+            "30": "Cluster",
+            "31": "Duplex",
+            "32": "Quadplex",
+            "33": "Mobile Home",
+            "34": "MultiFamily",
+            "35": "TownHouse",
+            "36": "Triplex",
+            "37": "Patio Home",
+            "38": "Row Home",
+            "39": "Tri-Level",
+            "40": "Bi-Level",
+            "41": "Split Level",
+            "42": "Split Foyer",
+            "43": "Tiny House",
+            "44": "European",
+            "45": "Mobile/Manufactured"
+        },
+        "air_condition_code": {
+            "1": "Central",
+            "2": "Evaporative Cooler",
+            "3": "Office Only",
+            "4": "Packaged Unit",
+            "5": "Window Unit",
+            "6": "None",
+            "7": "Other",
+            "8": "Partial",
+            "9": "Chilled Water",
+            "10": "Refrigeration",
+            "11": "Ventilation",
+            "12": "Wall",
+            "13": "Yes",
+            "14": "Geo-Thermal"
+        },
+        "heating_fuel_code": {
+            "1": "Coal",
+            "2": "Electric",
+            "3": "Gas",
+            "4": "Geo-Thermal",
+            "5": "None",
+            "6": "Oil",
+            "7": "Propane",
+            "8": "Solar",
+            "9": "Wood",
+            "10": "Butane"
+        },
+        "garage_code": {
+            "1": "Attached Garage",
+            "2": "Built-in",
+            "3": "Carport",
+            "4": "Detached Garage",
+            "5": "Pole",
+            "6": "Offsite",
+            "7": "Garage",
+            "8": "Unimproved",
+            "9": "Parking Lot",
+            "10": "Mixed",
+            "11": "None",
+            "12": "Open",
+            "13": "Paved/Surfaced",
+            "14": "Ramp",
+            "15": "Parking Structure",
+            "16": "Tuckunder",
+            "17": "Underground/Basement",
+            "18": "Covered",
+            "19": "Yes - Unspecified",
+            "20": "Heated",
+            "21": "Unfinished - Attached",
+            "22": "Unfinished - Detached",
+            "23": "Finished - Attached",
+            "24": "Finished - Detached",
+            "25": "Finished"
+        },
+        "heating_type": {
+            "1": "Baseboard",
+            "2": "Electric",
+            "3": "Central",
+            "4": "Forced air unit",
+            "5": "Oil",
+            "6": "Floor/Wall",
+            "7": "Gravity",
+            "8": "Heat Pump",
+            "9": "Geo-thermal",
+            "10": "Hot Water",
+            "11": "Gas",
+            "12": "Partial",
+            "13": "Radiant",
+            "14": "None",
+            "15": "Other",
+            "16": "Steam",
+            "17": "Coal",
+            "18": "Space/Suspended",
+            "19": "Convection",
+            "20": "Solar",
+            "21": "Vent",
+            "22": "Wood Burning",
+            "23": "Propane",
+            "24": "Yes",
+            "25": "Zone"
+        },
+        "other_rooms": {
+            "A": "Lanai",
+            "B": "Breakfast Nook",
+            "C": "Cellar",
+            "D": "Mud room",
+            "F": "Family Room/Den",
+            "G": "Game / Recreation room",
+            "H": "Hobby room",
+            "I": "Sitting Room",
+            "L": "Laundry Room",
+            "M": "Media room/Home theater",
+            "N": "Bonus Room",
+            "O": "Home Office",
+            "R": "Atrium",
+            "S": "Sun, Solarium, Florida room",
+            "T": "Great Room",
+            "U": "Study/Library",
+            "X": "Exercise/Home Gym",
+            "Y": "Utility Room"
+        },
+        "pool": {
+            "1": "Above ground pool",
+            "2": "Pool & Spa (both)",
+            "3": "Community Pool or Spa",
+            "4": "Enclosed",
+            "5": "Heated Pool",
+            "6": "Indoor Swimming Pool",
+            "7": "Solar Heated",
+            "8": "Pool (yes)",
+            "9": "Spa or Hot Tub (only)",
+            "10": "Vinyl In-ground Pool",
+            "11": "Pool, historical value",
+            "12": "In-Ground Pool"
+        },
+        "amenities": {
+            "1": "Arbor/Pergola",
+            "2": "Mobile Home Hookup",
+            "3": "Sauna/Steam Room",
+            "A": "Alarm System",
+            "B": "Boat Dock / Ramp",
+            "C": "Club House",
+            "D": "Wet Bar",
+            "E": "Intercom System",
+            "F": "Safe Room /Panic Room",
+            "G": "Golf Course/Green",
+            "H": "Audio Sound System",
+            "I": "Fire Sprinkler",
+            "J": "Boat Lift/Davits",
+            "K": "Outdoor Kitchen/Fireplace",
+            "L": "Storm or Tornado Shelter/Cellar",
+            "N": "Wine Cellar",
+            "O": "Basketball/Sport Court",
+            "P": "Treehouse/Playhouse",
+            "Q": "Handicap Ramp/Accessible",
+            "R": "RV parking",
+            "S": "Automatic Sprinkler System (lawn/irrigation)",
+            "T": "Tennis Court",
+            "U": "OVERHEAD DOOR",
+            "V": "Central Vacuum System",
+            "W": "Water Feature",
+            "X": "Storm/Security Shutters",
+            "Y": "Koi Pond",
+            "M": "Smoke/Carbon Monoxide Detector"
+        }
+    }
+    var user={
+        "name": "ncjsndc ncksjnc",
+        "email": "test0627@mailinator.com",
+        "phone": "9092039203",
+        "user_id": "512"
+    }
+    var property={
+        "status": "Sold",
+        "confidence_score": "5.5",
+        "rental_estimate": null,
+        "address": {
+            "property_id": "85691865",
+            "fips": "34017",
+            "apn": "04  00044-0000-00028-  02",
+            "street_number": "746",
+            "street_pre_direction": null,
+            "street_name": "HARRISON",
+            "street_suffix": "AVE",
+            "street_post_direction": null,
+            "unit_type": null,
+            "unit_number": null,
+            "full_address": "746 Harrison Ave Harrison NJ 07029",
+            "city": "HARRISON",
+            "state": "NJ",
+            "zip_code": "07029",
+            "zip_plus_four_code": "1909",
+            "latitude": "40.747871",
+            "longitude": "-74.148703",
+            "geocoding_accuracy": "-74.148703",
+            "census_tract": "013500",
+            "carrier_code": "C012"
+        },
+        "tax": [
+            {
+                "year": "2021",
+                "property_tax": 10652.01,
+                "land": "200000.0",
+                "additions": "274900.0",
+                "rate_code_area": null,
+                "assessed_value": "474900.0"
+            }
+        ],
+        "valuation": {
+            "assessed_value": "474900.0",
+            "appraisal": "594281.0355081952",
+            "list_price": "590000.0",
+            "date": "2021"
+        },
+        "structure": {
+            "year_built": "1960",
+            "effective_year_built": "1960",
+            "rooms_count": "0.0",
+            "beds_count": "6.0",
+            "baths": "2.0",
+            "partial_baths_count": "0.0",
+            "units_count": null,
+            "total_area_sq_ft": "1938.0",
+            "stories": "2 Stories",
+            "plumbing_fixtures": null,
+            "air_conditioning_type": null,
+            "amenities": null,
+            "architecture_type": null,
+            "basement_type": null,
+            "condition": null,
+            "construction_type": "Frame",
+            "exterior_features": null,
+            "exterior_wall_type": null,
+            "flooring_types": null,
+            "heating_type": "Gas",
+            "heating_fuel_type": null,
+            "interior_wall_type": null,
+            "other_rooms": null,
+            "parking_type": "Attached Garage",
+            "accessor_parking_type": null,
+            "listing_parking_type": "ATTACHED GARAGE",
+            "garage_type": null,
+            "parking_spaces_count": "0",
+            "pool_type": null,
+            "roof_material_type": null,
+            "roof_style_type": null,
+            "sewer_type": null,
+            "water_type": null
+        },
+        "sale_history": [],
+        "is_blocked": "YES"
+    }
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
     const [initialRate, setInitialRate] = useState(1)
     useEffect(() => {
@@ -33,27 +1047,10 @@ function ReportForm(props) {
        var x  = document.getElementById(id)
        x.value = value
     }
-    function setCMAProps(body) {
-        var cmaPayload = props.cmaPayload
-        var propertyList = props.propertyList
-        propertyList.push({
-            address: body.ADDRESS_1.data + body.ADDRESS_2.data + body.CITY.data + ' ' +body.STATE.data + ' ' + body.ZIP.data,
-            sqft: body.SQFT.data,
-            brba: body.NUM_BEDS.data + '/' + body.NUM_BATHS.data,
-            yrBuilt: body.YEAR_BUILT.data,
-            listPrice: body.LIST_PRICE.data,
-        })
-        
-        props.setPropertyList(...propertyList)
-        cmaPayload.report_data_list.push(body)
-        console.log('vx: giraffe', propertyList)
-        console.log('vx: giraffe2', cmaPayload)
-        props.setCmaPayload(cmaPayload)
-    }
     function populateFields() {
-        populateField("agent-name", props.user.name)
-        populateField("agent-email", props.user.email)
-        populateField("agent-phone", props.user.phone)
+        populateField("agent-name", user.name)
+        populateField("agent-email", user.email)
+        populateField("agent-phone", user.phone)
         populateField("year-built", getYearBuilt())
         populateField("county", getCounty())
         populateField("sqft", getSqft())
@@ -87,9 +1084,9 @@ function ReportForm(props) {
     function doCMAAction () {
         doUpdateHonelyEstimate()
         setTimeout(() => {
-            if (!props.inCMA) {
+            if (!inCMA) {
                 var pika = null
-                if (props.creditsFlag) {
+                if (creditsFlag) {
                     pika = {
                         creditAmount: 2
                     }
@@ -103,9 +1100,9 @@ function ReportForm(props) {
             }
                 doGenerateReport(false, true)
         }, 500)
-    //     if (!props.inCMA) {
+    //     if (!inCMA) {
     //     var pika = null
-    //     if (props.creditsFlag) {
+    //     if (creditsFlag) {
     //         pika = {
     //             creditAmount: 2
     //         }
@@ -133,7 +1130,6 @@ function ReportForm(props) {
       }
     function doGenerateReport (shareMode, cmaMode) {
         console.log('vx: doGenerateReport execution begins')
-        // console.log('vx: props.forCMA', props.forCMA)
         // constants
         const chartExportOptions = {
           width: '300',
@@ -197,7 +1193,7 @@ function ReportForm(props) {
           // console.log(customLogoData)
 
           // get property image
-          const propertyImg = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + props.property.address.latitude + '' + ',' + props.property.address.longitude + '+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko'
+          const propertyImg = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + property.address.latitude + '' + ',' + property.address.longitude + '+&fov=90&source=outdoor&key=AIzaSyClIFG-ONBwyXrn4_kaA4yMYHGpZD5EEko'
 
           // get all the inputs from user
           const agentName = document.getElementById('agent-name').value
@@ -207,7 +1203,7 @@ function ReportForm(props) {
           let shareEmails = null
         //   let shareMessage = document.getElementById('share-message').value
           let shareMessage = null
-          let appraisal = formatCurrency(props.property.valuation.appraisal)
+          let appraisal = formatCurrency(property.valuation.appraisal)
           const appraisalAfter = document.getElementById('report-honey-value-after').innerText
           let apn = getAPN()
           let address1 = getAddress1()
@@ -284,7 +1280,7 @@ function ReportForm(props) {
           if (yearBuilt === null || yearBuilt === '') {
             yearBuilt = ' '
           } else {
-            yearBuilt = yearBuilt?.toString()
+            yearBuilt = yearBuilt.toString()
           }
           if (parkingSpaces === '') {
             parkingSpaces = ' '
@@ -358,68 +1354,34 @@ function ReportForm(props) {
           // schools
           const schoolList = []
           // vx: todo: schools part...
-        //   if (props.schools) {
-        //     if (props.schools.length > 3) {
-        //       for (let i = 0; i < 3; i++) {
-        //         let rating = ''
-        //         if (props.schools[i].rating !== null) {
-        //           rating = props.schools[i].rating + '/10'
-        //         } else {
-        //           rating = 'N/R'
-        //         }
-        //         schoolList.push([rating, props.schools[i].name, props.schools[i].type, props.schools[i].level_short, props.schools[i].distance + props.schools[i].distanceText])
-        //       }
-        //     } else {
-        //       for (let i = 0; i < props.schools.length; i++) {
-        //         let rating = ''
-        //         if (props.schools[i].rating !== null) {
-        //           rating = props.schools[i].rating + '/10'
-        //         } else {
-        //           rating = 'N/R'
-        //         }
-        //         schoolList.push([rating, props.schools[i].name, props.schools[i].type, props.schools[i].level_short, props.schools[i].distance + props.schools[i].distanceText])
-        //       }
-        //     }
-        //   }
 
           // walkscore
           const walkscoreList = []
           // vx: todo: walkscore part...
-        //   if (props.walkscore) {
-        //     if (props.walkscore.walkscore) {
-        //       walkscoreList.push([props.walkscore.walkscore?.toString(), 'Walk Score', props.walkscore.description])
-        //     }
-        //     if (props.walkscore.bike) {
-        //       walkscoreList.push([props.walkscore.bike.score?.toString(), 'Bike Score', props.walkscore.bike.description])
-        //     }
-        //     if (props.walkscore.transit) {
-        //       walkscoreList.push([props.walkscore.transit.score?.toString(), 'Transit Score', props.walkscore.transit.description])
-        //     }
-        //   }
 
           // honely forecast
           const honelyForecast = []
-          if (props.forecast && props.forecast.property_forecast.percentage_change_forecasts && props.forecast.property_forecast.value_change_forecasts) {
+          if (forecast && forecast.property_forecast.percentage_change_forecasts && forecast.property_forecast.value_change_forecasts) {
             let change = ''
-            for (let i = 1; i < props.forecast.property_forecast.percentage_change_forecasts.length; i++) {
-              if (props.forecast.property_forecast.percentage_change_forecasts[i].change >= 0) {
-                change = '<span style="color: #07871c;">increase ' + props.forecast.property_forecast.percentage_change_forecasts[i].change + '%</span>'
+            for (let i = 1; i < forecast.property_forecast.percentage_change_forecasts.length; i++) {
+              if (forecast.property_forecast.percentage_change_forecasts[i].change >= 0) {
+                change = '<span style="color: #07871c;">increase ' + forecast.property_forecast.percentage_change_forecasts[i].change + '%</span>'
               } else {
-                change = '<span style="color: red;">decrease ' + props.forecast.property_forecast.percentage_change_forecasts[i].change + '%</span>'
+                change = '<span style="color: red;">decrease ' + forecast.property_forecast.percentage_change_forecasts[i].change + '%</span>'
               }
-              honelyForecast.push([timeFrame4lvls[i], change, formatCurrency(props.forecast.property_forecast.value_change_forecasts[i].change)])
+              honelyForecast.push([timeFrame4lvls[i], change, formatCurrency(forecast.property_forecast.value_change_forecasts[i].change)])
             }
           }
 
           // home value change zip
           const homeValueChangeZip = []
-          if (props.forecast && props.forecast.neighborhood.percentage_change_forecasts) {
+          if (forecast && forecast.neighborhood.percentage_change_forecasts) {
             let change = ''
-            for (let i = 1; i < props.forecast.neighborhood.percentage_change_forecasts.length; i++) {
-              if (props.forecast.neighborhood.percentage_change_forecasts[i].change >= 0) {
-                change = '<span style="color: #07871c;">increase ' + props.forecast.neighborhood.percentage_change_forecasts[i].change + '%</span>'
+            for (let i = 1; i < forecast.neighborhood.percentage_change_forecasts.length; i++) {
+              if (forecast.neighborhood.percentage_change_forecasts[i].change >= 0) {
+                change = '<span style="color: #07871c;">increase ' + forecast.neighborhood.percentage_change_forecasts[i].change + '%</span>'
               } else {
-                change = '<span style="color: red;">decrease ' + props.forecast.neighborhood.percentage_change_forecasts[i].change + '%</span>'
+                change = '<span style="color: red;">decrease ' + forecast.neighborhood.percentage_change_forecasts[i].change + '%</span>'
               }
               homeValueChangeZip.push([timeFrame3lvls[i], change])
             }
@@ -427,48 +1389,48 @@ function ReportForm(props) {
 
           // migration trends
           const migrationTrends = []
-          if (props.forecast && props.forecast.moving_trends && props.forecast.moving_trends.move_in_percentage_change_forecast && props.forecast.moving_trends.move_out_percentage_change_forecast && props.forecast.moving_trends.net_in && props.forecast.moving_trends.state_rankings && props.forecast.moving_trends.country_rankings) {
+          if (forecast && forecast.moving_trends && forecast.moving_trends.move_in_percentage_change_forecast && forecast.moving_trends.move_out_percentage_change_forecast && forecast.moving_trends.net_in && forecast.moving_trends.state_rankings && forecast.moving_trends.country_rankings) {
             let inRateChange = ''
             let outRateChange = ''
             let migrationChange = ''
 
-            for (let i = 0; i < props.forecast.moving_trends.move_in_percentage_change_forecast.length; i++) {
-              if (props.forecast.moving_trends.move_in_percentage_change_forecast[i].change >= 0) {
-                inRateChange = '<span style="color: #07871c;">' + props.forecast.moving_trends.move_in_percentage_change_forecast[i].change + '%</span>'
+            for (let i = 0; i < forecast.moving_trends.move_in_percentage_change_forecast.length; i++) {
+              if (forecast.moving_trends.move_in_percentage_change_forecast[i].change >= 0) {
+                inRateChange = '<span style="color: #07871c;">' + forecast.moving_trends.move_in_percentage_change_forecast[i].change + '%</span>'
               } else {
-                inRateChange = '<span style="color: red;">' + props.forecast.moving_trends.move_in_percentage_change_forecast[i].change + '%</span>'
+                inRateChange = '<span style="color: red;">' + forecast.moving_trends.move_in_percentage_change_forecast[i].change + '%</span>'
               }
-              if (props.forecast.moving_trends.move_out_percentage_change_forecast[i].change >= 0) {
-                outRateChange = '<span style="color: #07871c;">' + props.forecast.moving_trends.move_out_percentage_change_forecast[i].change + '%</span>'
+              if (forecast.moving_trends.move_out_percentage_change_forecast[i].change >= 0) {
+                outRateChange = '<span style="color: #07871c;">' + forecast.moving_trends.move_out_percentage_change_forecast[i].change + '%</span>'
               } else {
-                outRateChange = '<span style="color: red;">' + props.forecast.moving_trends.move_out_percentage_change_forecast[i].change + '%</span>'
+                outRateChange = '<span style="color: red;">' + forecast.moving_trends.move_out_percentage_change_forecast[i].change + '%</span>'
               }
-              if (props.forecast.moving_trends.net_in[i].change >= 0) {
-                migrationChange = '<span style="color: #07871c;">' + props.forecast.moving_trends.net_in[i].change + '%</span>'
+              if (forecast.moving_trends.net_in[i].change >= 0) {
+                migrationChange = '<span style="color: #07871c;">' + forecast.moving_trends.net_in[i].change + '%</span>'
               } else {
-                migrationChange = '<span style="color: red;">' + props.forecast.moving_trends.net_in[i].change + '%</span>'
+                migrationChange = '<span style="color: red;">' + forecast.moving_trends.net_in[i].change + '%</span>'
               }
-              migrationTrends.push([timeFrame4lvls[i], inRateChange, outRateChange, migrationChange, '#' + props.forecast.moving_trends.state_rankings[i].rank, '#' + props.forecast.moving_trends.country_rankings[i].rank])
+              migrationTrends.push([timeFrame4lvls[i], inRateChange, outRateChange, migrationChange, '#' + forecast.moving_trends.state_rankings[i].rank, '#' + forecast.moving_trends.country_rankings[i].rank])
             }
           }
 
           // comparsion to zip
           let propertyValueForecast = ''
-          if (props.forecast && props.forecast.property_forecast.property_valued_compared_to_zipcode) {
-            if (props.forecast.property_forecast.property_valued_compared_to_zipcode >= 0) {
-              propertyValueForecast = '<span style="color: #07871c;">' + props.forecast.property_forecast.property_valued_compared_to_zipcode + '% higher</span>'
+          if (forecast && forecast.property_forecast.property_valued_compared_to_zipcode) {
+            if (forecast.property_forecast.property_valued_compared_to_zipcode >= 0) {
+              propertyValueForecast = '<span style="color: #07871c;">' + forecast.property_forecast.property_valued_compared_to_zipcode + '% higher</span>'
             } else {
-              propertyValueForecast = '<span style="color: red;">' + props.forecast.property_forecast.property_valued_compared_to_zipcode + '% lower</span>'
+              propertyValueForecast = '<span style="color: red;">' + forecast.property_forecast.property_valued_compared_to_zipcode + '% lower</span>'
             }
           }
 
           // check property status, only show list price if active
-          // console.log(props.property)
+          // console.log(property)
           let listPrice = ' '
-          if (props.property && props.property.status && props.property.status !== null) {
-            if (props.property.status.toLowerCase() === 'active' || props.property.status.toLowerCase() === 'for sale') {
-              if (props.property.valuation.list_price && props.property.valuation.list_price !== null) {
-                listPrice = '<p style="font-size: 16px;">List Price: ' + formatCurrency(props.property.valuation.list_price) + '</p>'
+          if (property && property.status && property.status !== null) {
+            if (property.status.toLowerCase() === 'active' || property.status.toLowerCase() === 'for sale') {
+              if (property.valuation.list_price && property.valuation.list_price !== null) {
+                listPrice = '<p style="font-size: 16px;">List Price: ' + formatCurrency(property.valuation.list_price) + '</p>'
               }
             }
           }
@@ -482,211 +1444,14 @@ function ReportForm(props) {
             salePrice = ' '
           }
 
-          /* if (props.property.sale_history && props.property.sale_history.length > 0) {
-            saleDate = props.property.sale_history[0].date
-            salePrice = formatCurrency(props.property.sale_history[0].price)
+          /* if (property.sale_history && property.sale_history.length > 0) {
+            saleDate = property.sale_history[0].date
+            salePrice = formatCurrency(property.sale_history[0].price)
           } */
 
           // get rental trend data
           const rentalTrendss = []
-          // console.log(props.rentalTrends)
-
-        //   if (props.rentalTrends) {
-        //     // do zip codes
-        //     if (props.rentalTrends.zip) {
-        //       let medianRent = props.rentalTrends.zip.median_rent
-        //       let population = props.rentalTrends.zip.population
-        //       let cashFlow = props.rentalTrends.zip.cash_flow
-        //       let cagr1y = props.rentalTrends.zip.cagr1y
-        //       let cagr3y = props.rentalTrends.zip.cagr3y
-        //       let cagr5y = props.rentalTrends.zip.cagr5y
-
-        //       if (medianRent && medianRent != null) {
-        //         medianRent = formatCurrency(medianRent)
-        //       } else {
-        //         medianRent = 'N/A'
-        //       }
-        //       if (population && population != null) {
-        //         population = formatNumberWithComma(population)
-        //       } else {
-        //         population = 'N/A'
-        //       }
-        //       if (cashFlow && cashFlow != null) {
-        //         cashFlow = doReportTextColorCode(cashFlow, null, '%')
-        //       } else {
-        //         cashFlow = 'N/A'
-        //       }
-        //       if (cagr1y && cagr1y != null) {
-        //         cagr1y = doReportTextColorCode(cagr1y, null, '%')
-        //       } else {
-        //         cagr1y = 'N/A'
-        //       }
-        //       if (cagr3y && cagr3y != null) {
-        //         cagr3y = doReportTextColorCode(cagr3y, null, '%')
-        //       } else {
-        //         cagr3y = 'N/A'
-        //       }
-        //       if (cagr5y && cagr5y != null) {
-        //         cagr5y = doReportTextColorCode(cagr5y, null, '%')
-        //       } else {
-        //         cagr5y = 'N/A'
-        //       }
-
-        //       rentalTrendss.push(
-        //         [
-        //           'Zip Code',
-        //           medianRent,
-        //           population,
-        //           cashFlow,
-        //           cagr1y,
-        //           cagr3y,
-        //           cagr5y,
-        //         ],
-        //       )
-        //     } else {
-        //       rentalTrendss.push(
-        //         [
-        //           'Zip Code',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //         ],
-        //       )
-        //     }
-
-        //     // do state data
-        //     if (props.rentalTrends.state) {
-        //       let medianRent = props.rentalTrends.state.median_rent
-        //       let population = props.rentalTrends.state.population
-        //       let cashFlow = props.rentalTrends.state.cash_flow
-        //       let cagr1y = props.rentalTrends.state.cagr1y
-        //       let cagr3y = props.rentalTrends.state.cagr3y
-        //       let cagr5y = props.rentalTrends.state.cagr5y
-
-        //       if (medianRent && medianRent != null) {
-        //         medianRent = formatCurrency(medianRent)
-        //       } else {
-        //         medianRent = 'N/A'
-        //       }
-        //       if (population && population != null) {
-        //         population = formatNumberWithComma(population)
-        //       } else {
-        //         population = 'N/A'
-        //       }
-        //       if (cashFlow && cashFlow != null) {
-        //         cashFlow = doReportTextColorCode(cashFlow, null, '%')
-        //       } else {
-        //         cashFlow = 'N/A'
-        //       }
-        //       if (cagr1y && cagr1y != null) {
-        //         cagr1y = doReportTextColorCode(cagr1y, null, '%')
-        //       } else {
-        //         cagr1y = 'N/A'
-        //       }
-        //       if (cagr3y && cagr3y != null) {
-        //         cagr3y = doReportTextColorCode(cagr3y, null, '%')
-        //       } else {
-        //         cagr3y = 'N/A'
-        //       }
-        //       if (cagr5y && cagr5y != null) {
-        //         cagr5y = doReportTextColorCode(cagr5y, null, '%')
-        //       } else {
-        //         cagr5y = 'N/A'
-        //       }
-
-        //       rentalTrendss.push(
-        //         [
-        //           'State',
-        //           medianRent,
-        //           population,
-        //           cashFlow,
-        //           cagr1y,
-        //           cagr3y,
-        //           cagr5y,
-        //         ],
-        //       )
-        //     } else {
-        //       rentalTrendss.push(
-        //         [
-        //           'State',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //         ],
-        //       )
-        //     }
-
-        //     // do metro data
-        //     if (props.rentalTrends.metro) {
-        //       let medianRent = props.rentalTrends.metro.median_rent
-        //       let population = props.rentalTrends.metro.population
-        //       let cashFlow = props.rentalTrends.metro.cash_flow
-        //       let cagr1y = props.rentalTrends.metro.cagr1y
-        //       let cagr3y = props.rentalTrends.metro.cagr3y
-        //       let cagr5y = props.rentalTrends.metro.cagr5y
-
-        //       if (medianRent && medianRent != null) {
-        //         medianRent = formatCurrency(medianRent)
-        //       } else {
-        //         medianRent = 'N/A'
-        //       }
-        //       if (population && population != null) {
-        //         population = formatNumberWithComma(population)
-        //       } else {
-        //         population = 'N/A'
-        //       }
-        //       if (cashFlow && cashFlow != null) {
-        //         cashFlow = doReportTextColorCode(cashFlow, null, '%')
-        //       } else {
-        //         cashFlow = 'N/A'
-        //       }
-        //       if (cagr1y && cagr1y != null) {
-        //         cagr1y = doReportTextColorCode(cagr1y, null, '%')
-        //       } else {
-        //         cagr1y = 'N/A'
-        //       }
-        //       if (cagr3y && cagr3y != null) {
-        //         cagr3y = doReportTextColorCode(cagr3y, null, '%')
-        //       } else {
-        //         cagr3y = 'N/A'
-        //       }
-        //       if (cagr5y && cagr5y != null) {
-        //         cagr5y = doReportTextColorCode(cagr5y, null, '%')
-        //       } else {
-        //         cagr5y = 'N/A'
-        //       }
-
-        //       rentalTrendss.push(
-        //         [
-        //           'Metro',
-        //           medianRent,
-        //           population,
-        //           cashFlow,
-        //           cagr1y,
-        //           cagr3y,
-        //           cagr5y,
-        //         ],
-        //       )
-        //     } else {
-        //       rentalTrendss.push(
-        //         [
-        //           'Metro',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //           'N/A',
-        //         ],
-        //       )
-        //     }
-        //   } else {
+        
             rentalTrendss.push(
               [
                 'Zip Code',
@@ -727,8 +1492,8 @@ function ReportForm(props) {
           const templateProd = 'template_honely_basic.html'
 
           const body = {
-            user_id: props.user.user_id,
-            // property_id: props.forecast.property_forecast.property_id,
+            user_id: user.user_id,
+            // property_id: forecast.property_forecast.property_id,
             template: templateProd,
             DATE: {
               type: 'text',
@@ -736,7 +1501,7 @@ function ReportForm(props) {
             },
             PROPERTY_URL: {
               type: 'text',
-              data: 'https://www.honely.com/forecast/' + props.property.address.property_id,
+              data: 'https://www.honely.com/forecast/' + property.address.property_id,
             },
             IMG_LOCATION: {
               type: 'image',
@@ -828,23 +1593,23 @@ function ReportForm(props) {
             },
             LAND: {
               type: 'text',
-              data: formatCurrency(props.property.tax[0].land),
+              data: formatCurrency(property.tax[0].land),
             },
             ADDITIONS: {
               type: 'text',
-              data: formatCurrency(props.property.tax[0].additions),
+              data: formatCurrency(property.tax[0].additions),
             },
             ASSESSED_VALUE: {
               type: 'text',
-              data: formatCurrency(props.property.tax[0].assessed_value),
+              data: formatCurrency(property.tax[0].assessed_value),
             },
             TAX_YEAR: {
               type: 'text',
-              data: props.property.tax[0].year?.toString(),
+              data: property.tax[0].year.toString(),
             },
             PROPERTY_TAX: {
               type: 'text',
-              data: formatCurrency(props.property.tax[0].property_tax),
+              data: formatCurrency(property.tax[0].property_tax),
             },
             NUM_PART_BATHS: {
               type: 'text',
@@ -972,75 +1737,75 @@ function ReportForm(props) {
             },
             STATE_RANKING_TOTAL: {
               type: 'text',
-              data: props.forecast.moving_trends.total_state_rank,
+              data: forecast.moving_trends.total_state_rank,
             },
             NATIONAL_RANKING_TOTAL: {
               type: 'text',
-              data: props.forecast.moving_trends.total_country_rank,
+              data: forecast.moving_trends.total_country_rank,
             },
             MONTH3_ZIP_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_state_ranking_forecasts[1].change,
+              data: forecast.neighborhood.zipcode_growth_state_ranking_forecasts[1].change,
             },
             MONTH3_ZIP_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_national_ranking_forecasts[1].change,
+              data: forecast.neighborhood.zipcode_growth_national_ranking_forecasts[1].change,
             },
             MONTH3_VALUE_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_state_ranking_forecasts[1].change,
+              data: forecast.neighborhood.avg_value_state_ranking_forecasts[1].change,
             },
             MONTH3_VALUE_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_national_ranking_forecasts[1].change,
+              data: forecast.neighborhood.avg_value_national_ranking_forecasts[1].change,
             },
             YEAR1_ZIP_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_state_ranking_forecasts[2].change,
+              data: forecast.neighborhood.zipcode_growth_state_ranking_forecasts[2].change,
             },
             YEAR1_ZIP_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_national_ranking_forecasts[2].change,
+              data: forecast.neighborhood.zipcode_growth_national_ranking_forecasts[2].change,
             },
             YEAR1_VALUE_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_state_ranking_forecasts[2].change,
+              data: forecast.neighborhood.avg_value_state_ranking_forecasts[2].change,
             },
             YEAR1_VALUE_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_national_ranking_forecasts[2].change,
+              data: forecast.neighborhood.avg_value_national_ranking_forecasts[2].change,
             },
             YEAR2_ZIP_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_state_ranking_forecasts[3].change,
+              data: forecast.neighborhood.zipcode_growth_state_ranking_forecasts[3].change,
             },
             YEAR2_ZIP_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_national_ranking_forecasts[3].change,
+              data: forecast.neighborhood.zipcode_growth_national_ranking_forecasts[3].change,
             },
             YEAR2_VALUE_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_state_ranking_forecasts[3].change,
+              data: forecast.neighborhood.avg_value_state_ranking_forecasts[3].change,
             },
             YEAR2_VALUE_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_national_ranking_forecasts[3].change,
+              data: forecast.neighborhood.avg_value_national_ranking_forecasts[3].change,
             },
             YEAR3_ZIP_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_state_ranking_forecasts[4].change,
+              data: forecast.neighborhood.zipcode_growth_state_ranking_forecasts[4].change,
             },
             YEAR3_ZIP_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.zipcode_growth_national_ranking_forecasts[4].change,
+              data: forecast.neighborhood.zipcode_growth_national_ranking_forecasts[4].change,
             },
             YEAR3_VALUE_STATE_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_state_ranking_forecasts[4].change,
+              data: forecast.neighborhood.avg_value_state_ranking_forecasts[4].change,
             },
             YEAR3_VALUE_NATIONAL_RANK: {
               type: 'text',
-              data: props.forecast.neighborhood.avg_value_national_ranking_forecasts[4].change,
+              data: forecast.neighborhood.avg_value_national_ranking_forecasts[4].change,
             },
             CHART_3MONTH: {
               type: 'text',
@@ -1072,11 +1837,11 @@ function ReportForm(props) {
             },
             MIGRATION_STATE_RANK: {
               type: 'text',
-              data: props.forecast.moving_trends.total_state_rank,
+              data: forecast.moving_trends.total_state_rank,
             },
             MIGRATION_COUNTRY_RANK: {
               type: 'text',
-              data: props.forecast.moving_trends.total_country_rank,
+              data: forecast.moving_trends.total_country_rank,
             },
             MIGRATION_TRENDS: {
               type: 'array',
@@ -1135,13 +1900,13 @@ function ReportForm(props) {
             } else {
                 var pika = {array : []}
                 var pika2 = {array : []}
-                if (!props.inCMA) {
+                if (!inCMA) {
                     // vx: generate cma button from reportintro page
                     window.sessionStorage.removeItem('CMA')
                     window.sessionStorage.removeItem('CMASubjectPropertyId')
                     pika.array.push(body)
                     window.sessionStorage.setItem('CMA', JSON.stringify(pika))
-                    pika2.array.push(props.forecast.property_forecast.property_id)
+                    pika2.array.push(forecast.property_forecast.property_id)
                     window.sessionStorage.setItem('CMASubjectPropertyId',  JSON.stringify(pika2))
                     // vx: todo: redirect to cma page
                     window.location.href = '/cma'
@@ -1155,18 +1920,18 @@ function ReportForm(props) {
                     pika.array.push(body)
                     window.sessionStorage.setItem('CMA', JSON.stringify(pika))
                     var pika2 = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId'))
-                    pika2.array.push(props.forecast.property_forecast.property_id)
+                    pika2.array.push(forecast.property_forecast.property_id)
                     window.sessionStorage.setItem('CMASubjectPropertyId', JSON.stringify(pika2))
                     // removeReportForm()
                     window.location.reload()
                 }
-                // if (!props.inCMA) {
+                // if (!inCMA) {
                 //     var pika = {}
                 //     pika['0'] = body
                 //     window.sessionStorage.setItem('CMA', JSON.stringify(pika))
                 // } else {
                 //     var pika = JSON.parse(window.sessionStorage.getItem('CMA'))
-                //     pika[Object.keys(pika).length?.toString()] = body
+                //     pika[Object.keys(pika).length.toString()] = body
                 //     window.sessionStorage.setItem('CMA', JSON.stringify(pika))
                 //     window.location.reload()
                 // }
@@ -1211,7 +1976,7 @@ function ReportForm(props) {
                 }
               }
             var payload = null
-            if (props.creditsFlag) {
+            if (creditsFlag) {
                 payload = {
                     'credit-amount': 1
                 }
@@ -1222,8 +1987,6 @@ function ReportForm(props) {
             }
             axios.post('https://developers.honely.com/user/buy-report', payload, config)
             .then(() => {
-                // console.log('vx: props.updateAuthState()', props.updateAuthState)
-                // props.updateAuthState()
                 window.sessionStorage.removeItem('PaymentPopup')
                 window.location.reload()
             })
@@ -1238,20 +2001,20 @@ function ReportForm(props) {
       function doInitialEstimate () {
         // TO DO WHEN API is ready
         // get all the inputs from user
-        // console.log(props.property)
-        if (props.property) {
-          const propertyId = props.property.address.property_id
-          const fips = props.property.address.fips
-          let zip = props.property.address.zip_code
-          let yearBuilt = props.property.structure.year_built
-          let stories = props.property.structure.stories
-          let sqft = props.property.structure.total_area_sq_ft
-          let numBeds = props.property.structure.beds_count
-          let numBaths = props.property.structure.baths
-          let numPartialBaths = props.property.structure.partial_baths_count
-          let roomCount = props.property.structure.rooms_count
-          let parkingSpaces = props.property.structure.parking_spaces_count
-          let plumbingCount = props.property.structure.plumbing_fixtures
+        // console.log(property)
+        if (property) {
+          const propertyId = property.address.property_id
+          const fips = property.address.fips
+          let zip = property.address.zip_code
+          let yearBuilt = property.structure.year_built
+          let stories = property.structure.stories
+          let sqft = property.structure.total_area_sq_ft
+          let numBeds = property.structure.beds_count
+          let numBaths = property.structure.baths
+          let numPartialBaths = property.structure.partial_baths_count
+          let roomCount = property.structure.rooms_count
+          let parkingSpaces = property.structure.parking_spaces_count
+          let plumbingCount = property.structure.plumbing_fixtures
 
           // check numerical inputs
           if (!validateNumericalInput(sqft)) {
@@ -1281,7 +2044,7 @@ function ReportForm(props) {
             zip = null
           }
           if (yearBuilt !== null || yearBuilt !== '') {
-            yearBuilt = yearBuilt?.toString()
+            yearBuilt = yearBuilt.toString()
           }
           if (stories == null) {
             stories = 0
@@ -1355,16 +2118,16 @@ function ReportForm(props) {
       function doGetForecastResult (data) {
         if (data) {
           // console.log('inital: ' + this.initialRate)
-          console.log('vx: props.forecast.property_forecast.appraisal', props.forecast.property_forecast.appraisal)
+          console.log('vx: forecast.property_forecast.appraisal', forecast.property_forecast.appraisal)
           console.log('vx: data.current_value', data.current_value)
           console.log('vx: initialRate', initialRate)
-          if (props.forecast.property_forecast.appraisal && data.current_value) {
+          if (forecast.property_forecast.appraisal && data.current_value) {
             if (parseFloat(data.current_value) !== parseFloat(initialRate)) {
-                console.log('vx: psyduck4', parseFloat(props.forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate)))
-              return parseFloat(props.forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate))
+                console.log('vx: psyduck4', parseFloat(forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate)))
+              return parseFloat(forecast.property_forecast.appraisal) * (parseFloat(data.current_value) / parseFloat(initialRate))
             } else {
-                console.log('vx: psyduck3', props.forecast.property_forecast.appraisal)
-              return parseFloat(props.forecast.property_forecast.appraisal)
+                console.log('vx: psyduck3', forecast.property_forecast.appraisal)
+              return parseFloat(forecast.property_forecast.appraisal)
             }
           } else {
             console.log('vx: psyduck1')
@@ -1423,14 +2186,14 @@ function ReportForm(props) {
     function doUpdateHonelyEstimate () {
         // TO DO WHEN API is ready
         // get all the inputs from user
-        // console.log(props.property)
-        if (props.property) {
-          const propertyId = props.property.address.property_id
-          const fips = props.property.address.fips
-          let zip = props.property.address.zip_code
-          let yearBuilt = props.property.structure.year_built
+        // console.log(property)
+        if (property) {
+          const propertyId = property.address.property_id
+          const fips = property.address.fips
+          let zip = property.address.zip_code
+          let yearBuilt = property.structure.year_built
           // let stories = document.getElementById('stories').value
-          let stories = props.property.structure.stories
+          let stories = property.structure.stories
           const sqft = document.getElementById('sqft').value
           const numBeds = document.getElementById('num-beds').value
           const numBaths = document.getElementById('num-baths').value
@@ -1479,7 +2242,7 @@ function ReportForm(props) {
             zip = null
           }
           if (yearBuilt !== null || yearBuilt !== '') {
-            yearBuilt = yearBuilt?.toString()
+            yearBuilt = yearBuilt.toString()
           }
           if (stories === '--') {
             stories = 0
@@ -1691,7 +2454,7 @@ function ReportForm(props) {
             },
           },
           xaxis: {
-            categories: [props.forecast.zipcode, 'Surrounding 10 zip codes', 'State'],
+            categories: [forecast.zipcode, 'Surrounding 10 zip codes', 'State'],
             labels: {
               show: false,
             },
@@ -1719,78 +2482,23 @@ function ReportForm(props) {
         }
       }
     function chartMedianRent () {
-        if (validaterentalTrendsValues()) {
-          return [{
-            name: 'Median Rent',
-            data: [
-              props.rentalTrends.zip.median_rent,
-              props.rentalTrends.state.median_rent,
-              props.rentalTrends.metro.median_rent,
-            ],
-          }]
-        } else {
-          return [{
+        return [{
             name: 'Median Rent',
             data: [],
           }]
-        }
       }
     function chartCashFlow () {
-        if (validaterentalTrendsValues()) {
-          return [{
-            name: 'Cash Flow',
-            data: [
-              props.rentalTrends.zip.cash_flow,
-              props.rentalTrends.state.cash_flow,
-              props.rentalTrends.metro.cash_flow,
-            ],
-          }]
-        } else {
-          return [{
+        return [{
             name: 'Cash Flow',
             data: [],
           }]
-        }
       }
     function hideLoder () {
         document.getElementById('report-loader').classList.remove('active')
       }
-    function validaterentalTrendsValues () {
-        // console.log(props.rentalTrends)
-        if (props.rentalTrends) {
-          if (props.rentalTrends.zip && props.rentalTrends.state && props.rentalTrends.metro) {
-            if (props.rentalTrends.zip.cagr1y && props.rentalTrends.zip.cagr3y && props.rentalTrends.zip.cagr5y && props.rentalTrends.zip.median_rent && props.rentalTrends.zip.cash_flow &&
-              props.rentalTrends.state.cagr1y && props.rentalTrends.state.cagr3y && props.rentalTrends.state.cagr5y && props.rentalTrends.state.median_rent && props.rentalTrends.state.cash_flow &&
-              props.rentalTrends.metro.cagr1y && props.rentalTrends.metro.cagr3y && props.rentalTrends.metro.cagr5y && props.rentalTrends.metro.median_rent && props.rentalTrends.metro.cash_flow) {
-              return true
-            } else {
-              return false
-            }
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
-      }
+
     function chartRentalGrowth () {
-        if (validaterentalTrendsValues()) {
-          return [
-            {
-              name: 'Zip',
-              data: [props.rentalTrends.zip.cagr1y, props.rentalTrends.zip.cagr3y, props.rentalTrends.zip.cagr5y],
-            },
-            {
-              name: 'State',
-              data: [props.rentalTrends.state.cagr1y, props.rentalTrends.state.cagr3y, props.rentalTrends.state.cagr5y],
-            },
-            {
-              name: 'Metro',
-              data: [props.rentalTrends.metro.cagr1y, props.rentalTrends.metro.cagr3y, props.rentalTrends.metro.cagr5y],
-            },
-          ]
-        } else {
-          return [
+        return [
             {
               name: 'Zip',
               data: [],
@@ -1804,26 +2512,25 @@ function ReportForm(props) {
               data: [],
             },
           ]
-        }
       }
     function chart3month () {
-        console.log('vx: chart3month run, props.forecast', props.forecast)
-        if (props.forecast) {
-          if (props.forecast.neighborhood.percentage_change_forecasts && props.forecast.surrounding_zipcode.percentage_change_forecasts && props.forecast.state_statistics.percentage_change_forecasts) {
+        console.log('vx: chart3month run, forecast', forecast)
+        if (forecast) {
+          if (forecast.neighborhood.percentage_change_forecasts && forecast.surrounding_zipcode.percentage_change_forecasts && forecast.state_statistics.percentage_change_forecasts) {
               console.log('vx: 111111', [{
                 name: 'Percent Change',
                 data: [
-                  props.forecast.neighborhood.percentage_change_forecasts[1].change,
-                  props.forecast.surrounding_zipcode.percentage_change_forecasts[1].change,
-                  props.forecast.state_statistics.percentage_change_forecasts[1].change,
+                  forecast.neighborhood.percentage_change_forecasts[1].change,
+                  forecast.surrounding_zipcode.percentage_change_forecasts[1].change,
+                  forecast.state_statistics.percentage_change_forecasts[1].change,
                 ],
               }])
             return [{
               name: 'Percent Change',
               data: [
-                props.forecast.neighborhood.percentage_change_forecasts[1].change,
-                props.forecast.surrounding_zipcode.percentage_change_forecasts[1].change,
-                props.forecast.state_statistics.percentage_change_forecasts[1].change,
+                forecast.neighborhood.percentage_change_forecasts[1].change,
+                forecast.surrounding_zipcode.percentage_change_forecasts[1].change,
+                forecast.state_statistics.percentage_change_forecasts[1].change,
               ],
             }]
           } else {
@@ -1842,14 +2549,14 @@ function ReportForm(props) {
         }
       }
     function chart1year () {
-        if (props.forecast) {
-          if (props.forecast.neighborhood.percentage_change_forecasts && props.forecast.surrounding_zipcode.percentage_change_forecasts && props.forecast.state_statistics.percentage_change_forecasts) {
+        if (forecast) {
+          if (forecast.neighborhood.percentage_change_forecasts && forecast.surrounding_zipcode.percentage_change_forecasts && forecast.state_statistics.percentage_change_forecasts) {
             return [{
               name: 'Percent Change',
               data: [
-                props.forecast.neighborhood.percentage_change_forecasts[2].change,
-                props.forecast.surrounding_zipcode.percentage_change_forecasts[2].change,
-                props.forecast.state_statistics.percentage_change_forecasts[2].change,
+                forecast.neighborhood.percentage_change_forecasts[2].change,
+                forecast.surrounding_zipcode.percentage_change_forecasts[2].change,
+                forecast.state_statistics.percentage_change_forecasts[2].change,
               ],
             }]
           } else {
@@ -1866,14 +2573,14 @@ function ReportForm(props) {
         }
       }
     function chart2years () {
-        if (props.forecast) {
-          if (props.forecast.neighborhood.percentage_change_forecasts && props.forecast.surrounding_zipcode.percentage_change_forecasts && props.forecast.state_statistics.percentage_change_forecasts) {
+        if (forecast) {
+          if (forecast.neighborhood.percentage_change_forecasts && forecast.surrounding_zipcode.percentage_change_forecasts && forecast.state_statistics.percentage_change_forecasts) {
             return [{
               name: 'Percent Change',
               data: [
-                props.forecast.neighborhood.percentage_change_forecasts[3].change,
-                props.forecast.surrounding_zipcode.percentage_change_forecasts[3].change,
-                props.forecast.state_statistics.percentage_change_forecasts[3].change,
+                forecast.neighborhood.percentage_change_forecasts[3].change,
+                forecast.surrounding_zipcode.percentage_change_forecasts[3].change,
+                forecast.state_statistics.percentage_change_forecasts[3].change,
               ],
             }]
           } else {
@@ -1890,14 +2597,14 @@ function ReportForm(props) {
         }
       }
     function chart3years () {
-        if (props.forecast) {
-          if (props.forecast.neighborhood.percentage_change_forecasts && props.forecast.surrounding_zipcode.percentage_change_forecasts && props.forecast.state_statistics.percentage_change_forecasts) {
+        if (forecast) {
+          if (forecast.neighborhood.percentage_change_forecasts && forecast.surrounding_zipcode.percentage_change_forecasts && forecast.state_statistics.percentage_change_forecasts) {
             return [{
               name: 'Percent Change',
               data: [
-                props.forecast.neighborhood.percentage_change_forecasts[3].change,
-                props.forecast.surrounding_zipcode.percentage_change_forecasts[3].change,
-                props.forecast.state_statistics.percentage_change_forecasts[3].change,
+                forecast.neighborhood.percentage_change_forecasts[3].change,
+                forecast.surrounding_zipcode.percentage_change_forecasts[3].change,
+                forecast.state_statistics.percentage_change_forecasts[3].change,
               ],
             }]
           } else {
@@ -1914,18 +2621,18 @@ function ReportForm(props) {
         }
       }
     function GetHonelyAppraisal () {
-        // console.log(props.property)
-        if (props.property && props.property.valuation.appraisal) {
-          return formatCurrency(props.property.valuation.appraisal)
+        // console.log(property)
+        if (property && property.valuation.appraisal) {
+          return formatCurrency(property.valuation.appraisal)
         } else {
           return '--'
         }
       }
     function getMostRecentSaleDate () {
-        if (props.property && props.property.sale_history) {
-          if (props.property.sale_history != null && props.property.sale_history.length > 0) {
-            if (props.property.sale_history[0].date && props.property.sale_history[0].date != null) {
-              return props.property.sale_history[0].date
+        if (property && property.sale_history) {
+          if (property.sale_history != null && property.sale_history.length > 0) {
+            if (property.sale_history[0].date && property.sale_history[0].date != null) {
+              return property.sale_history[0].date
             } else {
               return ''
             }
@@ -1937,10 +2644,10 @@ function ReportForm(props) {
         }
       }
     function getMostRecentSalePrice () {
-        if (props.property && props.property.sale_history) {
-          if (props.property.sale_history != null && props.property.sale_history.length > 0) {
-            if (props.property.sale_history[0].price && props.property.sale_history[0].price != null) {
-              return props.property.sale_history[0].price
+        if (property && property.sale_history) {
+          if (property.sale_history != null && property.sale_history.length > 0) {
+            if (property.sale_history[0].price && property.sale_history[0].price != null) {
+              return property.sale_history[0].price
             } else {
               return ''
             }
@@ -1952,9 +2659,9 @@ function ReportForm(props) {
         }
       }
     function getParkingType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.parking_type && props.property.structure.parking_type !== null) {
-            return props.property.structure.parking_type
+        if (property && property.structure) {
+          if (property.structure.parking_type && property.structure.parking_type !== null) {
+            return property.structure.parking_type
           } else {
             return ''
           }
@@ -1963,13 +2670,13 @@ function ReportForm(props) {
         }
       }
     function getAirConditionCodes () {
-        if (props.optionLists && props.optionLists.air_condition_code) {
+        if (optionLists && optionLists.air_condition_code) {
           const options = []
-          for (const key in props.optionLists.air_condition_code) {
+          for (const key in optionLists.air_condition_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.air_condition_code[key],
+                name: optionLists.air_condition_code[key],
               },
             )
           }
@@ -1979,9 +2686,9 @@ function ReportForm(props) {
         }
       }
     function getACType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.air_conditioning_type && props.property.structure.air_conditioning_type !== null) {
-            return props.property.structure.air_conditioning_type
+        if (property && property.structure) {
+          if (property.structure.air_conditioning_type && property.structure.air_conditioning_type !== null) {
+            return property.structure.air_conditioning_type
           } else {
             return '--'
           }
@@ -2010,13 +2717,13 @@ function ReportForm(props) {
         )
     }
     function getBuildingConditionCodes () {
-        if (props.optionLists && props.optionLists.building_condition_code) {
+        if (optionLists && optionLists.building_condition_code) {
           const options = []
-          for (const key in props.optionLists.building_condition_code) {
+          for (const key in optionLists.building_condition_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.building_condition_code[key],
+                name: optionLists.building_condition_code[key],
               },
             )
           }
@@ -2026,9 +2733,9 @@ function ReportForm(props) {
         }
       }
     function getCondition () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.condition && props.property.structure.condition !== null) {
-            return props.property.structure.condition
+        if (property && property.structure) {
+          if (property.structure.condition && property.structure.condition !== null) {
+            return property.structure.condition
           } else {
             return '--'
           }
@@ -2057,13 +2764,13 @@ function ReportForm(props) {
         )
     }
     function getStyleCodes () {
-        if (props.optionLists && props.optionLists.style_code) {
+        if (optionLists && optionLists.style_code) {
           const options = []
-          for (const key in props.optionLists.style_code) {
+          for (const key in optionLists.style_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.style_code[key],
+                name: optionLists.style_code[key],
               },
             )
           }
@@ -2073,9 +2780,9 @@ function ReportForm(props) {
         }
       }
     function getArchitecture () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.architecture_type && props.property.structure.architecture_type !== null) {
-            return props.property.structure.architecture_type
+        if (property && property.structure) {
+          if (property.structure.architecture_type && property.structure.architecture_type !== null) {
+            return property.structure.architecture_type
           } else {
             return '--'
           }
@@ -2104,13 +2811,13 @@ function ReportForm(props) {
         )
     }
     function getConstructionTypeCodes () {
-        if (props.optionLists && props.optionLists.construction_type_code) {
+        if (optionLists && optionLists.construction_type_code) {
           const options = []
-          for (const key in props.optionLists.construction_type_code) {
+          for (const key in optionLists.construction_type_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.construction_type_code[key],
+                name: optionLists.construction_type_code[key],
               },
             )
           }
@@ -2120,9 +2827,9 @@ function ReportForm(props) {
         }
       }
     function getConstructionType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.construction_type && props.property.structure.construction_type !== null) {
-            return props.property.structure.construction_type
+        if (property && property.structure) {
+          if (property.structure.construction_type && property.structure.construction_type !== null) {
+            return property.structure.construction_type
           } else {
             return '--'
           }
@@ -2151,13 +2858,13 @@ function ReportForm(props) {
         )
     }
     function getBasementCodes () {
-        if (props.optionLists && props.optionLists.basement_code) {
+        if (optionLists && optionLists.basement_code) {
           const options = []
-          for (const key in props.optionLists.basement_code) {
+          for (const key in optionLists.basement_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.basement_code[key],
+                name: optionLists.basement_code[key],
               },
             )
           }
@@ -2167,9 +2874,9 @@ function ReportForm(props) {
         }
       }
     function getBasement () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.basement_type && props.property.structure.basement_type !== null) {
-            return props.property.structure.basement_type
+        if (property && property.structure) {
+          if (property.structure.basement_type && property.structure.basement_type !== null) {
+            return property.structure.basement_type
           } else {
             return '--'
           }
@@ -2198,13 +2905,13 @@ function ReportForm(props) {
         )
     }
     function getRoofTypeCodes () {
-        if (props.optionLists && props.optionLists.roof_type_code) {
+        if (optionLists && optionLists.roof_type_code) {
           const options = []
-          for (const key in props.optionLists.roof_type_code) {
+          for (const key in optionLists.roof_type_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.roof_type_code[key],
+                name: optionLists.roof_type_code[key],
               },
             )
           }
@@ -2214,9 +2921,9 @@ function ReportForm(props) {
         }
       }
     function getRoofStyle () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.roof_style_type && props.property.structure.roof_style_type !== null) {
-            return props.property.structure.roof_style_type
+        if (property && property.structure) {
+          if (property.structure.roof_style_type && property.structure.roof_style_type !== null) {
+            return property.structure.roof_style_type
           } else {
             return '--'
           }
@@ -2245,13 +2952,13 @@ function ReportForm(props) {
         )
     }
     function getRoofCoverCodes () {
-        if (props.optionLists && props.optionLists.roof_cover_code) {
+        if (optionLists && optionLists.roof_cover_code) {
           const options = []
-          for (const key in props.optionLists.roof_cover_code) {
+          for (const key in optionLists.roof_cover_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.roof_cover_code[key],
+                name: optionLists.roof_cover_code[key],
               },
             )
           }
@@ -2261,9 +2968,9 @@ function ReportForm(props) {
         }
       }
     function getRoofMaterial () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.roof_material_type && props.property.structure.roof_material_type !== null) {
-            return props.property.structure.roof_material_type
+        if (property && property.structure) {
+          if (property.structure.roof_material_type && property.structure.roof_material_type !== null) {
+            return property.structure.roof_material_type
           } else {
             return '--'
           }
@@ -2292,13 +2999,13 @@ function ReportForm(props) {
         )
     }
     function getExteriorWallsCodes () {
-        if (props.optionLists && props.optionLists.exterior_walls_code) {
+        if (optionLists && optionLists.exterior_walls_code) {
           const options = []
-          for (const key in props.optionLists.exterior_walls_code) {
+          for (const key in optionLists.exterior_walls_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.exterior_walls_code[key],
+                name: optionLists.exterior_walls_code[key],
               },
             )
           }
@@ -2308,9 +3015,9 @@ function ReportForm(props) {
         }
       }
     function getExteriorWalls () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.exterior_wall_type && props.property.structure.exterior_wall_type !== null) {
-            return props.property.structure.exterior_wall_type
+        if (property && property.structure) {
+          if (property.structure.exterior_wall_type && property.structure.exterior_wall_type !== null) {
+            return property.structure.exterior_wall_type
           } else {
             return '--'
           }
@@ -2339,13 +3046,13 @@ function ReportForm(props) {
         )
     }
     function getInteriorWallsCodes () {
-        if (props.optionLists && props.optionLists.interior_walls_code) {
+        if (optionLists && optionLists.interior_walls_code) {
           const options = []
-          for (const key in props.optionLists.interior_walls_code) {
+          for (const key in optionLists.interior_walls_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.interior_walls_code[key],
+                name: optionLists.interior_walls_code[key],
               },
             )
           }
@@ -2355,9 +3062,9 @@ function ReportForm(props) {
         }
       }
     function getInteriorWalls () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.interior_wall_type && props.property.structure.interior_wall_type !== null) {
-            return props.property.structure.interior_wall_type
+        if (property && property.structure) {
+          if (property.structure.interior_wall_type && property.structure.interior_wall_type !== null) {
+            return property.structure.interior_wall_type
           } else {
             return '--'
           }
@@ -2386,13 +3093,13 @@ function ReportForm(props) {
         )
     }
     function getFloorCoverCodes () {
-        if (props.optionLists && props.optionLists.floor_cover_code) {
+        if (optionLists && optionLists.floor_cover_code) {
           const options = []
-          for (const key in props.optionLists.floor_cover_code) {
+          for (const key in optionLists.floor_cover_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.floor_cover_code[key],
+                name: optionLists.floor_cover_code[key],
               },
             )
           }
@@ -2402,9 +3109,9 @@ function ReportForm(props) {
         }
       }
     function getFlooring () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.flooring_types && props.property.structure.flooring_types !== null) {
-            return props.property.structure.flooring_types
+        if (property && property.structure) {
+          if (property.structure.flooring_types && property.structure.flooring_types !== null) {
+            return property.structure.flooring_types
           } else {
             return '--'
           }
@@ -2433,13 +3140,13 @@ function ReportForm(props) {
         )
     }
     function getWaterCodes () {
-        if (props.optionLists && props.optionLists.water_code) {
+        if (optionLists && optionLists.water_code) {
           const options = []
-          for (const key in props.optionLists.water_code) {
+          for (const key in optionLists.water_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.water_code[key],
+                name: optionLists.water_code[key],
               },
             )
           }
@@ -2449,9 +3156,9 @@ function ReportForm(props) {
         }
       }
     function getWaterType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.water_type && props.property.structure.water_type !== null) {
-            return props.property.structure.water_type
+        if (property && property.structure) {
+          if (property.structure.water_type && property.structure.water_type !== null) {
+            return property.structure.water_type
           } else {
             return '--'
           }
@@ -2480,13 +3187,13 @@ function ReportForm(props) {
         )
     }
     function getSewerCodes () {
-        if (props.optionLists && props.optionLists.sewer_code) {
+        if (optionLists && optionLists.sewer_code) {
           const options = []
-          for (const key in props.optionLists.sewer_code) {
+          for (const key in optionLists.sewer_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.sewer_code[key],
+                name: optionLists.sewer_code[key],
               },
             )
           }
@@ -2496,9 +3203,9 @@ function ReportForm(props) {
         }
       }
     function getSewerType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.sewer_type && props.property.structure.sewer_type !== null) {
-            return props.property.structure.sewer_type
+        if (property && property.structure) {
+          if (property.structure.sewer_type && property.structure.sewer_type !== null) {
+            return property.structure.sewer_type
           } else {
             return '--'
           }
@@ -2527,9 +3234,9 @@ function ReportForm(props) {
         )
     }
     function getHeatType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.heating_type && props.property.structure.heating_type !== null) {
-            return props.property.structure.heating_type
+        if (property && property.structure) {
+          if (property.structure.heating_type && property.structure.heating_type !== null) {
+            return property.structure.heating_type
           } else {
             return '--'
           }
@@ -2538,13 +3245,13 @@ function ReportForm(props) {
         }
       }
     function getHeatingTypeCodes () {
-        if (props.optionLists && props.optionLists.heating_type) {
+        if (optionLists && optionLists.heating_type) {
           const options = []
-          for (const key in props.optionLists.heating_type) {
+          for (const key in optionLists.heating_type) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.heating_type[key],
+                name: optionLists.heating_type[key],
               },
             )
           }
@@ -2574,9 +3281,9 @@ function ReportForm(props) {
         )
     }
     function getHeatFuelType () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.heating_fuel_type && props.property.structure.heating_fuel_type !== null) {
-            return props.property.structure.heating_fuel_type
+        if (property && property.structure) {
+          if (property.structure.heating_fuel_type && property.structure.heating_fuel_type !== null) {
+            return property.structure.heating_fuel_type
           } else {
             return '--'
           }
@@ -2585,13 +3292,13 @@ function ReportForm(props) {
         }
       }
     function getHeatingFuelCodes () {
-        if (props.optionLists && props.optionLists.heating_fuel_code) {
+        if (optionLists && optionLists.heating_fuel_code) {
           const options = []
-          for (const key in props.optionLists.heating_fuel_code) {
+          for (const key in optionLists.heating_fuel_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.heating_fuel_code[key],
+                name: optionLists.heating_fuel_code[key],
               },
             )
           }
@@ -2621,9 +3328,9 @@ function ReportForm(props) {
         )
     }
     function getPool () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.pool_type && props.property.structure.pool_type !== null) {
-            return props.property.structure.pool_type
+        if (property && property.structure) {
+          if (property.structure.pool_type && property.structure.pool_type !== null) {
+            return property.structure.pool_type
           } else {
             return '--'
           }
@@ -2632,13 +3339,13 @@ function ReportForm(props) {
         }
       }
     function getPoolCodes () {
-        if (props.optionLists && props.optionLists.pool) {
+        if (optionLists && optionLists.pool) {
           const options = []
-          for (const key in props.optionLists.pool) {
+          for (const key in optionLists.pool) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.pool[key],
+                name: optionLists.pool[key],
               },
             )
           }
@@ -2668,9 +3375,9 @@ function ReportForm(props) {
         )
     }
     function getAmenities () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.amenities && props.property.structure.amenities !== null) {
-            return props.property.structure.amenities
+        if (property && property.structure) {
+          if (property.structure.amenities && property.structure.amenities !== null) {
+            return property.structure.amenities
           } else {
             return '--'
           }
@@ -2679,13 +3386,13 @@ function ReportForm(props) {
         }
       }
     function getAmenitiesCodes () {
-        if (props.optionLists && props.optionLists.amenities) {
+        if (optionLists && optionLists.amenities) {
           const options = []
-          for (const key in props.optionLists.amenities) {
+          for (const key in optionLists.amenities) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.amenities[key],
+                name: optionLists.amenities[key],
               },
             )
           }
@@ -2715,9 +3422,9 @@ function ReportForm(props) {
         )
     }
     function getParkingSpaces () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.parking_spaces_count && props.property.structure.parking_spaces_count !== null) {
-            return props.property.structure.parking_spaces_count
+        if (property && property.structure) {
+          if (property.structure.parking_spaces_count && property.structure.parking_spaces_count !== null) {
+            return property.structure.parking_spaces_count
           } else {
             return ''
           }
@@ -2726,9 +3433,9 @@ function ReportForm(props) {
         }
       }
       function getPlumbingCount () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.plumbing_fixtures && props.property.structure.plumbing_fixtures !== null) {
-            return props.property.structure.plumbing_fixtures
+        if (property && property.structure) {
+          if (property.structure.plumbing_fixtures && property.structure.plumbing_fixtures !== null) {
+            return property.structure.plumbing_fixtures
           } else {
             return ''
           }
@@ -2751,37 +3458,37 @@ function ReportForm(props) {
           }
     }
     function GetFullAddress () {
-        if (props.property && props.property.address) {
-          return props.property.address.full_address
+        if (property && property.address) {
+          return property.address.full_address
         } else {
           return ''
         }
       }
     function GetAPN () {
-        if (props.property && props.property.address) {
-          return props.property.address.apn
+        if (property && property.address) {
+          return property.address.apn
         } else {
           return ''
         }
     }
     function getAPN () {
-        if (props.property && props.property.address) {
-          return props.property.address.apn
+        if (property && property.address) {
+          return property.address.apn
         } else {
           return ''
         }
     }
     function getAddress1 () {
-        if (props.property && props.property.address) {
-          return props.property.address.street_number + ' ' + props.property.address.street_name + ' ' + props.property.address.street_suffix
+        if (property && property.address) {
+          return property.address.street_number + ' ' + property.address.street_name + ' ' + property.address.street_suffix
         } else {
           return ''
         }
       }
     function getAddress2 () {
-        if (props.property && props.property.address) {
-          if (props.property.address.unit_type !== null && props.property.address.unit_number !== null) {
-            return props.property.address.unit_type + ' ' + props.property.address.unit_number
+        if (property && property.address) {
+          if (property.address.unit_type !== null && property.address.unit_number !== null) {
+            return property.address.unit_type + ' ' + property.address.unit_number
           } else {
             return ''
           }
@@ -2790,29 +3497,29 @@ function ReportForm(props) {
         }
       }
     function getCity () {
-        if (props.property && props.property.address) {
-          return props.property.address.city
+        if (property && property.address) {
+          return property.address.city
         } else {
           return ''
         }
       }
     function getState () {
-        if (props.property && props.property.address) {
-          return props.property.address.state
+        if (property && property.address) {
+          return property.address.state
         } else {
           return ''
         }
       }
     function getZip () {
-        if (props.property && props.property.address) {
-          return props.property.address.zip_code
+        if (property && property.address) {
+          return property.address.zip_code
         } else {
           return ''
         }
       }
     function getCounty () {
-        if (props.property && props.property.address) {
-          return props.property.address.fips
+        if (property && property.address) {
+          return property.address.fips
         } else {
           return ''
         }
@@ -2943,9 +3650,9 @@ function ReportForm(props) {
         }
       }
     function getYearBuilt () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.year_built && props.property.structure.year_built !== null) {
-            return props.property.structure.year_built
+        if (property && property.structure) {
+          if (property.structure.year_built && property.structure.year_built !== null) {
+            return property.structure.year_built
           } else {
             return ''
           }
@@ -2954,20 +3661,20 @@ function ReportForm(props) {
         }
       }
       function getCounty () {
-        if (props.property && props.property.address) {
-          return props.property.address.fips
+        if (property && property.address) {
+          return property.address.fips
         } else {
           return ''
         }
       }
       function getStoriesCodes () {
-        if (props.optionLists && props.optionLists.stories_code) {
+        if (optionLists && optionLists.stories_code) {
           const options = []
-          for (const key in props.optionLists.stories_code) {
+          for (const key in optionLists.stories_code) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.stories_code[key],
+                name: optionLists.stories_code[key],
               },
             )
           }
@@ -2977,9 +3684,9 @@ function ReportForm(props) {
         }
       }
       function getStories () {
-        if (props.property && props.property.structure) {
-            if (props.property.structure.stories && props.property.structure.stories != null) {
-              return props.property.structure.stories
+        if (property && property.structure) {
+            if (property.structure.stories && property.structure.stories != null) {
+              return property.structure.stories
             } else {
               return ''
             }
@@ -3019,9 +3726,9 @@ function ReportForm(props) {
           } 
       }
       function getSqft () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.total_area_sq_ft && props.property.structure.total_area_sq_ft !== null) {
-            return formatNumber(props.property.structure.total_area_sq_ft)
+        if (property && property.structure) {
+          if (property.structure.total_area_sq_ft && property.structure.total_area_sq_ft !== null) {
+            return formatNumber(property.structure.total_area_sq_ft)
           } else {
             return ''
           }
@@ -3030,9 +3737,9 @@ function ReportForm(props) {
         }
       }
       function getNumBeds () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.beds_count && props.property.structure.beds_count !== null) {
-            return props.property.structure.beds_count
+        if (property && property.structure) {
+          if (property.structure.beds_count && property.structure.beds_count !== null) {
+            return property.structure.beds_count
           } else {
             return ''
           }
@@ -3041,9 +3748,9 @@ function ReportForm(props) {
         }
       }
       function getNumBaths () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.baths && props.property.structure.baths !== null) {
-            return props.property.structure.baths
+        if (property && property.structure) {
+          if (property.structure.baths && property.structure.baths !== null) {
+            return property.structure.baths
           } else {
             return ''
           }
@@ -3052,9 +3759,9 @@ function ReportForm(props) {
         }
       }
       function getNumPartialBaths () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.partial_baths_count && props.property.structure.partial_baths_count !== null) {
-            return props.property.structure.partial_baths_count
+        if (property && property.structure) {
+          if (property.structure.partial_baths_count && property.structure.partial_baths_count !== null) {
+            return property.structure.partial_baths_count
           } else {
             return ''
           }
@@ -3063,9 +3770,9 @@ function ReportForm(props) {
         }
       }
       function getRoomCount () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.rooms_count && props.property.structure.rooms_count !== null) {
-            return props.property.structure.rooms_count
+        if (property && property.structure) {
+          if (property.structure.rooms_count && property.structure.rooms_count !== null) {
+            return property.structure.rooms_count
           } else {
             return ''
           }
@@ -3089,13 +3796,13 @@ function ReportForm(props) {
         }
       }
       function getOtherRoomCodes () {
-        if (props.optionLists && props.optionLists.other_rooms) {
+        if (optionLists && optionLists.other_rooms) {
           const options = []
-          for (const key in props.optionLists.other_rooms) {
+          for (const key in optionLists.other_rooms) {
             options.push(
               {
                 id: key,
-                name: props.optionLists.other_rooms[key],
+                name: optionLists.other_rooms[key],
               },
             )
           }
@@ -3105,9 +3812,9 @@ function ReportForm(props) {
         }
       }
       function getOtherRooms () {
-        if (props.property && props.property.structure) {
-          if (props.property.structure.other_rooms && props.property.structure.other_rooms !== null) {
-            return props.property.structure.other_rooms
+        if (property && property.structure) {
+          if (property.structure.other_rooms && property.structure.other_rooms !== null) {
+            return property.structure.other_rooms
           } else {
             return '--'
           }
@@ -3136,16 +3843,38 @@ function ReportForm(props) {
           )
       }
     return (
-        <div className="form-overlay" id="report-form-overlay">
+        <div className="section" id="report-form-overlay">
+            <CreditsBanner availableCredits={35} />
+            <div className="report-form-header">
+                <p className="text-exlarge">Review Property Report</p>
+                <p>Update this report with any available data if applicable</p>
+            </div>
+            <div className="report-form-changes-action">
+                <div className="report-form-changes-action-btns">
+                <button>Save</button>
+                <button>Cancel</button>
+                </div>
+                {/* <span>You have made unsaved changes</span> */}
+                <p>You have unsaved changes</p>
+                <div className="report-form-changes-action-empty">
+                </div>
+            </div>
+            <div className="report-form-subject-property-block">
+                <p className="report-form-subject-property-heading">Address</p>
+                <div className="report-form-subject-property-address">
+                <p>746 Harrison Ave Harrison 07029</p>
+                <button>CHANGE</button>
+                </div>
+            </div>
             {
                 showPaymentPopup && 
-                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={doDownloadReport} creditsFlag={props.creditsFlag} purchaseCreditsMode={false}/>
+                <PaymentConfirmationPopup setShowPaymentPopup ={setShowPaymentPopup} confirmAction={doDownloadReport} creditsFlag={creditsFlag} purchaseCreditsMode={false}/>
             }
             <div className="forecast-form-container">
-            <div className="forecast-form-title-bar">
+            {/* <div className="forecast-form-title-bar">
                 <span>Property Report</span>
                 <i className="fa fa-times-thin fa-2x" aria-hidden="true" onClick={() => {removeReportForm()}}></i>
-            </div>
+            </div> */}
             <div className="forecast-form-wrapper custom-scrollbar">
 
             <div className="section-loader-overlay manual withBackground" id="report-loader">
@@ -3501,12 +4230,10 @@ function ReportForm(props) {
             <div>
           <p class="report-disclaimer">Honely provides the Honely AI, data, website and brand &amp; links &ldquo;as is,&rdquo; &ldquo;with all faults&rdquo; and &ldquo;as available.&rdquo; <br></br>* The Honely revaluation currenty takes into account only valid changes to inputs such as property size, number of bedrooms, and number of bathrooms.</p>
           </div>
-          <div class="form-action-row-mobile">
-            {/* <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate_mobile">Update Estimate</button> */}
-            {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport_mobile">Share Report</button> */}
+          {/* <div class="form-action-row-mobile">
             <button onClick={() => {
                 var pika = null
-                if (props.creditsFlag) {
+                if (creditsFlag) {
                     pika = {
                         creditAmount: 1
                     }
@@ -3520,17 +4247,14 @@ function ReportForm(props) {
                 setShowPaymentPopup(true)
             }} id="btn_doDownloadReport_mobile">Generate Report</button>
             <button onClick={() => {doCMAAction()}} id="btn_doDownloadReport_mobileCMA">Add to CMA Report</button>
-            {/* <button @click="doGenerateCMA" id="btn_generateCma_mobile">Generate CMA</button> */}
-          </div>
+          </div> */}
           </div>
                 </div>
             </div>
-            <div class="form-action-row" style={{backgroundColor:'white'}}>
-        {/* <button onClick={() => {doUpdateHonelyEstimate()}} id="btn_doUpdateEstimate">Update Estimate</button> */}
-        {/* <button onClick={() => {doGenerateReport()}} id="btn_doShareReport">Share Report</button> */}
+            {/* <div class="form-action-row" style={{backgroundColor:'white'}}>
         <button onClick={() => {
             var pika = null
-            if (props.creditsFlag) {
+            if (creditsFlag) {
                 pika = {
                     creditAmount: 1
                 }
@@ -3544,9 +4268,27 @@ function ReportForm(props) {
             setShowPaymentPopup(true)
         }} id="btn_doDownloadReport">Generate Report</button>
         <button onClick={() => {doCMAAction()}} id="btn_doDownloadReportCMA">Add to CMA Report</button>
-      </div>
+      </div> */}
+            </div>
+            <div className="report-form-final-action">
+                <div className="report-form-final-action-element">
+                    <div className="report-form-final-action-element-inner">
+                    <img src={File} className="file" /> 
+                    <p>Generate Single Report</p>
+                    </div>
+                    <p>1 credit per download</p>
+                    <button>Continue</button>
+                </div>
+                <div className="report-form-final-action-element">
+                    <div className="report-form-final-action-element-inner">
+                    <img src={Files} className="file" />
+                    <p>Generate CMA Report</p>
+                    </div>
+                    <p>2 credits per download</p>
+                    <button>Continue</button>
+                </div>
             </div>
         </div>
     )
 }
-export default ReportForm;
+export default ReportFormV2;

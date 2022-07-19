@@ -2,6 +2,68 @@
 COMPONENT -  FORECAST FORM
 ====================================================== */
 
+.report-form-header {
+    margin-top: 160px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.report-form-changes-action {
+    background-color: #4A4A4A;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 160px;
+    width: 100%;
+}
+.report-form-changes-action-btns {
+    flex: 1;
+}
+.report-form-changes-action-empty {
+    flex: 1;
+}
+.report-form-changes-action button{
+    background-color: black;
+    border: none;
+}
+.report-form-changes-action span{
+    text-align: center;
+    margin: auto;
+}
+.report-form-changes-action p{
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+}
+.report-form-subject-property-block {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 40px;
+    padding-left: 1%;
+}
+.report-form-subject-property-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.report-form-subject-property-address {
+    display: flex;
+}
+.report-form-subject-property-address p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.report-form-subject-property-block button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0px;
+    color: black;
+    height: 31px;
+    padding: 0;
+    width: 102px;
+    margin-left: 30px;
+}
 .form-overlay {
     display: none;
     position: fixed;
@@ -17,19 +79,21 @@ COMPONENT -  FORECAST FORM
     display: block;
 }
 .forecast-form-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
+    /* position: absolute; */
+    width: 80%;
+    margin: auto;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    /* width: 70%;
     height: 80vh;
     max-width: 900px;
     min-width: 300px;
     min-height: 300px;
     font-family: 'Poppins', 'Roboto', Arial, Verdana, Helvetica, sans-serif;
     background: #ffffff;
-    border-radius: 5px;
-    z-index: 99;
+    border-radius: 5px; */
+    /* z-index: 99; */
 }
 .forecast-form-container.short {
     height: 62vh;
@@ -317,6 +381,34 @@ COMPONENT -  FORECAST FORM
 .forecast-form-overlay .section-loader-overlay {
     z-index: 999;
 }
+.report-form-final-action {
+    width: 80%;
+    margin: auto;
+}
+.report-form-final-action-element {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 2.5%;
+    border: 1px solid #00000054;
+    border-radius: 25px;
+    ;
+}
+.report-form-final-action-element p {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 600;
+}
+.report-form-final-action-element img {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.report-form-final-action-element-inner {
+    display: flex;
+    align-items: center;
+}
 @media only screen and (max-width: 1600px) {
     .forecast-form-container {
         /* height: 90vh; */
@@ -341,6 +433,33 @@ COMPONENT -  FORECAST FORM
     }
     .form-row-flex-4cols p.wide, .form-row-flex-4cols p, .chart-container {
         width: 45%;
+    }
+    .report-form-final-action-element {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    .report-form-final-action-element button{
+        margin: 20px auto;
+        width: 100px;
+    }
+    .report-form-final-action-element-inner {
+        margin: 10px auto;
+    }
+    /* .report-form-subject-property-address {
+        flex-direction: column;
+    } */
+    /* .report-form-subject-property-address button {
+        margin-top: 10px;
+        margin-left: 0;
+    } */
+    .report-form-changes-action {
+        top: 130px;
+        font-size: 11px;
+    }
+    .report-form-changes-action button {
+        font-size: 11px;
+        min-width: 58px;
     }
 }
 @media (max-width: 600px) {
@@ -391,5 +510,38 @@ COMPONENT -  FORECAST FORM
     }
     .report-honely-value:first-of-type {
         margin-bottom: 10px;
+    }
+    .report-form-final-action-element {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    .report-form-final-action-element button{
+        margin: 20px auto;
+        width: 100px;
+    }
+    .report-form-final-action-element-inner {
+        margin: 10px auto;
+    }
+    .report-form-subject-property-address {
+        flex-direction: column;
+    }
+    .report-form-subject-property-address button {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .report-form-changes-action {
+        top: 130px;
+    }
+}
+@media (max-width: 500px) {
+    .report-form-changes-action {
+        top: 120px;
+    }
+    .report-form-changes-action p {
+        margin-right: 30px;
+    }
+    .report-form-changes-action-empty {
+        display: none;
     }
 }

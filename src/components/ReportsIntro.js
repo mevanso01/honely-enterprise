@@ -59,6 +59,20 @@ function ReportsIntro(props) {
         return
     }
     function showReportForm(cmaflag) {
+        /*
+        user
+        optionLists
+        forecast
+        property
+        inCMA
+        creditsFlag
+        jwt
+        updateAuthState
+        */
+        console.log('vx: user', user)
+        console.log('vx: optionLists', optionLists)
+        console.log('vx: forecast', forecast)
+        console.log('vx: property', property)
         // setForCMA(cmaflag)
         // forCMA = cmaflag
         setPopupDisplay(false)

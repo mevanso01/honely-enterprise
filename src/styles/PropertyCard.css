@@ -1,0 +1,32 @@
+.property-card {
+  margin: 0 0 30px 0;
+  border-radius: 20px;
+  border: 1px solid #c4c4c4;
+  position: relative;
+}
+
+.property-card.mousedover {
+  cursor: pointer;
+}
+
+.property-card.mousedover:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.property-card .card-content {
+    padding: 15px;
+  }
+
+
+@media (min-width: 768px) {
+  .property-card {
+    width: calc(50% - 30px);
+    margin: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .property-card {
+    width: calc(33.33% - 30px);
+  }
+}

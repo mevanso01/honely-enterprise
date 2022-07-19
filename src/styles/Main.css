@@ -8,6 +8,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: Inter, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, main, hgroup, menu, nav, section {
@@ -45,7 +46,7 @@ body {
 	flex-direction: column;
     width: 100%;
     background: #f6f6f6;
-    color: #4d4d4d;
+    color: black;
     font-size: 1rem;
     /* font-family: 'Roboto', Arial, Verdana, Helvetica, sans-serif; */
     font-family: 'Poppins', 'Roboto', Arial, Verdana, Helvetica, sans-serif;
@@ -84,8 +85,10 @@ p.hero-text {
     font-family: 'Quicksand', 'Roboto', Arial, Verdana, Helvetica, sans-serif;
 }
 .text-exlarge {
-    font-size: 45px;
-    font-weight: 800;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 58px;
+    text-align: center;
     margin-bottom: 2rem;
 }
 .text-large {
@@ -93,8 +96,10 @@ p.hero-text {
     font-weight: 500;
 }
 .text-medium {
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 29px;
+    text-align: center;
 }
 .text-small {
     font-size: 20px;
@@ -245,6 +250,7 @@ CONTAINERS
     padding: 1rem 0;
     background: #ffffff;
     clear: both;
+    height: 80px;
 }
 .header-container.active {
     -moz-box-shadow: 0px 5px 10px -5px #888888;
@@ -513,15 +519,15 @@ img.header-logo {
 .section {
     position: relative;
     width: 100%;
-    padding: 3.5rem 0;
+    padding: 3.5rem 0 0 0;
     clear: both;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 .section-wrapper {
-    width: 95%;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
 }
 .flex-wrapper {
@@ -645,17 +651,21 @@ textarea {
     width: 100%;
 }
 button {
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 600;
     min-width: 140px;
     background: #FF9900;
     color: white;
     padding: 15px;
-    border: 1px solid #FF9900;
+    /* border: 1px solid #FF9900; */
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 button:hover {
     background: #5a6778;
     color: #ffffff;
+    border: none;
 }
 button.text-btn {
     background:  transparent;
@@ -1180,6 +1190,17 @@ MOBILE
     }
     .page-sub-title {
         font-size: 25px;
+    }
+    .text-exlarge {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .text-medium{
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .section{
+        padding-top: 4rem;
     }
 }
 @media (max-width: 500px) {

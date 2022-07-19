@@ -1,0 +1,183 @@
+.report-loggedin-content{
+    padding: 65px 25px;
+}
+
+.start-page{
+    margin-top: 80px;
+}
+
+.search-box{
+    border-radius: 15px;
+    width: 90%;
+    margin: auto;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.search-input-container{
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.search-box-btn{
+    width: 237px;
+    height: 75px;
+    background-color: #C9C9C9;
+    color: white;
+    border-radius: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    border: none;
+}
+
+.grey{
+    background-color: #F9F8F5;
+}
+
+.report-loggedin-medium-text{
+    font-weight: 500;
+    font-size: 36px;
+    margin: 0;
+    text-align: center;
+}
+
+.report-loggedin-lists{
+    margin-top: 65px;
+    margin-left: 30%;
+}
+
+.report-loggedin-row-value{
+
+}
+
+.report-loggedin-row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.orange-checkmark{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.report-loggedin-value{
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0;
+}
+
+.report-loggedin-label{
+    font-weight: 300;
+    font-size: 16px;
+    margin: 0;
+}
+
+.report-loggedin-credits{
+    margin: 30px 0;
+}
+
+.report-loggedin-credits-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+}
+
+.report-loggedin-credits-left{
+    display: flex;
+    align-items: center;
+}
+
+.report-loggedin-credits-right{
+    display: flex;
+}
+
+.file{
+    width: 35px;
+    height: 35px;
+    margin-right: 35px;
+    object-fit: contain;
+}
+
+.credits-row-data{
+
+}
+
+.credits-right-btn{
+    font-weight: 700;
+    font-size: 24px;
+    width: 237px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+}
+
+.lead-intro-v2-lead-cards{
+    margin-top: 50px;
+}
+
+.space-top{
+    margin-top: 15px;
+}
+
+@media (max-width: 800px){
+    .search-box{
+        height: 100px;
+    }
+    .lead-intro-v2-lead-cards{
+        flex-direction: column;
+        align-items: center !important;
+    }
+
+    .report-loggedin-lists{
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 500px){
+    .search-box{
+        height: 50px;
+    }
+    .search-box-btn{
+        width: 150px;
+        height: 40px;
+        font-size: 15px;
+    }
+    .report-loggedin-medium-text{
+        font-size: 20px;
+    }
+    .orange-checkmark{
+        width: 35px;
+        height: 35px;
+    }
+    .report-loggedin-value{
+        font-size: 18px;
+    }
+    .report-loggedin-label{
+        font-size: 12px;
+    }
+    .credits-right-btn{
+        width: 120px;
+        height: 35px;
+        font-size: 15px;
+        margin-top: 25px;
+    }
+    .report-loggedin-credits-row{
+        flex-direction: column;
+    }
+    .report-loggedin-credits-right{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}

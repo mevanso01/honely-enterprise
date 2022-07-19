@@ -1,0 +1,180 @@
+.credits-banner{
+    background-color: #FF9900;
+    width: 100%;
+    border-radius: 5px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px 0 80px;
+    position: fixed;
+    top: 80px;
+    z-index: 999;
+}
+
+.credits{
+    display: flex;
+    align-items: center;
+}
+
+.credit{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 0;
+    margin: 0;
+    margin-right: 15px;
+}
+
+.credit-box{
+    width: 43px;
+    height: 36px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.credit-number{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 0;
+    margin: 0;
+}
+
+.credits-btn-container{
+}
+
+.credits-btn{
+    height: 40px;
+    width: 180px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+@media (max-width: 800px){
+    .credits-banner{
+        background-color: #FF9900;
+        border-radius: 5px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 80px 0 80px;
+    }
+    
+    .credits{
+        display: flex;
+        align-items: center;
+    }
+    
+    .credit{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 0;
+        margin: 0;
+        margin-right: 12px;
+    }
+    
+    .credit-box{
+        width: 30px;
+        height: 20px;
+        border: 1px solid #000000;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .credit-number{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 0;
+        margin: 0;
+    }
+    
+    .credits-btn-container{
+    }
+    
+    .credits-btn{
+        height: 30px;
+        width: 140px;
+        background-color: black;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 500px){
+    .credits-banner{
+        background-color: #FF9900;
+        border-radius: 5px;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+    }
+    
+    .credits{
+        display: flex;
+        align-items: center;
+    }
+    
+    .credit{
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 0;
+        margin: 0;
+        margin-right: 8px;
+    }
+    
+    .credit-box{
+        width: 30px;
+        height: 20px;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .credit-number{
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 0;
+        margin: 0;
+    }
+    
+    .credits-btn-container{
+    }
+    
+    .credits-btn{
+        height: 20px;
+        width: 60px;
+        background-color: black;
+        color: white;
+        font-size: 8px;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 0;
+        min-height: 0;
+        border-radius: 5px;
+    }
+}

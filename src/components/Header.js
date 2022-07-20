@@ -83,18 +83,20 @@ function Header(props) {
                 document.getElementById('header-dropdown-left').classList.add('active')
               }}
               onMouseLeave = {() => {
-                console.log('vx: onMouseLeave called')
                 document.getElementById('header-dropdown-left').classList.remove('active')
               }}
             >
               <Link to="/leadgen">Lead Capture</Link>
-              <div class="header-dropdown left" id="header-dropdown-left">
-                <ul>
-                  <li>Leads</li>
-                  <li>Customize Widget</li>
-                  <li>Subscription</li>
-                </ul>
-              </div>
+              {
+                props.authFlag && props.userProfile.status !== 'CONFIRMED' &&
+                <div class="header-dropdown left" id="header-dropdown-left">
+                  <ul>
+                    <li onClick={() => { window.location.href = '/account-management/leads'}}>Leads</li>
+                    <li onClick={() => { window.location.href = '/account-management/customize-widget'}}>Customize Widget</li>
+                    <li onClick={() => { window.location.href = '/account-management/subscription'}}>Subscription</li>
+                  </ul>
+                </div>
+              }
             </li>
             <li
               className={`header-item ${
@@ -103,17 +105,19 @@ function Header(props) {
                 document.getElementById('header-dropdown-right').classList.add('active')
               }}
               onMouseLeave = {() => {
-                console.log('vx: onMouseLeave called')
                 document.getElementById('header-dropdown-right').classList.remove('active')
               }}
             >
               <Link to="/reports">Report Generation</Link>
-              <div class="header-dropdown right" id="header-dropdown-right">
-                <ul>
-                  <li>New Report</li>
-                  <li>Archived Reports</li>
-                </ul>
-              </div>
+              {
+                props.authFlag &&
+                <div class="header-dropdown right" id="header-dropdown-right">
+                  <ul>
+                    <li>New Report</li>
+                    <li>Archived Reports</li>
+                  </ul>
+                </div>
+              }
             </li>
           </ul>
         </nav>

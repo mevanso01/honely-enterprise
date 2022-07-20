@@ -1,5 +1,5 @@
 //REACT
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //STYLES
 import "../styles/ReportIntroLoggedInV2.css";
@@ -14,6 +14,10 @@ import CreditsBanner from "./CreditsBanner";
 import ReportSearch from "./CustomizeWidget/ReportSearch";
 
 export default function ReportIntroLoggedInV2() {
+  useEffect(() => {
+    window.sessionStorage.removeItem('subjectForecastDetails')
+    window.sessionStorage.removeItem('subjectPropertyDetails')
+  })
   return (
     <div className="section">
       <CreditsBanner availableCredits={35} />
@@ -21,9 +25,9 @@ export default function ReportIntroLoggedInV2() {
         <div className="section-wrapper">
           <p className="text-exlarge">Generate a Property Report</p>
           <div className="search-box">
-            <div className="search-input-container">
+            {/* <div className="search-input-container"> */}
               <ReportSearch />
-            </div>
+            {/* </div> */}
             {/* <button className="search-box-btn">Continue</button> */}
           </div>
         </div>

@@ -299,11 +299,12 @@ function App() {
               <Route
                 path="/reports"
                 element={
-                  <ReportsIntro
+                  <ReportsIntroV2
                     userProfile={data.userProfile}
                     jwt={data.jwt}
                     doSignOut={doSignOut}
                     updateAuthState={updateAuthState}
+                    authFlag={true}
                   />
                 }
               />
@@ -339,10 +340,9 @@ function App() {
                     />
                   }
                 />
-                {/* <Route path="leads" element={<Leads />}> */}
-                <Route path="leads" element={<LeadsList />}>
-                  {/* <Route path="wordpress-guide" element={<WordPressGuide />} />
-                  <Route path="wix-guide" element={<WixGuide />} /> */}
+                <Route path="leads" element={<Leads />}>
+                  <Route path="wordpress-guide" element={<WordPressGuide />} />
+                  <Route path="wix-guide" element={<WixGuide />} />
                 </Route>
                 <Route
                   path="subscription"
@@ -403,7 +403,7 @@ function App() {
               <Route
                 path="*"
                 element={
-                  <LeadGenIntro
+                  <LeadGenIntroV2
                     userProfile={data.userProfile}
                     jwt={data.jwt}
                     doSignOut={doSignOut}

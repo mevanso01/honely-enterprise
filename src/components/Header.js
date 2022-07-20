@@ -191,11 +191,35 @@ function Header(props) {
         style={{ minWidth: "110px" }}
       >
         {props.authFlag && (
-          <div className="header-signout" onClick={props.signOut}>
-            <div id="header-signout">
-            <span className="mdi mdi-power" />
-            Sign out
-            </div>
+          <div className="account-management-items" >
+            <ul>
+              <li
+                className={`header-item`}
+                onMouseOver = {() => {
+                  document.getElementById('header-dropdown-account').classList.add('active')
+                }}
+                onMouseLeave = {() => {
+                  document.getElementById('header-dropdown-account').classList.remove('active')
+                }}
+              >
+                <Link to="/">Account Management</Link>
+                {
+                  props.authFlag && props.userProfile.status !== 'CONFIRMED' &&
+                  <div class="header-dropdown account" id="header-dropdown-account">
+                    <ul>
+                      <li>User Profile</li>
+                      <li>Change Password</li>
+                      <li>Payment methods</li>
+                      <li onClick={props.signOut}>Sign out</li>
+                    </ul>
+                  </div>
+                }
+              </li>
+            </ul>
+            {/* <div id="header-signout">
+              <span className="mdi mdi-power" />
+              Sign out
+            </div> */}
           </div>
         )}
         {!props.authFlag && (

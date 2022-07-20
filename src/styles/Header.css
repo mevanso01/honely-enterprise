@@ -142,6 +142,22 @@
     text-align: center;
     margin: 7px 0;
 }
+.account-management-items {
+    position: relative;
+}
+.header-dropdown.account {
+    display: none;
+    position: absolute;
+    margin-left: -10px;
+    top: 19px;
+}
+.header-dropdown.account.active {
+    display: block;
+}
+.header-dropdown.account li {
+    padding: 5px 0;
+    cursor: pointer;
+}
 @media (max-width: 1060px) {
     .header-right-items {
         width: auto;

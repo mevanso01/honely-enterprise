@@ -1,0 +1,100 @@
+.property-report-container {
+  padding: 50px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.property-report-container h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.property-report-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.33);
+  border-radius: 20px;
+  padding: 40px 20px;
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+}
+.property-report-wrapper span.mdi-close {
+  position: absolute;
+  font-size: 24px;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+.property-report-wrapper p.title {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.property-report-wrapper p.address {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  margin: 0;
+}
+.property-report-wrapper .report-screen {
+  width: 287px;
+  margin: 40px 0;
+}
+.property-report-wrapper .report-screen img {
+  width: 100%;
+}
+.property-report-wrapper .continue-btn {
+  max-width: 700px;
+  width: 100%;
+  margin: 6px 0;
+}
+
+@media (min-width: 768px) {
+  .property-report-container {
+    padding: 50px;
+  }
+  .property-report-container h1 {
+    font-size: 36px;
+  }
+  .property-report-wrapper span.mdi-close {
+    font-size: 32px;
+  }
+  .property-report-wrapper {
+    border-radius: 40px;
+    padding: 40px;
+  }
+  .property-report-wrapper span.mdi-close {
+    top: 20px;
+    right: 50px;
+  }
+  .property-report-wrapper p.title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  .property-report-wrapper p.address {
+    font-size: 16px;
+  }
+  .property-report-wrapper .report-screen {
+    margin: 70px 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .property-report-container h1 {
+    font-size: 42px;
+  }
+  .property-report-wrapper {
+    padding: 60px 80px;
+  }
+  .property-report-wrapper p.title {
+    font-size: 32px;
+  }
+  .property-report-wrapper p.address {
+    font-size: 20px;
+  }
+  .property-report-wrapper .report-screen {
+    margin: 70px 0 100px 0;
+  }
+}

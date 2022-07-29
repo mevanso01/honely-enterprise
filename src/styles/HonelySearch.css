@@ -4,6 +4,9 @@ SEARCH CONTAINER
 .search-container {
     position: relative;
 }
+.search-container.not-in-cma {
+    width: 59%;
+}
 svg {
    margin-left: 15px;
 }
@@ -202,5 +205,8 @@ MOBILE
     }
     .search-result-container .search-result-col:first-of-type {
         max-width: 210px;
+    }
+    .search-container.not-in-cma {
+        width: 100%;
     }
 }

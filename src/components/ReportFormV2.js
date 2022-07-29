@@ -7,416 +7,423 @@ import CreditsBanner from "./CreditsBanner";
 import File from "../assets/images/file.png";
 import Files from "../assets/images/files.png";
 function ReportFormV2(props) {
-    var inCMA = false
+    var [forecast, setForecast] = useState(
+        JSON.parse(window.sessionStorage.getItem('reportFormForecast'))
+    )
+    var [property, setProperty] = useState(
+        JSON.parse(window.sessionStorage.getItem('reportFormProperty'))
+    )
+    // var inCMA = false
+    var [inCMA, setInCMA] = useState(false)
     var creditsFlag = false
-    var forecast = {
-        "zipcode": "07029",
-        "city": "HARRISON",
-        "state": "NJ",
-        "zip_code_listing_statistics": {
-            "average_rental_income": 2491,
-            "total_listing_on_marker": 3,
-            "sold_properties_last_month": null,
-            "average_sqft": 257.32,
-            "median_days_on_market": 1.5,
-            "great_school_rating": null,
-            "median_sold_price": 508000,
-            "median_listings_price": 569000
-        },
-        "property_forecast": {
-            "property_id": "85691865",
-            "rental_estimate": null,
-            "confidence_score": "5.5",
-            "fips": "34017",
-            "apn": "04  00044-0000-00028-  02",
-            "address": "746 Harrison Ave Harrison NJ 07029",
-            "latitude": "40.747871",
-            "longitude": "-74.148703",
-            "list_price": "590000.0",
-            "appraisal": "594281.0355081952",
-            "appraisal_low": "443868.50542107096",
-            "appraisal_high": "744693.5655953193",
-            "assessed_value": "474900.0",
-            "beds_count": "6.0",
-            "baths": "2.0",
-            "realtor": "",
-            "property_status": "Sold",
-            "total_area_sq_ft": "1938.0",
-            "posted_date": "2021-07-10",
-            "percentage_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "0.93"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "4.63"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "14.54"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "24.84"
-                }
-            ],
-            "value_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "599824.25"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "621778.22"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "680672.27"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "741925.99"
-                }
-            ],
-            "average_zip_code_value": "535017.4920109232",
-            "property_valued_compared_to_zipcode": "11.08"
-        },
-        "neighborhood": {
-            "percentage_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "1.12"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "5.45"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "16.31"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "27.67"
-                }
-            ],
-            "value_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "541023.21"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "564158.28"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "622277.37"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "683070.86"
-                }
-            ],
-            "past_percentage_change": [
-                {
-                    "year": "July 2021",
-                    "change": null
-                },
-                {
-                    "year": "July 2020",
-                    "change": null
-                },
-                {
-                    "year": "July 2019",
-                    "change": null
-                }
-            ],
-            "zipcode_growth_state_ranking_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "387"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "330"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "327"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "276"
-                }
-            ],
-            "zipcode_growth_national_ranking_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "17590"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "20623"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "18812"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "14115"
-                }
-            ],
-            "avg_value_state_ranking_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": "278"
-                },
-                {
-                    "year": "October 2022",
-                    "change": "283"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "282"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "276"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "271"
-                }
-            ],
-            "avg_value_national_ranking_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": "5467"
-                },
-                {
-                    "year": "October 2022",
-                    "change": "5550"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "5897"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "5786"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "5508"
-                }
-            ],
-            "total_state_rank": "595",
-            "total_national_rank": "32966",
-            "competitive_score": null,
-            "competition_statements": "1|2|3|4",
-            "current_value": "535017.49"
-        },
-        "surrounding_zipcode": {
-            "null": "NO",
-            "percentage_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "2.96"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "12.93"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "29.90"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "45.29"
-                }
-            ]
-        },
-        "state_statistics": {
-            "average_rental_income": 2284,
-            "total_listing_on_marker": 5505,
-            "sold_properties_last_month": 2236,
-            "average_sqft": 257.5,
-            "median_days_on_market": 2,
-            "great_school_rating": 5.5,
-            "median_sold_price": 400000,
-            "median_listings_price": 549000,
-            "percentage_change_forecasts": [
-                {
-                    "year": "July 2022",
-                    "change": null
-                },
-                {
-                    "year": "October 2022",
-                    "change": "2.85"
-                },
-                {
-                    "year": "July 2023",
-                    "change": "12.71"
-                },
-                {
-                    "year": "July 2024",
-                    "change": "29.14"
-                },
-                {
-                    "year": "July 2025",
-                    "change": "43.81"
-                }
-            ]
-        },
-        "moving_trends": {
-            "null": "NO",
-            "total_state_rank": "593",
-            "total_country_rank": "38108",
-            "net_in": [
-                {
-                    "year": "July 2022",
-                    "change": -0.23
-                },
-                {
-                    "year": "October 2022",
-                    "change": 0.34
-                },
-                {
-                    "year": "July 2023",
-                    "change": 0.05
-                },
-                {
-                    "year": "July 2024",
-                    "change": 0.2
-                },
-                {
-                    "year": "July 2025",
-                    "change": 0.34
-                }
-            ],
-            "move_in_percentage_change_forecast": [
-                {
-                    "year": "July 2022",
-                    "change": 0.32
-                },
-                {
-                    "year": "October 2022",
-                    "change": 0.7
-                },
-                {
-                    "year": "July 2023",
-                    "change": 0.67
-                },
-                {
-                    "year": "July 2024",
-                    "change": 0.8
-                },
-                {
-                    "year": "July 2025",
-                    "change": 0.92
-                }
-            ],
-            "move_out_percentage_change_forecast": [
-                {
-                    "year": "July 2022",
-                    "change": 0.55
-                },
-                {
-                    "year": "October 2022",
-                    "change": 0.36
-                },
-                {
-                    "year": "July 2023",
-                    "change": 0.62
-                },
-                {
-                    "year": "July 2024",
-                    "change": 0.6
-                },
-                {
-                    "year": "July 2025",
-                    "change": 0.58
-                }
-            ],
-            "state_rankings": [
-                {
-                    "year": "July 2022",
-                    "rank": "549"
-                },
-                {
-                    "year": "October 2022",
-                    "rank": "25"
-                },
-                {
-                    "year": "July 2023",
-                    "rank": "215"
-                },
-                {
-                    "year": "July 2024",
-                    "rank": "65"
-                },
-                {
-                    "year": "July 2025",
-                    "rank": "25"
-                }
-            ],
-            "country_rankings": [
-                {
-                    "year": "July 2022",
-                    "rank": "34588"
-                },
-                {
-                    "year": "October 2022",
-                    "rank": "4570"
-                },
-                {
-                    "year": "July 2023",
-                    "rank": "15372"
-                },
-                {
-                    "year": "July 2024",
-                    "rank": "7332"
-                },
-                {
-                    "year": "July 2025",
-                    "rank": "4570"
-                }
-            ]
-        },
-        "is_blocked": "NO"
-    }
+    // var forecast = {
+    //     "zipcode": "07029",
+    //     "city": "HARRISON",
+    //     "state": "NJ",
+    //     "zip_code_listing_statistics": {
+    //         "average_rental_income": 2491,
+    //         "total_listing_on_marker": 3,
+    //         "sold_properties_last_month": null,
+    //         "average_sqft": 257.32,
+    //         "median_days_on_market": 1.5,
+    //         "great_school_rating": null,
+    //         "median_sold_price": 508000,
+    //         "median_listings_price": 569000
+    //     },
+    //     "property_forecast": {
+    //         "property_id": "85691865",
+    //         "rental_estimate": null,
+    //         "confidence_score": "5.5",
+    //         "fips": "34017",
+    //         "apn": "04  00044-0000-00028-  02",
+    //         "address": "746 Harrison Ave Harrison NJ 07029",
+    //         "latitude": "40.747871",
+    //         "longitude": "-74.148703",
+    //         "list_price": "590000.0",
+    //         "appraisal": "594281.0355081952",
+    //         "appraisal_low": "443868.50542107096",
+    //         "appraisal_high": "744693.5655953193",
+    //         "assessed_value": "474900.0",
+    //         "beds_count": "6.0",
+    //         "baths": "2.0",
+    //         "realtor": "",
+    //         "property_status": "Sold",
+    //         "total_area_sq_ft": "1938.0",
+    //         "posted_date": "2021-07-10",
+    //         "percentage_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "0.93"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "4.63"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "14.54"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "24.84"
+    //             }
+    //         ],
+    //         "value_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "599824.25"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "621778.22"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "680672.27"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "741925.99"
+    //             }
+    //         ],
+    //         "average_zip_code_value": "535017.4920109232",
+    //         "property_valued_compared_to_zipcode": "11.08"
+    //     },
+    //     "neighborhood": {
+    //         "percentage_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "1.12"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "5.45"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "16.31"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "27.67"
+    //             }
+    //         ],
+    //         "value_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "541023.21"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "564158.28"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "622277.37"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "683070.86"
+    //             }
+    //         ],
+    //         "past_percentage_change": [
+    //             {
+    //                 "year": "July 2021",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "July 2020",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "July 2019",
+    //                 "change": null
+    //             }
+    //         ],
+    //         "zipcode_growth_state_ranking_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "387"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "330"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "327"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "276"
+    //             }
+    //         ],
+    //         "zipcode_growth_national_ranking_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "17590"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "20623"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "18812"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "14115"
+    //             }
+    //         ],
+    //         "avg_value_state_ranking_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": "278"
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "283"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "282"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "276"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "271"
+    //             }
+    //         ],
+    //         "avg_value_national_ranking_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": "5467"
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "5550"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "5897"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "5786"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "5508"
+    //             }
+    //         ],
+    //         "total_state_rank": "595",
+    //         "total_national_rank": "32966",
+    //         "competitive_score": null,
+    //         "competition_statements": "1|2|3|4",
+    //         "current_value": "535017.49"
+    //     },
+    //     "surrounding_zipcode": {
+    //         "null": "NO",
+    //         "percentage_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "2.96"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "12.93"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "29.90"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "45.29"
+    //             }
+    //         ]
+    //     },
+    //     "state_statistics": {
+    //         "average_rental_income": 2284,
+    //         "total_listing_on_marker": 5505,
+    //         "sold_properties_last_month": 2236,
+    //         "average_sqft": 257.5,
+    //         "median_days_on_market": 2,
+    //         "great_school_rating": 5.5,
+    //         "median_sold_price": 400000,
+    //         "median_listings_price": 549000,
+    //         "percentage_change_forecasts": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": null
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": "2.85"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": "12.71"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": "29.14"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": "43.81"
+    //             }
+    //         ]
+    //     },
+    //     "moving_trends": {
+    //         "null": "NO",
+    //         "total_state_rank": "593",
+    //         "total_country_rank": "38108",
+    //         "net_in": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": -0.23
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": 0.34
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": 0.05
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": 0.2
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": 0.34
+    //             }
+    //         ],
+    //         "move_in_percentage_change_forecast": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": 0.32
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": 0.7
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": 0.67
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": 0.8
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": 0.92
+    //             }
+    //         ],
+    //         "move_out_percentage_change_forecast": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "change": 0.55
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "change": 0.36
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "change": 0.62
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "change": 0.6
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "change": 0.58
+    //             }
+    //         ],
+    //         "state_rankings": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "rank": "549"
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "rank": "25"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "rank": "215"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "rank": "65"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "rank": "25"
+    //             }
+    //         ],
+    //         "country_rankings": [
+    //             {
+    //                 "year": "July 2022",
+    //                 "rank": "34588"
+    //             },
+    //             {
+    //                 "year": "October 2022",
+    //                 "rank": "4570"
+    //             },
+    //             {
+    //                 "year": "July 2023",
+    //                 "rank": "15372"
+    //             },
+    //             {
+    //                 "year": "July 2024",
+    //                 "rank": "7332"
+    //             },
+    //             {
+    //                 "year": "July 2025",
+    //                 "rank": "4570"
+    //             }
+    //         ]
+    //     },
+    //     "is_blocked": "NO"
+    // }
     var optionLists={
         "water_code": {
             "1": "Cistern",
@@ -933,94 +940,108 @@ function ReportFormV2(props) {
         }
     }
     var user={
-        "name": "ncjsndc ncksjnc",
-        "email": "test0627@mailinator.com",
-        "phone": "9092039203",
+        "name": props.userProfile.full_name,
+        "email": props.userProfile.email,
+        "phone": props.userProfile.phone_number,
         "user_id": "512"
     }
-    var property={
-        "status": "Sold",
-        "confidence_score": "5.5",
-        "rental_estimate": null,
-        "address": {
-            "property_id": "85691865",
-            "fips": "34017",
-            "apn": "04  00044-0000-00028-  02",
-            "street_number": "746",
-            "street_pre_direction": null,
-            "street_name": "HARRISON",
-            "street_suffix": "AVE",
-            "street_post_direction": null,
-            "unit_type": null,
-            "unit_number": null,
-            "full_address": "746 Harrison Ave Harrison NJ 07029",
-            "city": "HARRISON",
-            "state": "NJ",
-            "zip_code": "07029",
-            "zip_plus_four_code": "1909",
-            "latitude": "40.747871",
-            "longitude": "-74.148703",
-            "geocoding_accuracy": "-74.148703",
-            "census_tract": "013500",
-            "carrier_code": "C012"
-        },
-        "tax": [
-            {
-                "year": "2021",
-                "property_tax": 10652.01,
-                "land": "200000.0",
-                "additions": "274900.0",
-                "rate_code_area": null,
-                "assessed_value": "474900.0"
-            }
-        ],
-        "valuation": {
-            "assessed_value": "474900.0",
-            "appraisal": "594281.0355081952",
-            "list_price": "590000.0",
-            "date": "2021"
-        },
-        "structure": {
-            "year_built": "1960",
-            "effective_year_built": "1960",
-            "rooms_count": "0.0",
-            "beds_count": "6.0",
-            "baths": "2.0",
-            "partial_baths_count": "0.0",
-            "units_count": null,
-            "total_area_sq_ft": "1938.0",
-            "stories": "2 Stories",
-            "plumbing_fixtures": null,
-            "air_conditioning_type": null,
-            "amenities": null,
-            "architecture_type": null,
-            "basement_type": null,
-            "condition": null,
-            "construction_type": "Frame",
-            "exterior_features": null,
-            "exterior_wall_type": null,
-            "flooring_types": null,
-            "heating_type": "Gas",
-            "heating_fuel_type": null,
-            "interior_wall_type": null,
-            "other_rooms": null,
-            "parking_type": "Attached Garage",
-            "accessor_parking_type": null,
-            "listing_parking_type": "ATTACHED GARAGE",
-            "garage_type": null,
-            "parking_spaces_count": "0",
-            "pool_type": null,
-            "roof_material_type": null,
-            "roof_style_type": null,
-            "sewer_type": null,
-            "water_type": null
-        },
-        "sale_history": [],
-        "is_blocked": "YES"
-    }
+    // var property={
+    //     "status": "Sold",
+    //     "confidence_score": "5.5",
+    //     "rental_estimate": null,
+    //     "address": {
+    //         "property_id": "85691865",
+    //         "fips": "34017",
+    //         "apn": "04  00044-0000-00028-  02",
+    //         "street_number": "746",
+    //         "street_pre_direction": null,
+    //         "street_name": "HARRISON",
+    //         "street_suffix": "AVE",
+    //         "street_post_direction": null,
+    //         "unit_type": null,
+    //         "unit_number": null,
+    //         "full_address": "746 Harrison Ave Harrison NJ 07029",
+    //         "city": "HARRISON",
+    //         "state": "NJ",
+    //         "zip_code": "07029",
+    //         "zip_plus_four_code": "1909",
+    //         "latitude": "40.747871",
+    //         "longitude": "-74.148703",
+    //         "geocoding_accuracy": "-74.148703",
+    //         "census_tract": "013500",
+    //         "carrier_code": "C012"
+    //     },
+    //     "tax": [
+    //         {
+    //             "year": "2021",
+    //             "property_tax": 10652.01,
+    //             "land": "200000.0",
+    //             "additions": "274900.0",
+    //             "rate_code_area": null,
+    //             "assessed_value": "474900.0"
+    //         }
+    //     ],
+    //     "valuation": {
+    //         "assessed_value": "474900.0",
+    //         "appraisal": "594281.0355081952",
+    //         "list_price": "590000.0",
+    //         "date": "2021"
+    //     },
+    //     "structure": {
+    //         "year_built": "1960",
+    //         "effective_year_built": "1960",
+    //         "rooms_count": "0.0",
+    //         "beds_count": "6.0",
+    //         "baths": "2.0",
+    //         "partial_baths_count": "0.0",
+    //         "units_count": null,
+    //         "total_area_sq_ft": "1938.0",
+    //         "stories": "2 Stories",
+    //         "plumbing_fixtures": null,
+    //         "air_conditioning_type": null,
+    //         "amenities": null,
+    //         "architecture_type": null,
+    //         "basement_type": null,
+    //         "condition": null,
+    //         "construction_type": "Frame",
+    //         "exterior_features": null,
+    //         "exterior_wall_type": null,
+    //         "flooring_types": null,
+    //         "heating_type": "Gas",
+    //         "heating_fuel_type": null,
+    //         "interior_wall_type": null,
+    //         "other_rooms": null,
+    //         "parking_type": "Attached Garage",
+    //         "accessor_parking_type": null,
+    //         "listing_parking_type": "ATTACHED GARAGE",
+    //         "garage_type": null,
+    //         "parking_spaces_count": "0",
+    //         "pool_type": null,
+    //         "roof_material_type": null,
+    //         "roof_style_type": null,
+    //         "sewer_type": null,
+    //         "water_type": null
+    //     },
+    //     "sale_history": [],
+    //     "is_blocked": "YES"
+    // }
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
     const [initialRate, setInitialRate] = useState(1)
     useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const params = Object.fromEntries(urlSearchParams.entries())
+        // vx: if inCMA queryparam not present, redirect to /reports
+        if (typeof params.inCMA === 'undefined') {
+            window.location.href = '/reports'
+        }
+        // console.log('vx: inCMA queryparam', params.inCMA === 'false')
+        else if (params.inCMA === 'true') {
+            setInCMA(true)
+        } else if (params.inCMA === 'false') {
+            setInCMA(false)
+        } else {
+            window.location.href = '/reports'
+        }
         doInitialEstimate()
         populateFields()
     }, [])
@@ -1083,47 +1104,20 @@ function ReportFormV2(props) {
       }
     function doCMAAction () {
         doUpdateHonelyEstimate()
+        var raichu = document.getElementById('reportFormZipCodeSection')
+        raichu.style = {
+            display: 'block'
+        }
         setTimeout(() => {
-            if (!inCMA) {
-                var pika = null
-                if (creditsFlag) {
-                    pika = {
-                        creditAmount: 2
-                    }
-                } else {
-                    pika = {
-                        dollarAmount: 1
-                    }
-                }
-              window.sessionStorage.removeItem('PaymentPopup')
-              window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
-            }
-                doGenerateReport(false, true)
+            doGenerateReport(false, true)
         }, 500)
-    //     if (!inCMA) {
-    //     var pika = null
-    //     if (creditsFlag) {
-    //         pika = {
-    //             creditAmount: 2
-    //         }
-    //     } else {
-    //         pika = {
-    //             dollarAmount: 1
-    //         }
-    //     }
-    //   window.sessionStorage.removeItem('PaymentPopup')
-    //   window.sessionStorage.setItem('PaymentPopup', JSON.stringify(pika))
-    // }
-    //     doGenerateReport(false, true)
     }
-    // async function doDownloadReport () {
-    //     await new Promise((resolve) => {
-    //         resolve(doUpdateHonelyEstimate())
-    //     })
-    //     doGenerateReport(false, false)
-    //   }
     function doDownloadReport () {
         doUpdateHonelyEstimate()
+        var raichu = document.getElementById('reportFormZipCodeSection')
+        raichu.style = {
+            display: 'block'
+        }
         setTimeout(() => {
             doGenerateReport(false, false)
         }, 500)
@@ -1897,6 +1891,17 @@ function ReportFormV2(props) {
             if (!cmaMode) {
               prodUrl = 'https://api.honely.com/util/reports/pdf'
               localUrl = 'http://localhost:8080/reports/pdf'
+            //   vx: need to remove forecast and property for reportform from sessionStorage, done
+              window.sessionStorage.removeItem('SinglePropertyReport')
+              var pika = {array : []}
+              pika.array.push(body)
+              window.sessionStorage.setItem('SinglePropertyReport', JSON.stringify(pika))
+              window.sessionStorage.removeItem('reportFormForecast')
+              window.sessionStorage.removeItem('reportFormProperty')
+            //   vx: need to redirect to single property report purchase page, done
+                window.location.href = '/sppurchase'
+                // window.location.href = '/paymentcheckout?mode=single-property-report-purchase' //vx: temporary
+              return
             } else {
                 var pika = {array : []}
                 var pika2 = {array : []}
@@ -1908,8 +1913,12 @@ function ReportFormV2(props) {
                     window.sessionStorage.setItem('CMA', JSON.stringify(pika))
                     pika2.array.push(forecast.property_forecast.property_id)
                     window.sessionStorage.setItem('CMASubjectPropertyId',  JSON.stringify(pika2))
-                    // vx: todo: redirect to cma page
-                    window.location.href = '/cma'
+                    // vx: need to redirect
+                    window.sessionStorage.removeItem('reportFormForecast')
+                    window.sessionStorage.removeItem('reportFormProperty')
+                    setTimeout(() => {
+                        window.location.href = '/cma'
+                    },500)
                 } else {
                     // vx: generate cma button from cma page
                     /*
@@ -1923,7 +1932,12 @@ function ReportFormV2(props) {
                     pika2.array.push(forecast.property_forecast.property_id)
                     window.sessionStorage.setItem('CMASubjectPropertyId', JSON.stringify(pika2))
                     // removeReportForm()
-                    window.location.reload()
+                    // window.location.reload()
+                    window.sessionStorage.removeItem('reportFormForecast')
+                    window.sessionStorage.removeItem('reportFormProperty')
+                    setTimeout(() => {
+                        window.location.href = '/cma'
+                    },500)
                 }
                 // if (!inCMA) {
                 //     var pika = {}
@@ -3844,26 +3858,27 @@ function ReportFormV2(props) {
       }
     return (
         <div className="section" id="report-form-overlay">
-            <CreditsBanner availableCredits={35} />
+            <CreditsBanner availableCredits={props.userProfile.credits} />
             <div className="report-form-header">
                 <p className="text-exlarge">Review Property Report</p>
                 <p>Update this report with any available data if applicable</p>
             </div>
-            <div className="report-form-changes-action">
+            {/* <div className="report-form-changes-action">
                 <div className="report-form-changes-action-btns">
                 <button>Save</button>
                 <button>Cancel</button>
                 </div>
-                {/* <span>You have made unsaved changes</span> */}
                 <p>You have unsaved changes</p>
                 <div className="report-form-changes-action-empty">
                 </div>
-            </div>
+            </div> */}
             <div className="report-form-subject-property-block">
                 <p className="report-form-subject-property-heading">Address</p>
                 <div className="report-form-subject-property-address">
-                <p>746 Harrison Ave Harrison 07029</p>
-                <button>CHANGE</button>
+                <p><GetFullAddress /></p>
+                <button onClick={() => {
+                    window.location.href = '/reports'
+                }}>CHANGE</button>
                 </div>
             </div>
             {
@@ -3884,7 +3899,56 @@ function ReportFormV2(props) {
             </div>
 
                 <div className="forecast-form">
-
+                    {/* vx: insert here */}
+                    <div className="form-section" style={{display: 'none'}} id="reportFormZipCodeSection">
+            <p className="form-section-title"><span><i className="fas fa-chart-line"></i> Neighborhood Forecast</span></p>
+            <div className="charts-row">
+            <div className="chart-container">
+                <Chart
+                  ref={chart3monthx}
+                  type="bar"
+                  height="300"
+                  width="100%"
+                  options={reportChartOptions()}
+                  series={chart3month()}
+                />
+                <p>3 Months</p>
+              </div>
+              <div className="chart-container">
+                <Chart
+                  ref={chart1yearx}
+                  type="bar"
+                  height="300"
+                  width="100%"
+                  options={reportChartOptions()}
+                  series={chart1year()}
+                />
+                <p>1 Year</p>
+              </div>
+              <div className="chart-container">
+                <Chart
+                  ref={chart2yearsx}
+                  type="bar"
+                  height="300"
+                  width="100%"
+                  options={reportChartOptions()}
+                  series={chart2years()}
+                />
+                <p>2 Years</p>
+              </div>
+              <div className="chart-container">
+                <Chart
+                  ref={chart3yearsx}
+                  type="bar"
+                  height="300"
+                  width="100%"
+                  options={reportChartOptions()}
+                  series={chart3years()}
+                />
+                <p>3 Years</p>
+              </div>
+            </div>
+            </div>
                     <div className="form-section">
                     <p className="form-section-title"><span><i className="fas fa-user-circle"></i> Agent Information</span></p>
                     <div className="form-row-flex-3cols">
@@ -4124,55 +4188,6 @@ function ReportFormV2(props) {
               </p>
             </div>
             </div>
-            <div className="form-section" style={{display: 'none'}}>
-            <p className="form-section-title"><span><i className="fas fa-chart-line"></i> Neighborhood Forecast</span></p>
-            <div className="charts-row">
-            <div className="chart-container">
-                <Chart
-                  ref={chart3monthx}
-                  type="bar"
-                  height="300"
-                  width="100%"
-                  options={reportChartOptions()}
-                  series={chart3month()}
-                />
-                <p>3 Months</p>
-              </div>
-              <div className="chart-container">
-                <Chart
-                  ref={chart1yearx}
-                  type="bar"
-                  height="300"
-                  width="100%"
-                  options={reportChartOptions()}
-                  series={chart1year()}
-                />
-                <p>1 Year</p>
-              </div>
-              <div className="chart-container">
-                <Chart
-                  ref={chart2yearsx}
-                  type="bar"
-                  height="300"
-                  width="100%"
-                  options={reportChartOptions()}
-                  series={chart2years()}
-                />
-                <p>2 Years</p>
-              </div>
-              <div className="chart-container">
-                <Chart
-                  ref={chart3yearsx}
-                  type="bar"
-                  height="300"
-                  width="100%"
-                  options={reportChartOptions()}
-                  series={chart3years()}
-                />
-                <p>3 Years</p>
-              </div>
-            </div>
-            </div>
             <div class="form-section" style={{display: 'none'}}>
             <p class="form-section-title"><span><i class="fas fa-chart-line"></i> Rental Trends</span></p>
             <div class="charts-row">
@@ -4270,24 +4285,39 @@ function ReportFormV2(props) {
         <button onClick={() => {doCMAAction()}} id="btn_doDownloadReportCMA">Add to CMA Report</button>
       </div> */}
             </div>
-            <div className="report-form-final-action">
-                <div className="report-form-final-action-element">
-                    <div className="report-form-final-action-element-inner">
-                    <img src={File} className="file" /> 
-                    <p>Generate Single Report</p>
+            {
+                !inCMA && 
+                <div className="report-form-final-action">
+                    <div className="report-form-final-action-element">
+                        <div className="report-form-final-action-element-inner">
+                        <img src={File} className="file" /> 
+                        <p>Generate Single Report</p>
+                        </div>
+                        <p>1 credit per download</p>
+                        <button onClick={() => {
+                            doDownloadReport()
+                        }}>Continue</button>
                     </div>
-                    <p>1 credit per download</p>
-                    <button>Continue</button>
-                </div>
-                <div className="report-form-final-action-element">
-                    <div className="report-form-final-action-element-inner">
-                    <img src={Files} className="file" />
-                    <p>Generate CMA Report</p>
+                    <div className="report-form-final-action-element">
+                        <div className="report-form-final-action-element-inner">
+                        <img src={Files} className="file" />
+                        <p>Generate CMA Report</p>
+                        </div>
+                        <p>2 credits per download</p>
+                        <button onClick={() => {
+                            doCMAAction()
+                        }}>Continue</button>
                     </div>
-                    <p>2 credits per download</p>
-                    <button>Continue</button>
                 </div>
-            </div>
+            }
+            {
+                inCMA &&
+                <div className="report-form-final-action" style={{textAlign: 'center'}}>
+                    <button onClick={() => {
+                        doCMAAction()
+                    }}>Add to CMA</button>
+                </div>
+            }
         </div>
     )
 }

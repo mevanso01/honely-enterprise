@@ -72,17 +72,25 @@ function HomePage(props) {
                 </div>
             </div>
             </div>
-            <div className="homepage-widgetpricing">
+            {/* vx: if not logged in or status !== active */}
+            {
+                (props.authFlag === false || props.userProfile.status !== 'ACTIVE') && 
+                <div className="homepage-widgetpricing">
                 <h1>Widget Pricing</h1>
                 <p>This montly rate equips your website with a premier lead capture tool and a competitive advantage. </p>
                 <p><span style={{fontWeight: '600'}}>$19.99/mo*</span>  <span style={{textDecoration: 'line-through'}}>$24.99/mo</span></p>
                 <p>Save 30% by taking advantage of this special offer.</p>
                 <button onClick={() => { 
-                    if (stripeUrl !== null) {
-                        window.location.href = stripeUrl
+                    if (props.authFlag === false) {
+                        window.location.href = '/signin'
+                    } else {
+                        if (stripeUrl !== null) {
+                            window.location.href = stripeUrl
+                        }
                     }
                     }}>Buy now</button>
-            </div>
+                </div>
+            }
             <div className="homepage-cma-reports">
                 <div className="homepage-cma-reports-left">
                     <img src="reports.png"></img>
@@ -143,17 +151,29 @@ function HomePage(props) {
                         <br></br><br></br><br></br><br></br>
                         </div>
                         <br></br>
-                        <button>Buy Report</button>
+                        <button onClick={() => {
+                            if (props.authFlag === false) {
+                                window.location.href = '/signin'
+                            } else {
+                                window.location.href = '/reports'
+                            }
+                        }}>Buy Report</button>
                     </div>
                     <div style={{paddingBottom: '50px'}}>
                         <h2>Purchase Credits</h2>
                         <br></br><br></br>
-                        <p>10 Credits for $10</p>
-                        <p>25 Credits for $22.50 (save 10%)</p>
-                        <p>50 Credits for $40 (save 20%)</p>
-                        <p>100 Credits for $75 (save 25%)</p>
+                        <p>20 Credits for $9.99</p>
+                        <p>50 Credits for $22.49 (save 10%)</p>
+                        <p>100 Credits for $39.99 (save 20%)</p>
+                        <p>200 Credits for $74.99 (save 25%)</p>
                         <br></br>
-                        <button>Buy Credits</button>
+                        <button onClick={() => {
+                            if (props.authFlag === false) {
+                                window.location.href = '/signin'
+                            } else {
+                                window.location.href = '/paymentcheckout?mode=bulk-credit-purchase'
+                            }
+                        }}>Buy Credits</button>
                     </div>
                 </div>
             </div>

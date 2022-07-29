@@ -144,6 +144,9 @@
 }
 
 @media (max-width: 500px){
+    .start-page{
+        margin-top: 0px;
+    }
     .search-box{
         height: 50px;
     }

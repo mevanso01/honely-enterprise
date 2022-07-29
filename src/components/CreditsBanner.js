@@ -14,7 +14,9 @@ export default function CreditsBanner({ availableCredits }) {
         </div>
       </div>
       <div className="credits-btn-container">
-        <div className="credits-btn">Buy Credits</div>
+        <div className="credits-btn" onClick={() => {
+          window.location.href = '/paymentcheckout?mode=bulk-credit-purchase'
+        }}>Buy Credits</div>
       </div>
     </div>
   );

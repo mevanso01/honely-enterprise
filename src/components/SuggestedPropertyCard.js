@@ -21,7 +21,8 @@ const SuggestedPropertyCard = (props) => {
         }
         // var pika = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId')).array
         if (!props.inCma || !pika.includes(response.data.property_forecast.property_id)) {
-            props.setForecast(response.data)
+            // props.setForecast(response.data)
+            window.sessionStorage.setItem('reportFormForecast', JSON.stringify(response.data))
             console.log('vx: forecast state set as...', response.data)
             if (props.inCma) {
                 props.setErrMsg('')
@@ -36,7 +37,8 @@ function getPropertyData(propertyId) {
   if(propertyId) {
       axios.get('https://api.honely.com/lookup/listing?property_id=' + propertyId)
       .then((response) => {
-          props.setProperty(response.data)
+          // props.setProperty(response.data)
+          window.sessionStorage.setItem('reportFormProperty', JSON.stringify(response.data))
           props.showReportForm()
       })
   }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import "../styles/CMA.css";
-import HonelySearchSimple from "./HonelySearchSimple";
+import ReportSearch from "./CustomizeWidget/ReportSearch";
 import ReportForm from "./ReportForm";
 import axios from "axios";
 import generateSideBySidePayload from "../functionalities/CMAPayloadGenerator";
@@ -33,18 +33,19 @@ function CMA(props) {
     user_id: "512",
   };
   function showReportForm() {
-    // setForCMA(cmaflag)
-    // forCMA = cmaflag
-    document.getElementById("report-form-overlay").classList.add("active");
-    document.getElementById("btn_doDownloadReport").style = "display : none";
-    document.getElementById("btn_doDownloadReport_mobile").style =
-      "display : none";
-    document.getElementById("btn_doDownloadReportCMA").style =
-      "display : inline-block";
-    document.getElementById("btn_doDownloadReport_mobileCMA").style =
-      "display : inline-block";
-    // document.getElementById('report-form-overlay').classList.add('active')
-    window.dispatchEvent(new Event("resize"));
+    // // setForCMA(cmaflag)
+    // // forCMA = cmaflag
+    // document.getElementById("report-form-overlay").classList.add("active");
+    // document.getElementById("btn_doDownloadReport").style = "display : none";
+    // document.getElementById("btn_doDownloadReport_mobile").style =
+    //   "display : none";
+    // document.getElementById("btn_doDownloadReportCMA").style =
+    //   "display : inline-block";
+    // document.getElementById("btn_doDownloadReport_mobileCMA").style =
+    //   "display : inline-block";
+    // // document.getElementById('report-form-overlay').classList.add('active')
+    // window.dispatchEvent(new Event("resize"));
+    window.location.href = '/reportform?inCMA=true'
   }
   useEffect(() => {
     console.log("vx: userprofile", props.userProfile);
@@ -249,78 +250,100 @@ function CMA(props) {
     }
   }
   function generateCMA() {
-    var sideBySidePayload = generateSideBySidePayload();
-    console.log("vx: tralalala1", sideBySidePayload);
-    var pika = JSON.parse(window.sessionStorage.getItem("CMA")).array;
-    var cmaPayloadVar = {};
-    cmaPayloadVar.user_id = "512";
-    cmaPayloadVar.mode = "multiple";
-    //   cmaPayloadVar.report_data_list = []
-    cmaPayloadVar.report_data_list = sideBySidePayload.slice();
-    //   cmaPayloadVar.report_data_list.concat(sideBySidePayload)
-    console.log("vx: tralalala2", cmaPayloadVar.report_data_list);
-    for (let x = 0; x < pika.length; x++) {
-      delete pika[x].user_id;
-      cmaPayloadVar.report_data_list.push(pika[x]);
+    /*
+    var lala = JSON.parse(
+                  window.sessionStorage.getItem("CMASubjectPropertyId")
+                ).array;
+                if (lala.length <= 1) {
+                  setErrMsg(
+                    "Please add at least one property to compare with."
+                  );
+                } else {
+                  setShowPaymentPopup(true);
+                }
+    */
+    var lala = JSON.parse(
+        window.sessionStorage.getItem("CMASubjectPropertyId")
+        ).array;
+    if (lala.length <= 1) {
+        setErrMsg(
+            "Please add at least one property to compare with."
+          );
+    } else {
+        window.location.href = '/cmapurchase'
     }
-    console.log("vx: tralalala3", cmaPayloadVar.report_data_list);
-    console.log("[INFO] Start generating PDF report......");
-    fetch("https://api.honely.com/util/reports/pdf", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cmaPayloadVar),
-      // body: JSON.stringify(raichu),
-    })
-      .then(function (response) {
-        // console.log(response)
-        return response.blob();
-      })
-      .then(function (blob) {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement("a");
-        a.href = url;
-        a.download = "honely_report.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        console.log("[INFO] Finished generating PDF report......");
-        let config = {
-          headers: {
-            Authorization: "Bearer " + props.jwt,
-          },
-        };
-        var payload = null;
-        if (
-          typeof JSON.parse(window.sessionStorage.getItem("PaymentPopup"))
-            .dollarAmount !== "undefined"
-        ) {
-          payload = {
-            "dollar-amount": 1,
-          };
-        }
-        if (
-          typeof JSON.parse(window.sessionStorage.getItem("PaymentPopup"))
-            .creditAmount !== "undefined"
-        ) {
-          payload = {
-            "credit-amount": 2,
-          };
-        }
-        axios
-          .post(
-            "https://developers.honely.com/user/buy-report",
-            payload,
-            config
-          )
-          .then(() => {
-            window.location.href = "/reports";
-          });
-      })
-      .catch((err) => {
-        console.log("PDF Request Failed", err);
-      });
+    // var sideBySidePayload = generateSideBySidePayload();
+    // console.log("vx: tralalala1", sideBySidePayload);
+    // var pika = JSON.parse(window.sessionStorage.getItem("CMA")).array;
+    // var cmaPayloadVar = {};
+    // cmaPayloadVar.user_id = "512";
+    // cmaPayloadVar.mode = "multiple";
+    // //   cmaPayloadVar.report_data_list = []
+    // cmaPayloadVar.report_data_list = sideBySidePayload.slice();
+    // //   cmaPayloadVar.report_data_list.concat(sideBySidePayload)
+    // console.log("vx: tralalala2", cmaPayloadVar.report_data_list);
+    // for (let x = 0; x < pika.length; x++) {
+    //   delete pika[x].user_id;
+    //   cmaPayloadVar.report_data_list.push(pika[x]);
+    // }
+    // console.log("vx: tralalala3", cmaPayloadVar.report_data_list);
+    // console.log("[INFO] Start generating PDF report......");
+    // fetch("https://api.honely.com/util/reports/pdf", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(cmaPayloadVar),
+    //   // body: JSON.stringify(raichu),
+    // })
+    //   .then(function (response) {
+    //     // console.log(response)
+    //     return response.blob();
+    //   })
+    //   .then(function (blob) {
+    //     var url = window.URL.createObjectURL(blob);
+    //     var a = document.createElement("a");
+    //     a.href = url;
+    //     a.download = "honely_report.pdf";
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     a.remove();
+    //     console.log("[INFO] Finished generating PDF report......");
+    //     let config = {
+    //       headers: {
+    //         Authorization: "Bearer " + props.jwt,
+    //       },
+    //     };
+    //     var payload = null;
+    //     if (
+    //       typeof JSON.parse(window.sessionStorage.getItem("PaymentPopup"))
+    //         .dollarAmount !== "undefined"
+    //     ) {
+    //       payload = {
+    //         "dollar-amount": 1,
+    //       };
+    //     }
+    //     if (
+    //       typeof JSON.parse(window.sessionStorage.getItem("PaymentPopup"))
+    //         .creditAmount !== "undefined"
+    //     ) {
+    //       payload = {
+    //         "credit-amount": 2,
+    //       };
+    //     }
+    //     axios
+    //       .post(
+    //         "https://developers.honely.com/user/buy-report",
+    //         payload,
+    //         config
+    //       )
+    //       .then(() => {
+    //         window.location.href = "/reports";
+    //       });
+    //   })
+    //   .catch((err) => {
+    //     console.log("PDF Request Failed", err);
+    //   });
   }
   function ComparableProperties() {
     var ans = [];
@@ -333,9 +356,7 @@ function CMA(props) {
         ans.push(
           <SuggestedPropertyCard
             property={pika[x]}
-            setForecast={setForecast}
             setErrMsg={setErrMsg}
-            setProperty={setProperty}
             showReportForm={showReportForm}
           />
         );
@@ -355,7 +376,7 @@ function CMA(props) {
       )}
       <br></br>
       <br></br>
-      <CreditsBanner availableCredits={35} />
+      <CreditsBanner availableCredits={props.userProfile.credits} />
       <div className="section cma-section">
         <div className="cma-header">
           <div>
@@ -424,20 +445,22 @@ function CMA(props) {
             <ReportFormContainer />
           </div>
         )}
-        <p className="cma-property-small-bold" style={{ cursor: "pointer" }}>
+        <p className="cma-property-small-bold" style={{ cursor: "pointer" }} onClick={() => {
+            generateCMA()
+        }}>
           Generate Report {">"}
         </p>
         <div className="cma-property-search-block">
           <div className="cma-property-search-sub-block">
             <h1>Search a property to compare</h1>
             <br></br>
-            <HonelySearchSimple
+            {/* <div className="search-box"> */}
+            <ReportSearch
               inCma={true}
-              setForecast={setForecast}
-              setProperty={setProperty}
               showReportForm={showReportForm}
               setErrMsg={setErrMsg}
             />
+            {/* </div> */}
           </div>
           <div>
             {/* <v-icon style="font-size: 70px; font-weight: 100; top: 20%;">
@@ -469,8 +492,11 @@ function CMA(props) {
             See more results
           </p>
         )}
+        <span style={{ color: "red", fontSize: "20px" }}>{errMsg}</span>
         <div className="generate-report-container">
-          <button className="generate-report-btn">Generate Report</button>
+          <button className="generate-report-btn" onClick={() => {
+              generateCMA()
+          }}>Generate Report</button>
         </div>
       </div>
     </div>

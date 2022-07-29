@@ -129,14 +129,14 @@ export default function WordPressGuide() {
         </div>
       </div>
 
-      <button
+      {/* <button
         className="wordpress-guide-complte-btn"
         onClick={() => {
           navigate("/account-management/customize-widget");
         }}
       >
         Finish Setup
-      </button>
+      </button> */}
     </div>
   );
 }

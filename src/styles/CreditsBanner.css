@@ -43,6 +43,7 @@
 }
 
 .credits-btn-container{
+    cursor: pointer;
 }
 
 .credits-btn{

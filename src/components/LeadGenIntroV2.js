@@ -104,9 +104,13 @@ export default function LeadGenIntroV2(props) {
             </p>
             <div className="lead-intro-v2-btn-container">
               <button className="lead-intro-v2-orange-btn" onClick={() => { 
-                    if (stripeUrl !== null) {
-                        window.location.href = stripeUrl
-                    }
+                    if (props.authFlag === false  || typeof props.authFlag === 'undefined') {
+                      window.location.href = '/signin'
+                  } else {
+                      if (stripeUrl !== null) {
+                          window.location.href = stripeUrl
+                      }
+                  }
                     }}>Buy now</button>
             </div>
           </div>

@@ -27,6 +27,10 @@
 .reports-intro-v2-report-type {
     padding: 4%;
 }
+.reports-intro-v2-report-type img {
+    max-width: 217px;
+    box-shadow: 0 0 20px #cccccc;
+}
 .reports-intro-v2-big-text{
     font-weight: 400;
     font-size: 36px;
@@ -36,6 +40,10 @@
 }
 .reports-intro-v2-subsection-big-text{
     margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+.reports-intro-v2-subsection-big-text-2{
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 .reports-intro-v2-subsection-btn {
@@ -143,6 +151,9 @@
         margin-bottom: 2rem;
     }
     .reports-intro-v2-subsection-big-text {
+        margin-top: 0.5rem;
+    }
+    .reports-intro-v2-subsection-big-text-2 {
         margin-top: 0.5rem;
     }
     .reports-intro-v2-subsection-btn{

@@ -41,6 +41,10 @@ import WordPressGuide from "./components/WordPressGuide";
 import WixGuide from "./components/WixGuide";
 import ReportFormV2 from "./components/ReportFormV2";
 import LeadsList from "./components/LeadsList"
+import PaymentCheckout from "./components/PaymentCheckout"
+import SingleReport from "./components/PropertyReport/SingleReport"
+import CMAReport from "./components/PropertyReport/CMAReport"
+import PaymentMethods from "./components/PaymentMethods";
 Amplify.configure(config);
 function App() {
   var [data, setData] = useState({
@@ -51,6 +55,7 @@ function App() {
   });
   var [jwtExpiry, setJwtExpiry] = useState(null);
   async function doSignOut() {
+    // vx: need to remove session storage stuff
     await Auth.signOut();
     updateAuthState();
     window.location.href = "/";
@@ -111,7 +116,7 @@ function App() {
               .get("https://developers.honely.com/user", config)
               .then((response) => {
                 // console.log('vx: userProfile being set in app.js state as', response.data.data)
-                // console.log('vx: userprofile is', response.data)
+                console.log('vx: userprofile is', response.data)
                 setData((prevValue) => {
                   return {
                     authFlag: true,
@@ -282,7 +287,7 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<HomePage authFlag={true} jwt={data.jwt} doSignOut={doSignOut}/>}
+                element={<HomePage authFlag={true} jwt={data.jwt} doSignOut={doSignOut} userProfile={data.userProfile}/>}
               />
               <Route
                 path="/leadgen"
@@ -340,7 +345,7 @@ function App() {
                     />
                   }
                 />
-                <Route path="leads" element={<Leads />}>
+                <Route path="leads" element={<Leads userProfile={data.userProfile} />}>
                   <Route path="wordpress-guide" element={<WordPressGuide />} />
                   <Route path="wix-guide" element={<WixGuide />} />
                 </Route>
@@ -399,6 +404,11 @@ function App() {
                   />
                 }
               />
+              <Route path="/reportform" element={<ReportFormV2 userProfile={data.userProfile} />} />
+              <Route path="/paymentcheckout" element={<PaymentCheckout userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}/>} />
+              <Route path='/sppurchase' element={<SingleReport userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut} />} />
+              <Route path='/cmapurchase' element={<CMAReport userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}  />} />
+              <Route path='/paymentmethods' element={<PaymentMethods userProfile={data.userProfile} jwt={data.jwt} doSignOut={doSignOut}  />} />
               {/* <Route path="/customize-widget" element={<CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />} /> */}
               <Route
                 path="*"
@@ -447,7 +457,6 @@ function App() {
               path="/signin"
               element={<Signin updateAuthState={updateAuthState} />}
             />
-            <Route path="/reportform" element={<ReportFormV2 />} />
           </Routes>
           {/* </div> */}
         </div>

@@ -199,6 +199,10 @@
     }
     .header-dropdown ul li{
         text-align: left;
+        margin-left: 20px;
+    }
+    .account-management-items {
+        margin-top: 10px;
     }
 }
 @media (max-width: 775px) {
@@ -252,5 +256,8 @@
     }
     .header-signout {
         padding-top: 2px;
+    }
+    .account-management-items a{
+        font-size: 12px;
     }
 }

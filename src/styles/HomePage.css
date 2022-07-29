@@ -177,6 +177,7 @@
         max-width: 300px;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 0 20px #cccccc;
     }
     .homepage-cma-reports-right {
         flex: 1.5;
@@ -195,7 +196,7 @@
         text-align: center;
         font-family: 'Ubuntu', sans-serif;
         font-weight: 400;
-        font-size: 48px;
+        font-size: 40px;
         line-height: 24px;
     }
     .homepage-report-features ul {

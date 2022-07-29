@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import '../../styles/HonelySearch.css';
 
-export default function ReportSearch() {
+export default function ReportSearch(props) {
   const [timer, setTimer] = useState(null)
   const [level, setLevel] = useState(null)
   const [results, setResults] = useState([])
@@ -13,14 +13,47 @@ export default function ReportSearch() {
     if(propertyId) {
         axios.get('https://api.honely.com/lookup/listing?property_id=' + propertyId)
         .then((response) => {
-          window.sessionStorage.setItem('subjectPropertyDetails', JSON.stringify(response.data))
+          window.sessionStorage.setItem('reportFormProperty', JSON.stringify(response.data))
+          setTimeout(() => {
+            if (!props.inCma) {
+              window.location.href = '/reportform?inCMA=false'
+            } else {
+              props.showReportForm()
+            }
+          }, 500)
         })
     }
 }
   function getForecast(value) {
     axios.get('https://api.honely.com/searches/forecast?address=' + value + '&user_id=512')
     .then((response) => {
-      window.sessionStorage.setItem('subjectForecastDetails', JSON.stringify(response.data))
+        if(!props.inCma) {
+          axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + response.data.property_forecast.property_id)
+          .then((response) => {
+            window.sessionStorage.removeItem('CMAComparableHomes')
+            var lala2 = {
+                array: response.data.rows
+            }
+            console.log('vx: articuno'. lala2)
+            window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(lala2))
+          })
+        }
+        var lala = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId'))
+        var pika = null
+        if (lala !== null) {
+            pika = lala.array
+        }
+        if (!props.inCma || !pika.includes(response.data.property_forecast.property_id)) {
+          window.sessionStorage.setItem('reportFormForecast', JSON.stringify(response.data))
+          if (props.inCma) {
+              props.setErrMsg('')
+          }
+          setTimeout(() => {
+            getPropertyData(response.data.property_forecast.property_id)
+          }, 500)
+        } else {
+          props.setErrMsg('Cannot add a property that has already been added.')
+        }
     })
   }
   function doSearch() {
@@ -172,7 +205,9 @@ export default function ReportSearch() {
     return
 }
   return (
-    <div className="search-container" style={{width: '59%'}}>
+  // <div className="search-container" style={!props.inCma ? {width: '59%'}:{width: '100%'}}>
+  // <div className="search-container in-cma">
+  <div className={!props.inCma ? "search-container not-in-cma":"search-container"}>
     <div
       className="search-input-wrapper"
       style={{ background: "white", padding: "2px", width: '100%', margin: 'auto' }}

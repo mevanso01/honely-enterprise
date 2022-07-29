@@ -615,7 +615,7 @@ function Subscription(props) {
             } */}
             <br></br>
             <br></br>
-            <div className="subscription-payment-method">
+            {/* <div className="subscription-payment-method">
               <h3>Payment Method</h3>
               <div className="subscription-payment-method-select">
                 <span
@@ -640,7 +640,7 @@ function Subscription(props) {
               <p className="subscription-payment-method-error-message">
                 {paymentMethodStatusMsg.errorMessage}
               </p>
-            </div>
+            </div> */}
             {/* <h3>Subscription</h3>
             <br></br><br></br>
             <button onClick={() => {window.location.href=data.stripeUrl}}>Subscribe now</button> */}
@@ -722,7 +722,7 @@ function Subscription(props) {
             } */}
           <br></br>
           <br></br>
-          <div className="subscription-payment-method">
+          {/* <div className="subscription-payment-method">
             <h3>Payment Method</h3>
             <div className="subscription-payment-method-select">
               <span
@@ -747,7 +747,7 @@ function Subscription(props) {
             <p className="subscription-payment-method-error-message">
               {paymentMethodStatusMsg.errorMessage}
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );

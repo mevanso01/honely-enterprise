@@ -80,20 +80,33 @@ function Header(props) {
               className={`header-item ${
                 path.pathname === "/leadgen" ? "active" : ""
               }`} onMouseOver = {() => {
-                document.getElementById('header-dropdown-left').classList.add('active')
+                if (props.authFlag && props.userProfile.status !== 'CONFIRMED') {
+                  document.getElementById('header-dropdown-left').classList.add('active')
+                }
               }}
               onMouseLeave = {() => {
-                document.getElementById('header-dropdown-left').classList.remove('active')
+                if (props.authFlag && props.userProfile.status !== 'CONFIRMED') {
+                  document.getElementById('header-dropdown-left').classList.remove('active')
+                }
               }}
             >
               <Link to="/leadgen">Lead Capture</Link>
               {
-                props.authFlag && props.userProfile.status !== 'CONFIRMED' &&
+                props.authFlag &&
                 <div class="header-dropdown left" id="header-dropdown-left">
                   <ul>
-                    <li onClick={() => { window.location.href = '/account-management/leads'}}>Leads</li>
-                    <li onClick={() => { window.location.href = '/account-management/customize-widget'}}>Customize Widget</li>
-                    <li onClick={() => { window.location.href = '/account-management/subscription'}}>Subscription</li>
+                    {
+                      props.userProfile.status !== 'CONFIRMED' &&
+                      <li onClick={() => { window.location.href = '/account-management/leads'}}>Leads</li>
+                    }
+                    {
+                      props.userProfile.status !== 'CONFIRMED' &&
+                      <li onClick={() => { window.location.href = '/account-management/customize-widget'}}>Customize Widget</li>
+                    }
+                    {
+                      props.userProfile.status !== 'CONFIRMED' &&
+                      <li onClick={() => { window.location.href = '/account-management/subscription'}}>Subscription</li>
+                    }
                   </ul>
                 </div>
               }
@@ -101,15 +114,16 @@ function Header(props) {
             <li
               className={`header-item ${
                 path.pathname === "/reports" ? "active" : ""
-              }`} onMouseOver = {() => {
-                document.getElementById('header-dropdown-right').classList.add('active')
-              }}
-              onMouseLeave = {() => {
-                document.getElementById('header-dropdown-right').classList.remove('active')
-              }}
+              }`} 
+              // onMouseOver = {() => {
+              //   document.getElementById('header-dropdown-right').classList.add('active')
+              // }}
+              // onMouseLeave = {() => {
+              //   document.getElementById('header-dropdown-right').classList.remove('active')
+              // }}
             >
               <Link to="/reports">Report Generation</Link>
-              {
+              {/* {
                 props.authFlag &&
                 <div class="header-dropdown right" id="header-dropdown-right">
                   <ul>
@@ -117,7 +131,7 @@ function Header(props) {
                     <li>Archived Reports</li>
                   </ul>
                 </div>
-              }
+              } */}
             </li>
           </ul>
         </nav>
@@ -204,12 +218,12 @@ function Header(props) {
               >
                 <Link to="/">Account Management</Link>
                 {
-                  props.authFlag && props.userProfile.status !== 'CONFIRMED' &&
+                  props.authFlag && 
                   <div class="header-dropdown account" id="header-dropdown-account">
                     <ul>
-                      <li>User Profile</li>
-                      <li>Change Password</li>
-                      <li>Payment methods</li>
+                      {/* <li>User Profile</li>
+                      <li>Change Password</li> */}
+                      <li onClick={() => { window.location.href = '/paymentmethods'}}>Payment methods</li>
                       <li onClick={props.signOut}>Sign out</li>
                     </ul>
                   </div>

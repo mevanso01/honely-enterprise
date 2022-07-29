@@ -49,7 +49,13 @@
     cursor: pointer;
 }
 .subscription-payment-method {
-    margin: 20px 0px;
+    margin: 20px 10%;
+}
+.subscription-payment-method h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    color: black;
 }
 .subscription-change-payment-method {
     cursor: pointer;
@@ -63,6 +69,12 @@
     padding-top: 30px;
     padding-bottom: 0px;
 }
+/* .subscription-payment-method-select span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: black;
+} */
 .subscription-payment-method-list {
     padding-top: 10px;
 }

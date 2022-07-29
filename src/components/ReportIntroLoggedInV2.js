@@ -13,20 +13,25 @@ import Files from "../assets/images/files.png";
 import CreditsBanner from "./CreditsBanner";
 import ReportSearch from "./CustomizeWidget/ReportSearch";
 
-export default function ReportIntroLoggedInV2() {
+export default function ReportIntroLoggedInV2(props) {
   useEffect(() => {
-    window.sessionStorage.removeItem('subjectForecastDetails')
-    window.sessionStorage.removeItem('subjectPropertyDetails')
+    window.sessionStorage.removeItem('reportFormForecast')
+    window.sessionStorage.removeItem('reportFormProperty')
+    window.sessionStorage.removeItem('SinglePropertyReport')
+    // vx: need to remove cma related sessionStorage stuff
+    window.sessionStorage.removeItem('CMAComparableHomes')
+    window.sessionStorage.removeItem('CMASubjectPropertyId')
+    window.sessionStorage.removeItem('CMA')
   })
   return (
     <div className="section">
-      <CreditsBanner availableCredits={35} />
+      <CreditsBanner availableCredits={props.userProfile.credits} />
       <div className="report-loggedin-content start-page">
         <div className="section-wrapper">
           <p className="text-exlarge">Generate a Property Report</p>
           <div className="search-box">
             {/* <div className="search-input-container"> */}
-              <ReportSearch />
+              <ReportSearch inCma={false}/>
             {/* </div> */}
             {/* <button className="search-box-btn">Continue</button> */}
           </div>
@@ -138,7 +143,9 @@ export default function ReportIntroLoggedInV2() {
                 </div>
               </div>
               <div className="report-loggedin-credits-right">
-                <button className="credits-right-btn">Continue</button>
+                <button className="credits-right-btn" onClick={() => {
+                  window.location.href = '/paymentcheckout?mode=1-credit-purchase'
+                }}>Continue</button>
               </div>
             </div>
             <div className="report-loggedin-credits-row">
@@ -156,7 +163,9 @@ export default function ReportIntroLoggedInV2() {
                 </div>
               </div>
               <div className="report-loggedin-credits-right">
-                <button className="credits-right-btn">Continue</button>
+                <button className="credits-right-btn" onClick={() => {
+                  window.location.href = '/paymentcheckout?mode=2-credit-purchase'
+                }}>Continue</button>
               </div>
             </div>
             <div className="report-loggedin-credits-row">
@@ -170,7 +179,9 @@ export default function ReportIntroLoggedInV2() {
                 </div>
               </div>
               <div className="report-loggedin-credits-right">
-                <button className="credits-right-btn">Continue</button>
+                <button className="credits-right-btn" onClick={() => {
+                  window.location.href = '/paymentcheckout?mode=bulk-credit-purchase'
+                }}>Continue</button>
               </div>
             </div>
           </div>

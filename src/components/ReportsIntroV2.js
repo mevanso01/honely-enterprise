@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../styles/ReportsIntroV2.css";
 import ReportIntroLoggedInV2 from "./ReportIntroLoggedInV2";
-function ReportsIntroV2({ authFlag }) {
-  if(authFlag){
+function ReportsIntroV2(props) {
+  if(props.authFlag){
     return (
-      <ReportIntroLoggedInV2 />
+      <ReportIntroLoggedInV2 userProfile={props.userProfile}/>
     );
   }else{
     return (
@@ -32,13 +32,15 @@ function ReportsIntroV2({ authFlag }) {
                     anywhere else.
                   </p>
                   <p>Property Report - 1 Credit or $0.50</p>
-                  <button className="reports-intro-v2-subsection-btn">
+                  <button onClick={() => {
+                      window.location.href = '/signin'
+                  }} className="reports-intro-v2-subsection-btn">
                     Get Started
                   </button>
                 </div>
                 <div className="reports-intro-v2-report-type">
-                  <img src="reports.png"></img>
-                  <p className="reports-intro-v2-big-text reports-intro-v2-subsection-big-text">
+                  <img style={{maxWidth: '280px', boxShadow: 'none'}} src="cmareports.png"></img>
+                  <p className="reports-intro-v2-big-text reports-intro-v2-subsection-big-text-2">
                     Intelligent CMA reports
                   </p>
                   <p>
@@ -47,7 +49,9 @@ function ReportsIntroV2({ authFlag }) {
                     anywhere else.
                   </p>
                   <p>CMA - 2 Credits or $1.00</p>
-                  <button className="reports-intro-v2-subsection-btn">
+                  <button onClick={() => {
+                      window.location.href = '/signin'
+                  }}className="reports-intro-v2-subsection-btn">
                     Get Started
                   </button>
                 </div>
@@ -133,22 +137,56 @@ function ReportsIntroV2({ authFlag }) {
                   <br></br>
                 </div>
                 <br></br>
-                <button>Buy Report</button>
+                <button onClick={() => {
+                    window.location.href = '/signin'
+                }}>Buy Report</button>
               </div>
               <div style={{ paddingBottom: "50px" }}>
                 <h2>Purchase Credits</h2>
                 <br></br>
                 <br></br>
-                <p>10 Credits for $10</p>
-                <p>25 Credits for $22.50 (save 10%)</p>
-                <p>50 Credits for $40 (save 20%)</p>
-                <p>100 Credits for $75 (save 25%)</p>
+                <p>20 Credits for $9.99</p>
+                <p>50 Credits for $22.49 (save 10%)</p>
+                <p>100 Credits for $39.99 (save 20%)</p>
+                <p>200 Credits for $74.99 (save 25%)</p>
                 <br></br>
-                <button>Buy Credits</button>
+                <button onClick={() => {
+                    window.location.href = '/signin'
+                }}>Buy Credits</button>
               </div>
             </div>
           </div>
         </div>
+        <div className="homepage-report-features">
+                <h1>What Do You Get with Honely’s Reporting Software?</h1>
+                <br></br>
+                <ul>
+                    <li>
+                        <div>
+                            <i className="mdi mdi-checkbox-marked-circle" />
+                        </div>
+                        <div>
+                            <p>Standard MLS data</p><p>(Beds, baths, sqft, etc.)</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                        <i className="mdi mdi-checkbox-marked-circle" />
+                        </div>
+                        <div>
+                            <p>Property Value Estimates and Forecasts</p><p>(Current, 3 month, 1, 2, 3 years)</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                        <i className="mdi mdi-checkbox-marked-circle" />
+                        </div>
+                        <div>
+                        <p>Predictive Neighborhood Analysis</p><p>(Price appreciation, migration trends, rankings, etc.)</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
       </div>
     );
   }

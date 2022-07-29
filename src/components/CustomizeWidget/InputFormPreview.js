@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowDownIcon } from './Icons'
-import { LocationIcon, UserIcon, MessageIcon, PhoneIcon } from './Icons'
+import { LocationIcon, UserIcon, MessageIcon, PhoneIcon, InfoIcon } from './Icons'
 
 const InputFormPreview = (props) => {
   const {
@@ -81,7 +81,7 @@ const InputFormPreview = (props) => {
         <div key={field.order} className='widget-form-controller'>
           <label style={{ color: widgetConfig.colors.text_color }}>{field.label}</label>
           <div className='widget-input-wrapper'>
-            <PhoneIcon />
+            {field.label.toLowerCase().includes('phone') ? <PhoneIcon /> : <InfoIcon /> }
             <input
               name={field.field_key}
               placeholder={field.placeholder}

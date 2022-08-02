@@ -44,7 +44,9 @@ const SingleReport = (props) => {
               a.remove();
               console.log("[INFO] Finished generating PDF report......");
               window.sessionStorage.removeItem("SinglePropertyReport")
-              window.location.href = "/reports";
+              setTimeout(() => {
+                window.location.href = '/reports'
+            }, 1000)
           })
           .catch((err) => {
               console.log("PDF Request Failed", err);
@@ -72,7 +74,7 @@ const SingleReport = (props) => {
       )}
       <h1>Generate a Property Report</h1>
       <div className='property-report-wrapper'>
-        <span class="mdi mdi-close" onClick={() => {window.location.href = '/reports'}}></span>
+        <span className="mdi mdi-close" onClick={() => {window.location.href = '/reports'}}></span>
         <p className='title'>Purchase a single report</p>
         <p className='address'>{JSON.parse(window.sessionStorage.getItem("SinglePropertyReport")).array[0].ADDRESS_1.data + ' ' + JSON.parse(window.sessionStorage.getItem("SinglePropertyReport")).array[0].CITY.data + ' ' + JSON.parse(window.sessionStorage.getItem("SinglePropertyReport")).array[0].STATE.data + ' ' + JSON.parse(window.sessionStorage.getItem("SinglePropertyReport")).array[0].ZIP.data}</p>
         <div className='report-screen'>

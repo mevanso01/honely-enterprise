@@ -1028,6 +1028,9 @@ function ReportFormV2(props) {
     const [showPaymentPopup, setShowPaymentPopup] = useState(false)
     const [initialRate, setInitialRate] = useState(1)
     useEffect(() => {
+        if(!window.sessionStorage.getItem('reportFormForecast')) {
+            window.location.href = '/reports'
+        }
         const urlSearchParams = new URLSearchParams(window.location.search)
         const params = Object.fromEntries(urlSearchParams.entries())
         // vx: if inCMA queryparam not present, redirect to /reports
@@ -2458,6 +2461,7 @@ function ReportFormV2(props) {
         }
       }
     function reportChartOptions () {
+        if (forecast) {
         return {
           plotOptions: {
             bar: {
@@ -2494,6 +2498,7 @@ function ReportFormV2(props) {
             },
           },
         }
+    }
       }
     function chartMedianRent () {
         return [{
@@ -4188,10 +4193,10 @@ function ReportFormV2(props) {
               </p>
             </div>
             </div>
-            <div class="form-section" style={{display: 'none'}}>
-            <p class="form-section-title"><span><i class="fas fa-chart-line"></i> Rental Trends</span></p>
-            <div class="charts-row">
-              <div class="chart-container chart-col-25">
+            <div className="form-section" style={{display: 'none'}}>
+            <p className="form-section-title"><span><i className="fas fa-chart-line"></i> Rental Trends</span></p>
+            <div className="charts-row">
+              <div className="chart-container chart-col-25">
                 <Chart
                   ref={chartMedianRentx}
                   type="bar"
@@ -4202,7 +4207,7 @@ function ReportFormV2(props) {
                 />
                 <p>Media Rent</p>
               </div>
-              <div class="chart-container chart-col-25">
+              <div className="chart-container chart-col-25">
                 <Chart
                   ref={chartCashFlowx}
                   type="bar"
@@ -4213,7 +4218,7 @@ function ReportFormV2(props) {
                 />
                 <p>Cash Flow</p>
               </div>
-              <div class="chart-container chart-col-50">
+              <div className="chart-container chart-col-50">
                 <Chart
                   ref={chartRentalGrowthx}
                   type="bar"
@@ -4226,13 +4231,13 @@ function ReportFormV2(props) {
               </div>
             </div>
           </div>
-            <div class="form-section share-area noborder-nomargin">
-            {/* <p class="form-section-title"><i class="fas fa-share-alt"></i> <span>Share Honely Report (Optional)</span></p> */}
-            {/* <div class="form-row">
+            <div className="form-section share-area noborder-nomargin">
+            {/* <p className="form-section-title"><i className="fas fa-share-alt"></i> <span>Share Honely Report (Optional)</span></p> */}
+            {/* <div className="form-row">
               <p>
                 <label>Emails (use commas " , " to separate multiple emails)</label>
-                <div class="input-text-multi" id="share-emails-input-container">
-                  <div class="input-text-multi-display" id="input-text-multi-display"></div>
+                <div className="input-text-multi" id="share-emails-input-container">
+                  <div className="input-text-multi-display" id="input-text-multi-display"></div>
                   <input type="text" name="share-emails-temp" id="share-emails-temp"></input>
                   <input type="hidden" name="share-emails" id="share-emails"></input>
                 </div>
@@ -4243,9 +4248,9 @@ function ReportFormV2(props) {
               </p>
             </div> */}
             <div>
-          <p class="report-disclaimer">Honely provides the Honely AI, data, website and brand &amp; links &ldquo;as is,&rdquo; &ldquo;with all faults&rdquo; and &ldquo;as available.&rdquo; <br></br>* The Honely revaluation currenty takes into account only valid changes to inputs such as property size, number of bedrooms, and number of bathrooms.</p>
+          <p className="report-disclaimer">Honely provides the Honely AI, data, website and brand &amp; links &ldquo;as is,&rdquo; &ldquo;with all faults&rdquo; and &ldquo;as available.&rdquo; <br></br>* The Honely revaluation currenty takes into account only valid changes to inputs such as property size, number of bedrooms, and number of bathrooms.</p>
           </div>
-          {/* <div class="form-action-row-mobile">
+          {/* <div className="form-action-row-mobile">
             <button onClick={() => {
                 var pika = null
                 if (creditsFlag) {
@@ -4266,7 +4271,7 @@ function ReportFormV2(props) {
           </div>
                 </div>
             </div>
-            {/* <div class="form-action-row" style={{backgroundColor:'white'}}>
+            {/* <div className="form-action-row" style={{backgroundColor:'white'}}>
         <button onClick={() => {
             var pika = null
             if (creditsFlag) {

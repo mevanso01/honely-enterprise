@@ -26,3 +26,29 @@
     font-weight: 400;
     padding: 10px;
 }
+@media (max-width: 575px) {
+    .leads-list-table {
+        /* display: none; */
+    }
+    .leads-list-mobile-section {
+        display: block;
+    }
+    .leads-list-mobile-data {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .leads-list-mobile-data-block {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .leads-list-mobile-data-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}

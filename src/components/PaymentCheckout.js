@@ -46,7 +46,9 @@ function PaymentCheckout(props) {
             a.click();
             a.remove();
             console.log("[INFO] Finished generating PDF report......");
-            window.location.href = '/reports'
+            setTimeout(() => {
+                window.location.href = '/reports'
+            }, 1000)
           })
           .catch((err) => {
             console.log("PDF Request Failed", err);
@@ -129,7 +131,9 @@ function PaymentCheckout(props) {
                     a.remove();
                     console.log("[INFO] Finished generating PDF report......");
                     window.sessionStorage.removeItem("SinglePropertyReport")
-                    window.location.href = "/reports";
+                    setTimeout(() => {
+                        window.location.href = '/reports'
+                    }, 1000)
                 })
                 .catch((err) => {
                     console.log("PDF Request Failed", err);

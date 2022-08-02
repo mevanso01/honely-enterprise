@@ -15,7 +15,7 @@ const CMAReport = (props) => {
       }
     }
     var payload = {
-        'credit-amount': 1
+        'credit-amount': 2
     }
     axios.post('https://developers.honely.com/user/buy-report', payload, config)
     .then(() => {
@@ -56,7 +56,9 @@ const CMAReport = (props) => {
         a.click();
         a.remove();
         console.log("[INFO] Finished generating PDF report......");
-        window.location.href = '/reports'
+        setTimeout(() => {
+          window.location.href = '/reports'
+      }, 1000)
       })
       .catch((err) => {
         console.log("PDF Request Failed", err);
@@ -78,7 +80,7 @@ const CMAReport = (props) => {
       )}
       <h1>Generate a Property Report</h1>
       <div className='property-report-wrapper'>
-        <span class="mdi mdi-close" onClick={() => {window.location.href = '/reports'}}></span>
+        <span className="mdi mdi-close" onClick={() => {window.location.href = '/reports'}}></span>
         <p className='title'>Purchase CMA report</p>
         {/* vx: need to construct actual address */}
         {/* <p className='address'>10905 Caminito Arcada, San Diego, CA. 92131</p> */}

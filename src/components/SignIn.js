@@ -8,6 +8,18 @@ Amplify.configure(config)
 function SignIn(props) {
     const [confCodeSent, setConfCodeSent] = useState(false)
     const [errMsg, setErrMsg] = useState('')
+    const [forcePwFlag, setForcePwFlag] = useState(false)
+    const [forcePwUser, setForcePwUser] = useState(null)
+    // const [forcePwNewPw, setForcePwNewPw] = useState('')
+    // useEffect(() => {
+    //     Auth.currentAuthenticatedUser()
+    //     .then((response) => {
+    //         console.log('vx: mounted sign in page, current user', response)
+    //     })
+    //     .catch((error) => {
+    //         console.log('vx: mounted sign in page, current user ERROR', error)
+    //     })
+    // }, [])
 
     var inputBorderProperties = {
         border: '1px solid #00000054',
@@ -18,9 +30,18 @@ function SignIn(props) {
       var email = document.getElementById('signin-email').value
       var password = document.getElementById('signin-password').value
       try {
-        await Auth.signIn(email, password);
-        props.updateAuthState()
-        window.location.href = '/'
+        Auth.signIn(email, password)
+        .then((response) => {
+            console.log('vx: sign in response', response.challengeName)
+            if (response.challengeName === 'NEW_PASSWORD_REQUIRED') {
+                setForcePwFlag(true)
+                setForcePwUser(response)
+                setErrMsg('Please set new password')
+            } else {
+                props.updateAuthState()
+                window.location.href = '/'
+            }
+        })
       } catch(error) {
         if(error.name === 'UserNotConfirmedException') {
             await Auth.resendSignUp(email)
@@ -39,6 +60,7 @@ function SignIn(props) {
             })
         } else {
             setErrMsg('')
+            console.log('vx: sign in error', error.name)
         }
       }
     }
@@ -80,12 +102,37 @@ function SignIn(props) {
         window.location.href = '/'
       }
 
+      function setNewPwAndSignIn () {
+        var password = document.getElementById('forcePw-password').value
+        var confirmPassword = document.getElementById('forcePw-password-confirm').value
+        if(password !== confirmPassword) {
+            setErrMsg('Passwords do not match')
+        } else if (!(/(?=.{8,})/.test(password) && /(?=.*[!@#$%^&*])/.test(password) && /(?=.*[0-9])/.test(password) && /(?=.*[A-Z])/.test(password) && /(?=.*[a-z])/.test(password) )) {
+            setErrMsg('Password does not satisfy all requirements')
+        }
+        else {
+            setErrMsg('')
+            Auth.completeNewPassword(
+                forcePwUser,
+                password,
+            ).then(() => {
+                props.updateAuthState()
+                window.location.href = '/'
+            })
+            .catch((e) => {
+              console.log('vx: completeNewPassword ERROR', e)
+            })
+        }
+      }
+
     return (
         <div className="signup-container">
             <div className="signup-header">
             <h1>Sign in to Honely Dashboard</h1>
             </div>
-            <div className="signup-form">
+            {
+                !forcePwFlag && 
+                <div className="signup-form">
             <div>
             <label>Email</label>
             <input type="email" id='signin-email' style={inputBorderProperties} maxLength={50}></input>
@@ -119,6 +166,25 @@ function SignIn(props) {
             <br></br><br></br>
             <p className="signup-errmsg">{errMsg}</p>
             </div>
+            }
+            {
+                forcePwFlag && 
+                <div className="signup-form">
+                <div>
+                <label>Enter New Password</label>
+                <input type="password" id='forcePw-password' style={inputBorderProperties} maxLength={50}></input>
+                </div>
+                <div>
+                <label>Confirm New Password</label>
+                <input type="password" id='forcePw-password-confirm' style={inputBorderProperties} maxLength={50}></input>
+                </div>
+                <button onClick={() => {
+                        setNewPwAndSignIn()
+                    }}>Sign In</button>
+                <br></br><br></br>
+                <p className="signup-errmsg">{errMsg}</p>
+                </div>
+            }
         </div>
     );
 }

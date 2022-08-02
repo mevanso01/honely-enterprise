@@ -93,7 +93,7 @@ function Header(props) {
               <Link to="/leadgen">Lead Capture</Link>
               {
                 props.authFlag &&
-                <div class="header-dropdown left" id="header-dropdown-left">
+                <div className="header-dropdown left" id="header-dropdown-left">
                   <ul>
                     {
                       props.userProfile.status !== 'CONFIRMED' &&
@@ -125,7 +125,7 @@ function Header(props) {
               <Link to="/reports">Report Generation</Link>
               {/* {
                 props.authFlag &&
-                <div class="header-dropdown right" id="header-dropdown-right">
+                <div className="header-dropdown right" id="header-dropdown-right">
                   <ul>
                     <li>New Report</li>
                     <li>Archived Reports</li>
@@ -219,7 +219,7 @@ function Header(props) {
                 <Link to="/">Account Management</Link>
                 {
                   props.authFlag && 
-                  <div class="header-dropdown account" id="header-dropdown-account">
+                  <div className="header-dropdown account" id="header-dropdown-account">
                     <ul>
                       {/* <li>User Profile</li>
                       <li>Change Password</li> */}

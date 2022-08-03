@@ -22,7 +22,7 @@ export default function LeadGenIntroV2(props) {
     };
     axios
       .post(
-        "https://developers.honely.com/create-stripe-session?source=LEADGEN",
+        "https://developers.honely.com/create-stripe-session?source=SUBSCRIPTION",
         {},
         config
       )

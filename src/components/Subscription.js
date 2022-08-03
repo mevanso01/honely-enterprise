@@ -1,3 +1,14 @@
+/*
+CONFIRMED:
+	Subscribe btn -> stripeUrl + SUBCRIPTION
+COMPLETED:
+	if queryparam source=SUBSCRIPTION:
+		automatically call generateApiKey!
+	else:
+		subscribe button -> generateApiKey
+INACTIVE:
+	Subscribe btn -> generateApiKey
+*/
 import React, { useState, useEffect } from "react";
 import "../styles/Subscription.css";
 import "../styles/PaymentConfirmationPopup.css";
@@ -29,7 +40,7 @@ function Subscription(props) {
     };
     axios
       .post(
-        "https://developers.honely.com/create-stripe-session?source=LEADGEN",
+        "https://developers.honely.com/create-stripe-session?source=SUBSCRIPTION",
         {},
         config
       )
@@ -41,6 +52,14 @@ function Subscription(props) {
           };
         });
         console.log("vx: url set to state", data.stripeUrl);
+        // vx: if if queryparam source=SUBSCRIPTION -> call generateApiKey
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const params = Object.fromEntries(urlSearchParams.entries())
+        if(params.source.toLowerCase() === 'subscription') {
+          setTimeout(() => {
+            generateApiKey()
+         }, 500)
+        }
       })
       .catch((error) => {
         if (error.message === "Request failed with status code 401") {
@@ -681,7 +700,7 @@ function Subscription(props) {
               window.location.href = data.stripeUrl;
             }}
           >
-            Add Payment Method
+            Subscribe
           </button>
           <br></br>
           <br></br>
@@ -700,7 +719,7 @@ function Subscription(props) {
     typeof props.userProfile !== "undefined" &&
     props.userProfile !== null &&
     (props.userProfile.status === "INACTIVE" ||
-      props.userProfile.status === "COMPLETED")
+      props.userProfile.status === "COMPLETED" || props.userProfile.status === "PAYMENT_FAILED")
   ) {
     return (
       <div className="section">

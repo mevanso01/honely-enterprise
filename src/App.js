@@ -1,3 +1,8 @@
+/*
+CONFIRMED -> signed up
+COMPLETED -> added payment method
+ACTIVE -> subscribed for leads
+*/
 import logo from "./logo.svg";
 import "./App.css";
 import "./styles/Main.css";
@@ -129,8 +134,8 @@ function App() {
                   response.data.data.status === "COMPLETED" &&
                   response.data.data.api_key === null
                 ) {
-                  generateApiKey()
-                  window.location.reload()
+                  // generateApiKey()
+                  // window.location.reload()
                 }
               })
               .catch((error) => {
@@ -145,9 +150,9 @@ function App() {
           data.userProfile.status === "COMPLETED" &&
           data.userProfile.api_key === null
         ) {
-          console.log("vx: london bridge entered");
-          generateApiKey()
-          window.location.reload()
+          // console.log("vx: london bridge entered");
+          // generateApiKey()
+          // window.location.reload()
         }
       })
       .catch(() => {

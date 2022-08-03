@@ -19,7 +19,7 @@ function PaymentMethods (props) {
         };
         axios
           .post(
-            "https://developers.honely.com/create-stripe-session?source=LEADGEN",
+            "https://developers.honely.com/create-stripe-session?source=REPORT",
             {},
             config
           )

@@ -1,3 +1,6 @@
+/*
+As of Aug 2 2022, if status is not confirmed, all 3 sections under Lead Capture are visible
+*/
 import React, { useState, useEffect } from "react";
 import "../styles/Header.css";
 import {

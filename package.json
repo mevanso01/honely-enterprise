@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@meronex/icons": "^4.0.0",
     "@stripe/react-stripe-js": "^1.7.2",
     "@stripe/stripe-js": "^1.29.0",
     "@testing-library/jest-dom": "^5.16.3",
@@ -16,10 +17,12 @@
     "react-apexcharts": "^1.4.0",
     "react-color-palette": "^6.2.0",
     "react-dom": "^18.0.0",
+    "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.3.0",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.0",
     "react-sortable-hoc": "^2.0.0",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

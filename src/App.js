@@ -397,12 +397,12 @@ function App() {
                     <CustomizeWidget jwt={data.jwt} doSignOut={doSignOut} />
                   }
                 />
-                {/* <Route
+                <Route
                   path="leads-list"
                   element={
                     <LeadsList jwt={data.jwt} doSignOut={doSignOut} />
                   }
-                /> */}
+                />
               </Route>
               <Route
                 path="/cma"

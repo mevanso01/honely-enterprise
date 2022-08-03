@@ -7,10 +7,12 @@
     height: 32px;
 }
 .leads-list-table {
-
+    width: 100%;
+    overflow: auto;
 }
 .leads-list-table table {
     width: 100%;
+    min-width: 850px;
 }
 .leads-list-table table tr {
     border-bottom: 0.25px solid #959ba0;
@@ -20,11 +22,19 @@
     font-weight: 500;
     text-align: left;
     padding: 20px 10px;
+    vertical-align: middle;
 }
 .leads-list-table table tr td {
     font-size: 14px;
+    line-height: 18px;
     font-weight: 400;
     padding: 10px;
+    vertical-align: middle;
+}
+.pagination-wrapper {
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-end;
 }
 @media (max-width: 575px) {
     .leads-list-table {

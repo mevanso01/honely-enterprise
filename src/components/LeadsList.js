@@ -23,13 +23,13 @@ function LeadsList (props) {
         .then(response => {
             setLeadsList({
                 loading: false,
-                users: response.data.data.users,
+                users: response.data.data.leads,
                 error: null
             })
             setPagination({
                 ...pagination,
                 currentPage: page,
-                total: response.data.data?.total_users || 0
+                total: response.data.data?.total_leads || 0
               })
         })
         .catch(error => {
@@ -75,7 +75,7 @@ function LeadsList (props) {
                         </tr>
                         {leadsList.loading ? (
                             [...Array(pagination.pageSize).keys()].map(i => (
-                                <tr>
+                                <tr key={i}>
                                     <td><Skeleton width={50} height={14} /></td>
                                     <td><Skeleton width={300} height={14} /></td>
                                     <td><Skeleton width={40} height={14} /></td>

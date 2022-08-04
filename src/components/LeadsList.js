@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import "../styles/LeadsList.css";
 
 function LeadsList (props) {
-    const [leadsList, setLeadsList] = useState({ loading: true, users: [], error: null })
+    const [leadsList, setLeadsList] = useState({ loading: true, leads: [], error: null })
     const [pagination, setPagination] = useState({ currentPage: 1, pageSize: 5, total: null })
     
     const getLeads = (page = 1) => {
@@ -23,7 +23,7 @@ function LeadsList (props) {
         .then(response => {
             setLeadsList({
                 loading: false,
-                users: response.data.data.leads,
+                leads: response.data.data.leads,
                 error: null
             })
             setPagination({
@@ -52,6 +52,28 @@ function LeadsList (props) {
         })
         getLeads(page)
       }
+    const getLeadType = (lead) => {
+        let type = ''
+        if (lead?.additional_polls) {
+            const purposePoll = lead.additional_polls.find(poll => poll.field_key === 'purpose')
+            if (purposePoll) {
+                type = purposePoll.options.join(', ')
+            }
+        }
+        return type
+    }
+
+    const getPhoneNumber = (lead) => {
+        let phone = ''
+        if (lead?.additional_inputs) {
+            const phoneInput = lead.additional_inputs.find(input => input.field_key === 'phone_number')
+            if (phoneInput) {
+                phone = phoneInput['field-value']
+            }
+        }
+        return phone
+    }
+
     useEffect(() => {
         getLeads()
     }, [])
@@ -85,14 +107,14 @@ function LeadsList (props) {
                                 </tr>
                             ))
                         ) : (
-                            leadsList.users.map(user => (
-                                <tr key={user?.lead_id}>
-                                    <td>{user.full_name}</td>
-                                    <td>{user.searched_address}</td>
-                                    <td>{user?.type}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.phone_number}</td>
-                                    <td>{user.application_date.split('.')[0]}</td>
+                            leadsList.leads.map(lead => (
+                                <tr key={lead?.lead_id}>
+                                    <td>{lead.full_name}</td>
+                                    <td>{lead.searched_address}</td>
+                                    <td>{getLeadType(lead)}</td>
+                                    <td>{lead.email}</td>
+                                    <td>{getPhoneNumber(lead)}</td>
+                                    <td>{lead.application_date.split('.')[0]}</td>
                                 </tr>
                             ))
                         )}

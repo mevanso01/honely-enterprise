@@ -53,6 +53,9 @@ const CustomizeWidget = (props) => {
         },
         error: null
       })
+      const _widgetConfig = { ...widgetConfig }
+      delete _widgetConfig.extended
+      setWidgetConfig(_widgetConfig)
     })
     .catch(error => {
       if (error.message === 'Request failed with status code 401') {

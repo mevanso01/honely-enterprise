@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import '../styles/HomePage.css'
 import axios from "axios";
+import PromoCodePrompt from "./PromoCodePrompt"
 
 function HomePage(props) {
     const [stripeUrl, setStripeUrl] = useState(null)
+    const [promoCodeFlag, setPromoCodeFlag] = useState(false)
+    const [promoCodeErrMsg, setPromoCodeErrMsg] = useState('')
     function getStripeUrl() {
         let config = {
           headers: {
@@ -24,6 +27,69 @@ function HomePage(props) {
               props.doSignOut();
             }
           });
+      }
+      function promoCodeContinueAction() {
+        var promoCode = document.getElementById('promo-code').value
+        if (promoCode !== null && promoCode !== '' && promoCode !== 'HONELY20') {
+            setPromoCodeErrMsg('Invalid Promo Code')
+        } else {
+            setPromoCodeErrMsg('')
+            if (props.userProfile.default_payment_method) {
+                generateApiKey()
+            } else {
+                if (stripeUrl !== null) {
+                    var pcObject = {
+                        promoCode: promoCode
+                    }
+                    window.sessionStorage.setItem(
+                        "PromoCode",
+                        JSON.stringify(pcObject)
+                      );
+                    setTimeout(() => {
+                        window.location.href = stripeUrl
+                    }, 500)
+                }
+            }
+        }
+      }
+      function generateApiKey() {
+        if (props.userProfile.default_payment_type !== null) {
+          var promoCode = JSON.parse(window.sessionStorage.getItem('PromoCode')).promoCode
+          if (document.getElementById('promo-code') !== null) {
+            promoCode = document.getElementById('promo-code').value
+          }
+          let config = {
+            headers: {
+              Authorization: "Bearer " + props.jwt,
+            },
+          };
+          axios
+            .post(
+              "https://developers.honely.com/dashboard/api-key",
+              {
+                payment_type: "HONELY_API_BASIC_PLAN",
+                promo_code: promoCode
+              },
+              config
+            )
+            .then((response) => {
+              console.log("vx: generate api key wala response", response);
+              window.sessionStorage.removeItem('PromoCode')
+              setTimeout(() => {
+                window.location.href = '/account-management/subscription'
+              }, 500)
+            })
+            .catch((error) => {
+              if (error.message === "Request failed with status code 401") {
+                window.sessionStorage.removeItem('PromoCode')
+                setTimeout(() => {
+                    props.doSignOut();
+                }, 500)
+              }
+            });
+        } else {
+          window.location.href = stripeUrl;
+        }
       }
     useEffect(() => {
         // if (window.location.pathname !== '/') {
@@ -74,21 +140,37 @@ function HomePage(props) {
             </div>
             {/* vx: if not logged in or status !== active */}
             {
-                (props.authFlag === false || props.userProfile.status !== 'ACTIVE') && 
+                (props.authFlag === false || (!(props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE'))) && 
                 <div className="homepage-widgetpricing">
                 <h1>Widget Pricing</h1>
                 <p>This montly rate equips your website with a premier lead capture tool and a competitive advantage. </p>
                 <p><span style={{fontWeight: '600'}}>$19.99/mo*</span>  <span style={{textDecoration: 'line-through'}}>$24.99/mo</span></p>
                 <p>Save 30% by taking advantage of this special offer.</p>
-                <button onClick={() => { 
-                    if (props.authFlag === false) {
-                        window.location.href = '/signin'
-                    } else {
-                        if (stripeUrl !== null) {
-                            window.location.href = stripeUrl
+                {
+                    promoCodeFlag && 
+                    <PromoCodePrompt promoCodeContinueAction={promoCodeContinueAction}/>
+                }
+                {
+                    promoCodeFlag && 
+                    <p style={{color: 'red', fontWeight: '600'}}>{promoCodeErrMsg}</p>
+                }
+                {
+                    !promoCodeFlag && 
+                    <button onClick={() => { 
+                        if (props.authFlag === false) {
+                            window.location.href = '/signin'
+                        } else {
+                            setPromoCodeFlag(true)
+                            // if (props.userProfile.default_payment_method) {
+                            //     generateApiKey()
+                            // } else {
+                            //     if (stripeUrl !== null) {
+                            //         window.location.href = stripeUrl
+                            //     }
+                            // }
                         }
-                    }
-                    }}>Buy now</button>
+                        }}>Buy now</button>
+                }
                 </div>
             }
             <div className="homepage-cma-reports">

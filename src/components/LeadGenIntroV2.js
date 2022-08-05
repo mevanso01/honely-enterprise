@@ -1,6 +1,10 @@
+/*
+if status is either ACTIVE or INACTIVE, redirect to /leads
+*/
 //REACT
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PromoCodePrompt from "./PromoCodePrompt"
 
 //STYLES
 import "../styles/LeadGenIntroV2.css";
@@ -14,6 +18,8 @@ import GirlDesk from "../assets/images/girl-desk.png";
 
 export default function LeadGenIntroV2(props) {
   const [stripeUrl, setStripeUrl] = useState(null)
+  const [promoCodeFlag, setPromoCodeFlag] = useState(false)
+  const [promoCodeErrMsg, setPromoCodeErrMsg] = useState('')
   function getStripeUrl() {
     let config = {
       headers: {
@@ -35,9 +41,76 @@ export default function LeadGenIntroV2(props) {
         }
       });
   }
+  function promoCodeContinueAction() {
+    var promoCode = document.getElementById('promo-code').value
+    if (promoCode !== null && promoCode !== '' && promoCode !== 'HONELY20') {
+        setPromoCodeErrMsg('Invalid Promo Code')
+    } else {
+        setPromoCodeErrMsg('')
+        if (props.userProfile.default_payment_method) {
+            generateApiKey()
+        } else {
+            if (stripeUrl !== null) {
+                var pcObject = {
+                    promoCode: promoCode
+                }
+                window.sessionStorage.setItem(
+                    "PromoCode",
+                    JSON.stringify(pcObject)
+                  );
+                setTimeout(() => {
+                    window.location.href = stripeUrl
+                }, 500)
+            }
+        }
+    }
+  }
+  function generateApiKey() {
+    if (props.userProfile.default_payment_type !== null) {
+      var promoCode = JSON.parse(window.sessionStorage.getItem('PromoCode')).promoCode
+      if (document.getElementById('promo-code') !== null) {
+        promoCode = document.getElementById('promo-code').value
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + props.jwt,
+        },
+      };
+      axios
+        .post(
+          "https://developers.honely.com/dashboard/api-key",
+          {
+            payment_type: "HONELY_API_BASIC_PLAN",
+            promo_code: promoCode
+          },
+          config
+        )
+        .then((response) => {
+          console.log("vx: generate api key wala response", response);
+          window.sessionStorage.removeItem('PromoCode')
+          setTimeout(() => {
+            window.location.href = '/account-management/subscription'
+          }, 500)
+        })
+        .catch((error) => {
+          if (error.message === "Request failed with status code 401") {
+            window.sessionStorage.removeItem('PromoCode')
+            setTimeout(() => {
+                props.doSignOut();
+            }, 500)
+          }
+        });
+    } else {
+      window.location.href = stripeUrl;
+    }
+  }
   useEffect(() => {
     if (props.authFlag) {
+      if (typeof props !== 'undefined' && props!== null && typeof props.userProfile !== 'undefined' && props.userProfile !== null && (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE')) {
+        window.location.href = '/account-management/leads'
+      } else {
         getStripeUrl();
+      }
     }
 }, [])
   return (
@@ -103,15 +176,31 @@ export default function LeadGenIntroV2(props) {
               Save 30% by taking advantage of this special offer.
             </p>
             <div className="lead-intro-v2-btn-container">
+            {
+                promoCodeFlag && 
+                <PromoCodePrompt promoCodeContinueAction={promoCodeContinueAction}/>
+            }
+            {
+                promoCodeFlag && 
+                <p style={{color: 'red', fontWeight: '600'}}>{promoCodeErrMsg}</p>
+            }
+            {
+              !promoCodeFlag && 
               <button className="lead-intro-v2-orange-btn" onClick={() => { 
-                    if (props.authFlag === false  || typeof props.authFlag === 'undefined') {
-                      window.location.href = '/signin'
-                  } else {
-                      if (stripeUrl !== null) {
-                          window.location.href = stripeUrl
-                      }
-                  }
-                    }}>Buy now</button>
+                if (props.authFlag === false  || typeof props.authFlag === 'undefined') {
+                  window.location.href = '/signin'
+              } else {
+                  setPromoCodeFlag(true)
+                  // if (props.userProfile.default_payment_method) {
+                  //   generateApiKey()
+                  // } else {
+                  //   if (stripeUrl !== null) {
+                  //     window.location.href = stripeUrl
+                  //   }
+                  // }
+              }
+                }}>Buy now</button>
+            }
             </div>
           </div>
         </div>

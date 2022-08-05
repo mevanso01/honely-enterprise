@@ -1,6 +1,6 @@
 /*
-CONFIRMED -> signed up
-COMPLETED -> added payment method
+CONFIRMED -> signed up (but no payment method added)
+COMPLETED -> added payment method (but never subscribed)
 ACTIVE -> subscribed for leads
 */
 import logo from "./logo.svg";
@@ -424,12 +424,13 @@ function App() {
               <Route
                 path="*"
                 element={
-                  <LeadGenIntroV2
-                    userProfile={data.userProfile}
-                    jwt={data.jwt}
-                    doSignOut={doSignOut}
-                    updateUserProfile={updateUserProfile}
-                  />
+                  // <LeadGenIntroV2
+                  //   userProfile={data.userProfile}
+                  //   jwt={data.jwt}
+                  //   doSignOut={doSignOut}
+                  //   updateUserProfile={updateUserProfile}
+                  // />
+                  <HomePage authFlag={true} jwt={data.jwt} doSignOut={doSignOut} userProfile={data.userProfile}/>
                 }
               />
             </Routes>

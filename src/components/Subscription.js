@@ -325,6 +325,7 @@ function Subscription(props) {
   }
   function generateApiKey() {
     if (props.userProfile.default_payment_type !== null) {
+      var promoCode = JSON.parse(window.sessionStorage.getItem('PromoCode')).promoCode
       setShowLoading(true);
       let config = {
         headers: {
@@ -336,6 +337,7 @@ function Subscription(props) {
           "https://developers.honely.com/dashboard/api-key",
           {
             payment_type: "HONELY_API_BASIC_PLAN",
+            promo_code: promoCode
           },
           config
         )

@@ -1,5 +1,5 @@
 /*
-As of Aug 2 2022, if status is not confirmed, all 3 sections under Lead Capture are visible
+if status is either ACTIVE or INACTIVE, all 3 sections under Lead Capture are visible
 */
 import React, { useState, useEffect } from "react";
 import "../styles/Header.css";
@@ -83,12 +83,12 @@ function Header(props) {
               className={`header-item ${
                 path.pathname === "/leadgen" ? "active" : ""
               }`} onMouseOver = {() => {
-                if (props.authFlag && props.userProfile.status !== 'CONFIRMED') {
+                if (props.authFlag && (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE')) {
                   document.getElementById('header-dropdown-left').classList.add('active')
                 }
               }}
               onMouseLeave = {() => {
-                if (props.authFlag && props.userProfile.status !== 'CONFIRMED') {
+                if (props.authFlag && (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE')) {
                   document.getElementById('header-dropdown-left').classList.remove('active')
                 }
               }}
@@ -99,15 +99,15 @@ function Header(props) {
                 <div className="header-dropdown left" id="header-dropdown-left">
                   <ul>
                     {
-                      props.userProfile.status !== 'CONFIRMED' &&
+                      (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE') &&
                       <li onClick={() => { window.location.href = '/account-management/leads'}}>Leads</li>
                     }
                     {
-                      props.userProfile.status !== 'CONFIRMED' &&
+                      (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE') &&
                       <li onClick={() => { window.location.href = '/account-management/customize-widget'}}>Customize Widget</li>
                     }
                     {
-                      props.userProfile.status !== 'CONFIRMED' &&
+                      (props.userProfile.status === 'ACTIVE' || props.userProfile.status === 'INACTIVE') &&
                       <li onClick={() => { window.location.href = '/account-management/subscription'}}>Subscription</li>
                     }
                   </ul>

@@ -3,16 +3,23 @@ import React, { useState, useEffect, useRef } from 'react'
 const AccordionItem = (props) => {
   const {
     header,
-    isForceOpen
+    isForceOpen,
+    mode
   } = props
 
   const [active, setActive] = useState(false);
+  const [forceUpdate, setForceUpdte] = useState(false)
   const accordionContent = useRef()
   useEffect(() => {
     if (isForceOpen) {
       setActive(true)
     }
   }, [isForceOpen])
+
+  useEffect(() => {
+    setForceUpdte(!forceUpdate)
+  }, [mode])
+  
   
   return (
     <div className="accordion-item">

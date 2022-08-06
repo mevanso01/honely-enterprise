@@ -157,6 +157,7 @@ const CustomizeWidget = (props) => {
                 <h2>WIDGET ICON</h2>
                 <h3>Style</h3>
                 <AccordionItem
+                  mode={widgetConfig?.mode}
                   header={<p>Presets</p>}
                 >
                   <div className='widget-radio-item' onClick={() => setWidgetConfig(widgetSettings.settings['default-light'])}>
@@ -193,7 +194,7 @@ const CustomizeWidget = (props) => {
                     <div
                       key={i}
                       className='widget-radio-item'
-                      onClick={() => handleUpdateWidgetConfig({ font: font })}
+                      onClick={() => handleUpdateWidgetConfig({ fonts: font })}
                     >
                       {widgetConfig?.fonts === font ? (
                         <span className='mdi mdi-radiobox-marked' />

@@ -45,17 +45,17 @@ const CustomizeWidget = (props) => {
     })
     axios.post('https://developers.honely.com/widget/settings', widgetConfig, config)
     .then(() => {
+      const _widgetConfig = { ...widgetConfig }
+      delete _widgetConfig.extended
+      setWidgetConfig(_widgetConfig)
       setWidgetSettings({
         loading: false,
         settings: {
           ...widgetSettings.settings,
-          current: widgetConfig
+          current: _widgetConfig
         },
         error: null
       })
-      const _widgetConfig = { ...widgetConfig }
-      delete _widgetConfig.extended
-      setWidgetConfig(_widgetConfig)
     })
     .catch(error => {
       if (error.message === 'Request failed with status code 401') {

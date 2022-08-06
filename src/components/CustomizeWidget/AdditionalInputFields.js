@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const AdditionalInputFields = (props) => {
   const {
@@ -83,12 +85,19 @@ const AdditionalInputFields = (props) => {
               onChange={e => handleInputChange(value.order, { placeholder: e.target.value })}
             />
           </div>
-          <button
-            className='additional-input-delete-btn'
-            onClick={() => handleDeleteInput(value.order)}
+          <OverlayTrigger
+            placement='top'
+            overlay={
+              <Tooltip>Delete input field</Tooltip>
+            }
           >
-            X
-          </button>
+            <button
+              className='additional-input-delete-btn'
+              onClick={() => handleDeleteInput(value.order)}
+            >
+              x
+            </button>
+          </OverlayTrigger>
         </div>
         <div className='add-input-fields-divider'>
           <div className='widget-block-divider' />
@@ -157,10 +166,17 @@ const AdditionalInputFields = (props) => {
       </div>
       <div className='add-item-containter'>
         <div className='widget-block-divider' />
-        <span
-          className='mdi mdi-plus-circle-outline'
-          onClick={handleAddInputField}
-        />
+        <OverlayTrigger
+          placement='top'
+          overlay={
+            <Tooltip>Add input field</Tooltip>
+          }
+        >
+          <span
+            className='mdi mdi-plus-circle-outline'
+            onClick={handleAddInputField}
+          />
+        </OverlayTrigger>
       </div>
     </section>
   )

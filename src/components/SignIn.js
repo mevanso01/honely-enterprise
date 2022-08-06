@@ -29,7 +29,6 @@ function SignIn(props) {
     async function doSignIn () {
       var email = document.getElementById('signin-email').value
       var password = document.getElementById('signin-password').value
-      try {
         Auth.signIn(email, password)
         .then((response) => {
             console.log('vx: sign in response', response.challengeName)
@@ -42,7 +41,7 @@ function SignIn(props) {
                 window.location.href = '/'
             }
         })
-      } catch(error) {
+      .catch(async (error) => {
         if(error.name === 'UserNotConfirmedException') {
             await Auth.resendSignUp(email)
             setConfCodeSent(true)
@@ -62,7 +61,7 @@ function SignIn(props) {
             setErrMsg('')
             console.log('vx: sign in error', error.name)
         }
-      }
+      })
     }
 
     async function confirmEmailAndSignIn () {

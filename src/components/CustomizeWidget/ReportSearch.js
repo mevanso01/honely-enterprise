@@ -20,7 +20,7 @@ export default function ReportSearch(props) {
             } else {
               props.showReportForm()
             }
-          }, 500)
+          }, 2000)
         })
     }
 }

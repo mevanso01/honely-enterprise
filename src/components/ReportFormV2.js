@@ -2222,21 +2222,21 @@ function ReportFormV2(props) {
           // check numerical inputs
           if (!validateNumericalInput(sqft)) {
             document.getElementById('sqft').classList.add('error-input')
-            alert('Please enter a valid number')
+            // alert('Please enter a valid number')
             return
           } else {
             document.getElementById('sqft').classList.remove('error-input')
           }
           if (!validateNumericalInput(numBeds)) {
             document.getElementById('num-beds').classList.add('error-input')
-            alert('Please enter a valid number')
+            // alert('Please enter a valid number')
             return
           } else {
             document.getElementById('num-beds').classList.remove('error-input')
           }
           if (!validateNumericalInput(numBaths)) {
             document.getElementById('num-baths').classList.add('error-input')
-            alert('Please enter a valid number')
+            // alert('Please enter a valid number')
             return
           } else {
             document.getElementById('num-baths').classList.remove('error-input')

@@ -133,7 +133,7 @@ function CMA(props) {
               <td>{pika[x].SQFT.data}</td>
               <td>{pika[x].NUM_BEDS.data + "/" + pika[x].NUM_BATHS.data}</td>
               <td>{pika[x].YEAR_BUILT.data}</td>
-              <td>{pika[x].LIST_PRICE.data}</td>
+              <td>{pika[x].LIST_PRICE.data.replace('<p style=\"font-size: 16px;\">List Price: ', '').slice(0, -4)}</td>
               <i
                 onClick={() => {
                   /*

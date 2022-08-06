@@ -166,7 +166,7 @@ const PollQuestion = (props) => {
             ) : (
               <span className='mdi mdi-checkbox-blank-outline' />
             )}
-            Make this steo a requirement
+            Make this step a requirement
           </button>
         </div>
       </div>

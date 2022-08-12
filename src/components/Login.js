@@ -20,6 +20,7 @@ function Login(props) {
         var username = typeof params.username === 'undefined' ? null:params.username
         var accessToken = typeof params.access_token === 'undefined' ? null:params.access_token
         var idToken = typeof params.id_token === 'undefined' ? null:params.id_token
+        var redirect = typeof params.id_token === 'undefined' ? null:params.redirect
         if (username !== null && accessToken !== null && idToken !== null) {
         var accessTokenDecoded = parseJwt(accessToken)
         var now = Date.now()
@@ -62,7 +63,12 @@ function Login(props) {
             }
         }
     }
-        window.location.href='/'
+        // window.location.href='/'
+        if(redirect === 'report') {
+            window.location.href='/reports'
+        } else {
+            window.location.href='/'
+        }
     }
     // return (
     //     <div>

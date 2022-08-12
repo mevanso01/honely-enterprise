@@ -6,7 +6,7 @@ function PromoCodePrompt(props) {
         <div className="section promocode-container">
             <div className="signup-form promocode-form">
                 <label>Enter Promo Code (if applicable)</label>
-                <input id='promo-code'></input>
+                <input id='promo-code' style={{textTransform: 'uppercase'}}></input>
                 <br></br><br></br>
                 <button onClick={() => {
                     props.promoCodeContinueAction()

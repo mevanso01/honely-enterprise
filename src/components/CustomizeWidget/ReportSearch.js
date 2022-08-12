@@ -20,25 +20,12 @@ export default function ReportSearch(props) {
             } else {
               props.showReportForm()
             }
-          }, 2000)
+          }, 100)
         })
     }
 }
-  function getForecast(value) {
-    axios.get('https://api.honely.com/searches/forecast?address=' + value + '&user_id=512')
-    .then((response) => {
-        if(!props.inCma) {
-          axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + response.data.property_forecast.property_id)
-          .then((response) => {
-            window.sessionStorage.removeItem('CMAComparableHomes')
-            var lala2 = {
-                array: response.data.rows
-            }
-            console.log('vx: articuno'. lala2)
-            window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(lala2))
-          })
-        }
-        var lala = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId'))
+  function preGetPropertyData(response) {
+    var lala = JSON.parse(window.sessionStorage.getItem('CMASubjectPropertyId'))
         var pika = null
         if (lala !== null) {
             pika = lala.array
@@ -50,9 +37,31 @@ export default function ReportSearch(props) {
           }
           setTimeout(() => {
             getPropertyData(response.data.property_forecast.property_id)
-          }, 500)
+          }, 100)
         } else {
           props.setErrMsg('Cannot add a property that has already been added.')
+        }
+  }
+  function getForecast(value) {
+    axios.get('https://api.honely.com/searches/forecast?address=' + value + '&user_id=512')
+    .then((response) => {
+        if(!props.inCma) {
+          axios.get('https://api.honely.com/lookup/comparable_homes?property_id=' + response.data.property_forecast.property_id)
+          .then((response2) => {
+            window.sessionStorage.removeItem('CMAComparableHomes')
+            var lala2 = {
+                array: response2.data.rows
+            }
+            console.log('vx: articuno'. lala2)
+            window.sessionStorage.setItem('CMAComparableHomes', JSON.stringify(lala2))
+            preGetPropertyData(response)
+          })
+          .catch(() => {
+            window.sessionStorage.removeItem('CMAComparableHomes')
+            preGetPropertyData(response)
+        })
+        } else {
+          preGetPropertyData(response)
         }
     })
   }

@@ -42,7 +42,7 @@ export default function LeadGenIntroV2(props) {
       });
   }
   function promoCodeContinueAction() {
-    var promoCode = document.getElementById('promo-code').value
+    var promoCode = document.getElementById('promo-code').value.toUpperCase()
     if (promoCode !== null && promoCode !== '' && promoCode !== 'HONELY20') {
         setPromoCodeErrMsg('Invalid Promo Code')
     } else {

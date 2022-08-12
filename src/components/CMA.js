@@ -468,19 +468,22 @@ function CMA(props) {
                 </v-icon> */}
           </div>
         </div>
-        <div className="comparable-properties-container">
-          <div className="section-heading">
-            Add Suggested Comparable Properties
-          </div>
-          {/* <div className="cma-comparable-properties">
-          <SuggestedPropertyCard />
-          <SuggestedPropertyCard />
-          <SuggestedPropertyCard />
-          <SuggestedPropertyCard />
-        </div> */}
-          <ComparableProperties />
-        </div>
-        {comparablePropertiesIndex <
+        {
+            window.sessionStorage.getItem("CMAComparableHomes") !== null && 
+            <div className="comparable-properties-container">
+            <div className="section-heading">
+                Add Suggested Comparable Properties
+            </div>
+            {/* <div className="cma-comparable-properties">
+            <SuggestedPropertyCard />
+            <SuggestedPropertyCard />
+            <SuggestedPropertyCard />
+            <SuggestedPropertyCard />
+            </div> */}
+            <ComparableProperties />
+            </div>
+        }
+        { window.sessionStorage.getItem("CMAComparableHomes") !== null && comparablePropertiesIndex <
           JSON.parse(window.sessionStorage.getItem("CMAComparableHomes")).array
             ?.length && (
           <p

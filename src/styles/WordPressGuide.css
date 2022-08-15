@@ -63,8 +63,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 20px;
   cursor: pointer;
+  position: relative;
 }
 
 .wordpress-guide-api-key {

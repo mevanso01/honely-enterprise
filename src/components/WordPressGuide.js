@@ -1,5 +1,5 @@
 //REACT
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 //REACT LIBRARIES
@@ -22,6 +22,7 @@ import SearchForm from "../assets/images/search-form.png";
 export default function WordPressGuide() {
   const navigate = useNavigate();
   const { userProfile } = useOutletContext();
+  const [scriptCopied, setScriptCopied] = useState(false)
 
   return (
     <div className="wordpress-content">
@@ -99,10 +100,17 @@ export default function WordPressGuide() {
             className="wordpress-guide-api-key-container"
             onClick={() => {
               navigator.clipboard.writeText("<script src='https://developers.honely.com/widget/load-script?api-key=${userProfile?.api_key}'></script>");
+              setScriptCopied(true);
+              setTimeout(() => {
+                setScriptCopied(false);
+              }, 3000);
             }}
           >
             <p className="wordpress-guide-api-key">{`<script src="https://developers.honely.com/widget/load-script?api-key=${userProfile?.api_key}"></script>`}</p>
             <img src={CopyIcon} className="wordpress-guide-copy-icon" />
+            {scriptCopied && (
+              <div className="copied-notification">Copied to clipboard!</div>
+            )}
           </div>
         </div>
         <div className="wordpress-guide-details">

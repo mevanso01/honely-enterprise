@@ -30,6 +30,28 @@
     padding: 10px 10px;
     display: flex;
     align-items: center;
+    position: relative;
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8) translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(-38px);
+  }
+}
+.copied-notification {
+    position: absolute;
+    right: -40px;
+    background: #24cb43;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    transform: translateY(-38px);
+    animation: slideUp 0.1s linear;
 }
 .subscription-apikey > span {
     flex: 1;

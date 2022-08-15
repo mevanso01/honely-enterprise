@@ -30,6 +30,7 @@ function Subscription(props) {
     successMessage: "",
     errorMessage: "",
   });
+  const [scriptCopied, setScriptCopied] = useState(false)
   // const [chosenPaymentMethod, setChosenPaymentMethod] = useState(null)
   // console.log('vx: jwt from subscription', props.jwt)
   function getStripeUrl() {
@@ -240,6 +241,7 @@ function Subscription(props) {
               padding: "20px",
               backgroundColor: "#0e0e0e",
               color: "white",
+              maxWidth: "800px"
             }}
           >
             <span>
@@ -255,10 +257,17 @@ function Subscription(props) {
                       props.userProfile.api_key +
                       '"></script>'
                   );
+                  setScriptCopied(true);
+                  setTimeout(() => {
+                    setScriptCopied(false)
+                  }, 3000);
                 }}
                 className="mdi mdi-content-copy"
               />
             </div>
+            {scriptCopied && (
+              <div className="copied-notification">Copied to clipboard!</div>
+            )}
           </div>
         </div>
       );
